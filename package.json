@@ -1,19 +1,18 @@
 {
   "name": "mobile-combos",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "description": "mobile-combos",
-  "author": "David Wheatley",
-  "keywords": [
-    "gatsby"
-  ],
+  "author": "David Wheatley <david@davwheat.dev> (https://davwheat.dev)",
+  "prettier": "@flarum/prettier-config",
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \".\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -26,9 +25,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@flarum/prettier-config": "^1.0.0",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "prettier": "^2.7.1",
     "typescript": "^4.8.4"
-  }
+  },
+  "packageManager": "yarn@3.2.4"
 }
