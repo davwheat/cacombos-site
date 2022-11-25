@@ -23,31 +23,28 @@ export default function LoadingSpinner({ inline, style, size, className, ...prop
     <Tag
       role="status"
       aria-label="Loading spinner"
-      css={[
-        {
-          '--size': '48px',
+      css={{
+        '--size': '48px',
 
-          position: 'relative',
-          width: 'var(--size)',
-          height: 'var(--size)',
-          margin: 'auto',
-          display: inline ? 'inline-block' : undefined,
+        position: 'relative',
+        width: 'var(--size)',
+        height: 'var(--size)',
+        margin: 'auto',
+        display: inline ? 'inline-block' : undefined,
 
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            right: 0,
-            left: 0,
-            border: 'max(calc(var(--size) * 0.1), 1px) solid black',
-            borderTopColor: 'transparent',
-            borderRadius: '50%',
-            animation: `${spin} infinite 0.75s linear`,
-          },
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          border: 'max(calc(var(--size) * 0.1), 1px) solid black',
+          borderTopColor: 'transparent',
+          borderRadius: '50%',
+          animation: `${spin} infinite 0.75s linear`,
         },
-        ...passedCss,
-      ]}
+      }}
       className={className}
       style={
         {
