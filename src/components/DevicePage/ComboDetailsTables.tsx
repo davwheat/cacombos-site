@@ -2,9 +2,11 @@ import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 import { getDlComponents, getUlComponents } from '@functions/comboDisplayHelpers';
 import friendlyQamConverter from '@functions/friendlyQamConverter';
 import { useRecoilValue } from 'recoil';
+import { TableCellCss, TableHeadCellCss } from './ComboTable';
 
 import type Combo from '@api/Models/Combo';
-import { TableCellCss, TableHeadCellCss } from './ComboTable';
+
+const SHOW_COMPONENT_MODEL_ID = true;
 
 export interface ComboDetailsTablesProps {
   combo: Combo;
@@ -55,6 +57,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
           >
             <thead css={{ fontWeight: 'bold' }}>
               <tr>
+                {SHOW_COMPONENT_MODEL_ID && <th css={TableHeadCellCss}>ID</th>}
                 <th css={TableHeadCellCss}>Band</th>
                 <th css={TableHeadCellCss}>Class</th>
                 <th css={TableHeadCellCss}>Streams</th>
@@ -67,6 +70,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
               {(() => {
                 const lteCcRows = dlLteComponents.map((cc, i) => (
                   <tr key={`${combo.uuid()}-lte-${i}`}>
+                    {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">{cc.band()}</code>
                     </td>
@@ -82,6 +86,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
 
                 const nrCcRows = dlNrComponents.map((cc, i) => (
                   <tr key={`${combo.uuid()}-nr-${i}`}>
+                    {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">n{cc.band()}</code>
                     </td>
@@ -122,6 +127,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
           >
             <thead css={{ fontWeight: 'bold' }}>
               <tr>
+                {SHOW_COMPONENT_MODEL_ID && <th css={TableHeadCellCss}>ID</th>}
                 <th css={TableHeadCellCss}>Band</th>
                 <th css={TableHeadCellCss}>Class</th>
                 <th css={TableHeadCellCss}>Streams</th>
@@ -134,6 +140,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
               {(() => {
                 const lteCcRows = ulLteComponents.map((cc, i) => (
                   <tr key={`${combo.uuid()}-lte-${i}`}>
+                    {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">{cc.band()}</code>
                     </td>
@@ -147,6 +154,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
 
                 const nrCcRows = ulNrComponents.map((cc, i) => (
                   <tr key={`${combo.uuid()}-nr-${i}`}>
+                    {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">n{cc.band()}</code>
                     </td>
