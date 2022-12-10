@@ -1,12 +1,13 @@
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 import { getDlComponents, getUlComponents } from '@functions/comboDisplayHelpers';
 import friendlyQamConverter from '@functions/friendlyQamConverter';
-import { useRecoilValue } from 'recoil';
 import { TableCellCss, TableHeadCellCss } from './ComboTable';
+
+import { useRecoilValue } from 'recoil';
 
 import type Combo from '@api/Models/Combo';
 
-const SHOW_COMPONENT_MODEL_ID = true;
+const SHOW_COMPONENT_MODEL_ID = false;
 
 export interface ComboDetailsTablesProps {
   combo: Combo;
