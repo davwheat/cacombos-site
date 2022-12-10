@@ -29,7 +29,7 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Jost\:400,400i,700`, // you can also specify font weights and styles
+          `Atkinson Hyperlegible\:400,400i,700`, // you can also specify font weights and styles
         ],
         display: 'swap',
       },
