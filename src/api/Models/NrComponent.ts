@@ -13,6 +13,7 @@ export default class NrComponent extends Model {
   ulMimo = Model.attribute<number | null>('ulMimo');
   dlModulation = Model.attribute<string | null, string | null>('dlModulation', modulationTransformer);
   ulModulation = Model.attribute<string | null, string | null>('ulModulation', modulationTransformer);
+  componentIndex = Model.attribute<number>('componentIndex');
 
   createdAt = Model.attribute<Date, string>('createdAt', Model.transformDate);
   updatedAt = Model.attribute<Date, string>('updatedAt', Model.transformDate);
