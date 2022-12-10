@@ -22,17 +22,33 @@ export function getUlComponents(combo: Combo): [LteComponent[], NrComponent[]] {
   return [lteComponents, nrComponents];
 }
 
+function getDlCcClass(component: NrComponent | LteComponent, ignoreA: boolean = false): string {
+  let ccClass = component.dlClass();
+
+  if (!ccClass || (ignoreA && ccClass === 'A')) return '';
+
+  return ccClass;
+}
+
+function getUlCcClass(component: NrComponent | LteComponent, ignoreA: boolean = false): string {
+  let ccClass = component.ulClass();
+
+  if (!ccClass || (ignoreA && ccClass === 'A')) return '';
+
+  return ccClass;
+}
+
 export function getDlComboString(combo: Combo, format: 'complex' | 'simple'): string {
   const [lteComponents, nrComponents] = getDlComponents(combo);
 
   const comboFormatter: Record<'complex' | 'simple', { lte: (c: LteComponent) => string; nr: (c: NrComponent) => string }> = {
     complex: {
-      lte: (c: LteComponent) => `${c.band()}${c.dlClass() ?? ''}${c.mimo() ?? ''}`,
-      nr: (c: NrComponent) => `n${c.band()}${c.dlClass() ?? ''}${c.dlMimo() ?? ''}`,
+      lte: (c: LteComponent) => `${c.band()}${getDlCcClass(c) || '?'}${c.mimo() ?? ''}`,
+      nr: (c: NrComponent) => `n${c.band()}${getDlCcClass(c) || '?'}${c.dlMimo() ?? ''}`,
     },
     simple: {
-      lte: (c: LteComponent) => `${c.band()}`,
-      nr: (c: NrComponent) => `n${c.band()}`,
+      lte: (c: LteComponent) => `${c.band()}${getDlCcClass(c, true)}`,
+      nr: (c: NrComponent) => `n${c.band()}${getDlCcClass(c, true)}`,
     },
   };
 
@@ -120,12 +136,12 @@ export function getUlComboString(combo: Combo, format: 'complex' | 'simple'): st
 
   const comboFormatter: Record<'complex' | 'simple', { lte: (c: LteComponent) => string; nr: (c: NrComponent) => string }> = {
     complex: {
-      lte: (c: LteComponent) => `${c.band()}${c.ulClass() ?? ''}`,
-      nr: (c: NrComponent) => `n${c.band()}${c.ulClass() ?? ''}${c.ulMimo() === 1 ? '' : c.ulMimo() ?? ''}`,
+      lte: (c: LteComponent) => `${c.band()}${getUlCcClass(c)}`,
+      nr: (c: NrComponent) => `n${c.band()}${getUlCcClass(c)}${c.ulMimo() === 1 ? '' : c.ulMimo() ?? ''}`,
     },
     simple: {
-      lte: (c: LteComponent) => `${c.band()}`,
-      nr: (c: NrComponent) => `n${c.band()}`,
+      lte: (c: LteComponent) => `${c.band()}${getUlCcClass(c, true)}`,
+      nr: (c: NrComponent) => `n${c.band()}${getUlCcClass(c, true)}`,
     },
   };
 
