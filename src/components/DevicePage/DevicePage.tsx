@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Section from '@components/Design/Section';
 import Link from '@components/Links/Link';
@@ -72,7 +72,7 @@ export default function DevicePage({ uuid }: DevicePageProps) {
 
   useEffect(() => {
     if (device) {
-      document.title = `${device.deviceName()} | Mobile Combos`;
+      document.title = `${device.manufacturer()} ${device.deviceName()} | Mobile Combos`;
     }
 
     if (!device && !isBasicDataLoading) {

@@ -2,15 +2,16 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Button from '@components/Inputs/Button';
 import LoadingSpinner from '@components/LoadingSpinner';
 import { useApiStore } from '../../api/ApiStoreProvider';
-import Device from '../../api/Models/Device';
-import { JsonApiPayload } from '../../api/Store';
-import DevicesListItem from './DevicesListItem';
+import ModemsListItem from './ModemsListItem';
+
+import type { JsonApiPayload } from '../../api/Store';
+import type Modem from '../../api/Models/Modem';
 
 const PAGE_SIZE = 100;
 
-export default function AdminDevicesList() {
+export default function AdminModemsList() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [allDevices, setAllDevices] = useState<null | Device[]>(null);
+  const [allModems, setAllModems] = useState<null | Modem[]>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<null | any>(null);
 
@@ -21,12 +22,12 @@ export default function AdminDevicesList() {
     setIsLoading(true);
 
     store
-      .find<Device[]>('devices', { page: { limit: PAGE_SIZE }, include: ['modem'] })
-      .then((devices) => {
-        if (!devices) {
-          setAllDevices([]);
+      .find<Modem[]>('modems', { page: { limit: PAGE_SIZE } })
+      .then((modems) => {
+        if (!modems) {
+          setAllModems([]);
         } else {
-          setAllDevices(devices);
+          setAllModems(modems);
         }
 
         setIsLoading(false);
@@ -41,9 +42,9 @@ export default function AdminDevicesList() {
     setIsLoading(true);
 
     store
-      .find<Device[]>('devices', { page: { offset: currentPage * PAGE_SIZE }, include: ['modem'] })
-      .then((devices) => {
-        if (devices) setAllDevices((dev) => [...(dev ?? []), ...devices]);
+      .find<Modem[]>('modems', { page: { offset: currentPage * PAGE_SIZE } })
+      .then((modems) => {
+        if (modems) setAllModems((modem) => [...(modem ?? []), ...modems]);
         setIsLoading(false);
         setCurrentPage((page) => page + 1);
       })
@@ -51,12 +52,12 @@ export default function AdminDevicesList() {
         setError(err);
         setIsLoading(false);
       });
-  }, [store, allDevices]);
+  }, [store, allModems]);
 
   if (error) {
     return (
       <div>
-        <p className="text-speak">Something went wrong when fetching the list of devices. Please try again later.</p>
+        <p className="text-speak">Something went wrong when fetching the list of modems. Please try again later.</p>
       </div>
     );
   }
@@ -70,15 +71,14 @@ export default function AdminDevicesList() {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: 16,
-          // alignContent: 'stretch'
         }}
       >
-        {allDevices?.map((device) => (
-          <DevicesListItem key={device.uuid()} device={device} />
+        {allModems?.map((modem) => (
+          <ModemsListItem key={modem.uuid()} modem={modem} />
         ))}
       </ul>
 
-      {allDevices && ((allDevices as any)?.payload as JsonApiPayload)?.links?.next && (
+      {allModems && ((allModems as any)?.payload as JsonApiPayload)?.links?.next && (
         <Button
           disabled={isLoading}
           onClick={() => {

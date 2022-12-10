@@ -1,9 +1,9 @@
 import { SEO } from '@components/SEO';
 import Layout from '@components/Design/Layout';
-
-import type { HeadFC, PageProps } from 'gatsby';
 import Section from '@components/Design/Section';
 import AdminDevicesList from '@components/Admin/AdminDevicesList';
+
+import type { HeadFC, PageProps } from 'gatsby';
 
 export default function AdminDevicesPage({ location }: PageProps) {
   return (

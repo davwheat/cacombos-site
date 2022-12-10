@@ -68,7 +68,9 @@ interface FormFirmwareData {
   firmwareName: string;
 }
 
-function isValidData(attrs: FormAttributeData, fws: FormFirmwareData[]): boolean {
+function isValidData(attrs: FormAttributeData | undefined, fws: FormFirmwareData[] | undefined): boolean {
+  if (!attrs || !fws) return false;
+
   if (!attrs.deviceName || !attrs.modelName || !attrs.modemId || !attrs.releaseDate) return false;
 
   if (fws.some((fw) => !fw.firmwareName)) return false;
@@ -180,7 +182,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
     setIsFirmwareCapSetDataLoading(false);
     setDevice(data?.[0]);
 
-    document.title = device?.modelName() ?? 'Not found';
+    document.title = device?.modelName() ? `Editing ${device.modelName()}` : 'Not found';
 
     if (device) {
       const modem = device.modem() || null;
@@ -296,7 +298,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
           onSubmit={(e) => {
             e.preventDefault();
 
-            if (!isValidData(formAttributeData!, formFirmwareData!)) {
+            if (!isValidData(formAttributeData, formFirmwareData)) {
               alert('Invalid data!');
               return;
             }
@@ -323,7 +325,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
                       return;
 
                     case 404:
-                      enqueueSnackbar("One or models couldn't be found. Maybe someone else modified this device while you were?", {
+                      enqueueSnackbar("One or more models couldn't be found. Maybe someone else modified this device while you were?", {
                         variant: 'error',
                       });
                       return;
@@ -476,7 +478,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
             </div>
           </div>
 
-          <Button type="submit" css={{ alignSelf: 'center' }} disabled={!isValidData(formAttributeData!, formFirmwareData!)}>
+          <Button type="submit" css={{ alignSelf: 'center' }} disabled={!isValidData(formAttributeData, formFirmwareData)}>
             Save changes
           </Button>
         </form>
