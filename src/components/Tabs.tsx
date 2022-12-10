@@ -1,4 +1,3 @@
-import React from 'react';
 import { Tabs as OGTabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
 
 import Breakpoints from '@data/breakpoints';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 // import Link from '../Links/Link';
 // import SocialButtons from '../SocialButtons';
 

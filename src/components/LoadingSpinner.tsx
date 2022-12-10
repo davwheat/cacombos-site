@@ -1,4 +1,3 @@
-import React from 'react';
 import { Interpolation, keyframes, SerializedStyles, Theme } from '@emotion/react';
 
 const spin = keyframes`

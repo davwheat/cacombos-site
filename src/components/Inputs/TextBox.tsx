@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import SearchIcon from 'mdi-react/SearchIcon';

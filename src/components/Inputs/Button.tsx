@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Colors from '@data/colors.json';
 
 import LoadingSpinner from '@components/LoadingSpinner';

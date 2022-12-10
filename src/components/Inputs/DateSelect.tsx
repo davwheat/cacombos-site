@@ -1,10 +1,7 @@
-import React from 'react';
-
 import Colors from '@data/colors.json';
 
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
-import clsx from 'clsx';
 import dayjs from 'dayjs';
 
 interface IProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onInput'> {

@@ -1,4 +1,3 @@
-import React from 'react';
 import Colors from '@data/colors.json';
 import Hero from '@components/Design/Hero';
 import dayjs from 'dayjs';

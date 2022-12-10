@@ -1,4 +1,3 @@
-import React from 'react';
 import Store from './Store';
 
 const context = React.createContext<Store | null>(null);

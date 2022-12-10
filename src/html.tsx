@@ -1,4 +1,3 @@
-import React from 'react';
 import { ApiStoreContext } from './api/ApiStoreProvider';
 
 export default function HTML(props: Props) {

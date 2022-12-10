@@ -1,4 +1,3 @@
-import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import { ScrollContext } from 'gatsby-react-router-scroll';

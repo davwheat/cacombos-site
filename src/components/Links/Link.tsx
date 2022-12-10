@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link as GatsbyLink } from 'gatsby';
 
 export interface ILinkProps extends React.HTMLAttributes<HTMLAnchorElement> {

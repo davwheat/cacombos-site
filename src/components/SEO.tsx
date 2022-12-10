@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface SEOProps {
   children?: React.ReactNode;
   pageName: string;

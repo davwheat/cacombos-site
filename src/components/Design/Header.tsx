@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import Link from '../Links/Link';
 import Breakpoints from '@data/breakpoints';
@@ -57,6 +57,7 @@ export default function Header() {
       css={{
         background: '#000',
         color: '#fff',
+        fontSize: 18,
         height: 56,
         borderBottom: '1px solid #fff',
         marginBottom: 24,

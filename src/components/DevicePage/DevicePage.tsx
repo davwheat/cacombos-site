@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Section from '@components/Design/Section';
 import Link from '@components/Links/Link';

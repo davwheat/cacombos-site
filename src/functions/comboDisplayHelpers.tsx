@@ -1,4 +1,3 @@
-import React from 'react';
 import type Combo from '../api/Models/Combo';
 import type LteComponent from '../api/Models/LteComponent';
 import type NrComponent from '../api/Models/NrComponent';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;

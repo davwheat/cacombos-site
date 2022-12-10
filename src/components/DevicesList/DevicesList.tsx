@@ -1,6 +1,6 @@
 import Button from '@components/Inputs/Button';
 import LoadingSpinner from '@components/LoadingSpinner';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useApiStore } from '../../api/ApiStoreProvider';
 import Device from '../../api/Models/Device';
 import { JsonApiPayload } from '../../api/Store';

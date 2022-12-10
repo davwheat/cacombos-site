@@ -1,5 +1,3 @@
-import React from 'react';
-
 import clsx from 'clsx';
 import bestContrast from 'get-best-contrast-color';
 import Breakpoints from '@data/breakpoints';

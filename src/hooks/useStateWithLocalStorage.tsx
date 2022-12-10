@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 /**
  * Wrapper for React's `useState` hook that persists data in the browser's LocalStorage.

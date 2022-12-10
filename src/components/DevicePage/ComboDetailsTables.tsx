@@ -1,11 +1,10 @@
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 import { getDlComponents, getUlComponents } from '@functions/comboDisplayHelpers';
 import friendlyQamConverter from '@functions/friendlyQamConverter';
-import React from 'react';
 import { useRecoilValue } from 'recoil';
 
 import type Combo from '../../api/Models/Combo';
-import { TableCellCss, TableHeadCellCss } from './CapabilitySetVisualiser';
+import { TableCellCss, TableHeadCellCss } from './ComboTable';
 
 export interface ComboDetailsTablesProps {
   combo: Combo;
@@ -66,8 +65,8 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
             </thead>
             <tbody>
               {(() => {
-                const lteCcRows = dlLteComponents.map((cc) => (
-                  <tr key={`lte-${cc.id()}`}>
+                const lteCcRows = dlLteComponents.map((cc, i) => (
+                  <tr key={`${combo.uuid()}-lte-${i}`}>
                     <td>
                       <code className="code">{cc.band()}</code>
                     </td>
@@ -81,8 +80,8 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                   </tr>
                 ));
 
-                const nrCcRows = dlNrComponents.map((cc) => (
-                  <tr key={`nr-${cc.id()}`}>
+                const nrCcRows = dlNrComponents.map((cc, i) => (
+                  <tr key={`${combo.uuid()}-nr-${i}`}>
                     <td>
                       <code className="code">n{cc.band()}</code>
                     </td>
@@ -90,7 +89,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                     <td>{cc.dlMimo()}</td>
                     <td>{friendlyQamConverter(cc.dlModulation() ?? '256qam')}</td>
                     <td>{cc.bandwidth()} MHz</td>
-                    <td>{cc.subcarrierSpacing()} MHz</td>
+                    <td>{cc.subcarrierSpacing()} kHz</td>
                   </tr>
                 ));
 
@@ -133,8 +132,8 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
             </thead>
             <tbody>
               {(() => {
-                const lteCcRows = ulLteComponents.map((cc) => (
-                  <tr key={`lte-${cc.id()}`}>
+                const lteCcRows = ulLteComponents.map((cc, i) => (
+                  <tr key={`${combo.uuid()}-lte-${i}`}>
                     <td>
                       <code className="code">{cc.band()}</code>
                     </td>
@@ -146,8 +145,8 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                   </tr>
                 ));
 
-                const nrCcRows = ulNrComponents.map((cc) => (
-                  <tr key={`nr-${cc.id()}`}>
+                const nrCcRows = ulNrComponents.map((cc, i) => (
+                  <tr key={`${combo.uuid()}-nr-${i}`}>
                     <td>
                       <code className="code">n{cc.band()}</code>
                     </td>
@@ -155,7 +154,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                     <td>{cc.ulMimo()}</td>
                     <td>{friendlyQamConverter(cc.ulModulation() ?? '64qam')}</td>
                     <td>{cc.bandwidth()} MHz</td>
-                    <td>{cc.subcarrierSpacing()} MHz</td>
+                    <td>{cc.subcarrierSpacing()} kHz</td>
                   </tr>
                 ));
 
