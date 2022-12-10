@@ -6,7 +6,7 @@ import { css } from '@emotion/react';
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 import { getDlComboString, getDlMimoString, getUlComboString, getUlMimoString } from '@functions/comboDisplayHelpers';
 import type Combo from '../../api/Models/Combo';
-import { TableCellCss } from './CapabilitySetVisualiser';
+import { TableCellCss } from './ComboTable';
 import generateTransitions from '@functions/generateTransitions';
 
 import ArrowDown from 'mdi-react/ChevronDownIcon';
@@ -52,18 +52,16 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
 
   const [expandedRow, setExpandedRow] = useState<boolean>(false);
 
-  const tableCellCss: any[] = [TableCellCss];
-
-  if (expandedRow) {
-    tableCellCss.push({
-      borderBottom: 'none',
-    });
-  }
-
   return (
     <>
       <tr
+        data-combo-uuid={combo.uuid()}
         css={{
+          '.ComboTable-cell': {
+            ...TableCellCss,
+            borderBottom: expandedRow ? 'none' : TableCellCss.borderBottom,
+          },
+
           '&:hover': {
             '&, & + .ComboTable-expandedRow': {
               background: '#f5f5f5',
@@ -71,7 +69,7 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
           },
         }}
       >
-        <td css={[...tableCellCss, { padding: 2 }]}>
+        <td className="ComboTable-expanderCell ComboTable-cell" css={{ padding: '2px !important' }}>
           <button
             aria-label={expandedRow ? 'Collapse row' : 'Expand row'}
             css={[
@@ -109,23 +107,8 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
             />
           </button>
         </td>
-        {displayOptions.comboStringType === 'full' ? (
-          <td css={tableCellCss}>
-            <code className="code">{combo.comboString()}</code>
-          </td>
-        ) : (
-          <td css={tableCellCss}>
-            <code className="code">{getDlComboString(combo, displayOptions.comboStringType)}</code>
-          </td>
-        )}
-        <td css={tableCellCss}>{getDlMimoString(combo)}</td>
 
-        {displayOptions.comboStringType !== 'full' && (
-          <td css={tableCellCss}>
-            <code className="code">{getUlComboString(combo, displayOptions.comboStringType)}</code>
-          </td>
-        )}
-        <td css={tableCellCss}>{getUlMimoString(combo)}</td>
+        <ComboTableRowDataCells combo={combo} />
       </tr>
 
       {expandedRow && (
@@ -147,3 +130,39 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
     </>
   );
 }
+
+interface ComboTableRowDataCellsProps {
+  combo: Combo;
+}
+
+function _ComboTableRowDataCells({ combo }: ComboTableRowDataCellsProps) {
+  const displayOptions = useRecoilValue(ComboListDisplayOptions);
+
+  return (
+    <>
+      {displayOptions.comboStringType === 'full' ? (
+        <td className="ComboTable-cell">
+          <code className="code">{combo.comboString()}</code>
+        </td>
+      ) : (
+        <td className="ComboTable-cell">
+          <code className="code">{getDlComboString(combo, displayOptions.comboStringType)}</code>
+        </td>
+      )}
+
+      <td className="ComboTable-cell">{getDlMimoString(combo)}</td>
+
+      {displayOptions.comboStringType !== 'full' && (
+        <td className="ComboTable-cell">
+          <code className="code">{getUlComboString(combo, displayOptions.comboStringType)}</code>
+        </td>
+      )}
+
+      <td className="ComboTable-cell">{getUlMimoString(combo)}</td>
+    </>
+  );
+}
+
+const ComboTableRowDataCells = React.memo(_ComboTableRowDataCells, (prevProps, nextProps) => {
+  return prevProps.combo.id() === nextProps.combo.id();
+});

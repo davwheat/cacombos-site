@@ -36,8 +36,31 @@ export function getDlComboString(combo: Combo, format: 'complex' | 'simple'): st
     },
   };
 
-  const lteString = lteComponents.map(comboFormatter[format].lte).join('-');
-  const nrString = nrComponents.map(comboFormatter[format].nr).join('-');
+  const lteIndexes = new Set<number>();
+  const nrIndexes = new Set<number>();
+
+  const lteString = lteComponents
+    .filter((x) => {
+      if (lteIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      lteIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map(comboFormatter[format].lte)
+    .join('-');
+  const nrString = nrComponents
+    .filter((x) => {
+      if (nrIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      nrIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map(comboFormatter[format].nr)
+    .join('-');
 
   if (lteString && !nrString) {
     return lteString;
@@ -55,8 +78,31 @@ export function getDlComboString(combo: Combo, format: 'complex' | 'simple'): st
 export function getDlMimoString(combo: Combo): React.ReactNode {
   const [lteComponents, nrComponents] = getDlComponents(combo);
 
-  const lteString = lteComponents.map((c) => `${c.mimo()}`).join('+');
-  const nrString = nrComponents.map((c) => `${c.dlMimo()}`).join('+');
+  const lteIndexes = new Set<number>();
+  const nrIndexes = new Set<number>();
+
+  const lteString = lteComponents
+    .filter((x) => {
+      if (lteIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      lteIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map((c) => `${c.mimo()}`)
+    .join('+');
+  const nrString = nrComponents
+    .filter((x) => {
+      if (nrIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      nrIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map((c) => `${c.dlMimo()}`)
+    .join('+');
 
   const totalStreams = getTotalStreams(combo).dl;
 
@@ -83,8 +129,31 @@ export function getUlComboString(combo: Combo, format: 'complex' | 'simple'): st
     },
   };
 
-  const lteString = lteComponents.map(comboFormatter[format].lte).join('-');
-  const nrString = nrComponents.map(comboFormatter[format].nr).join('-');
+  const lteIndexes = new Set<number>();
+  const nrIndexes = new Set<number>();
+
+  const lteString = lteComponents
+    .filter((x) => {
+      if (lteIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      lteIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map(comboFormatter[format].lte)
+    .join('-');
+  const nrString = nrComponents
+    .filter((x) => {
+      if (nrIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      nrIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map(comboFormatter[format].nr)
+    .join('-');
 
   if (lteString && !nrString) {
     return lteString;
@@ -102,8 +171,31 @@ export function getUlComboString(combo: Combo, format: 'complex' | 'simple'): st
 export function getUlMimoString(combo: Combo): React.ReactNode {
   const [lteComponents, nrComponents] = getUlComponents(combo);
 
-  const lteString = lteComponents.map((c) => '1').join('+');
-  const nrString = nrComponents.map((c) => `${c.ulMimo()}`).join('+');
+  const lteIndexes = new Set<number>();
+  const nrIndexes = new Set<number>();
+
+  const lteString = lteComponents
+    .filter((x) => {
+      if (lteIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      lteIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map((c) => '1')
+    .join('+');
+  const nrString = nrComponents
+    .filter((x) => {
+      if (nrIndexes.has(x.componentIndex())) {
+        return false;
+      }
+
+      nrIndexes.add(x.componentIndex());
+      return true;
+    })
+    .map((c) => `${c.ulMimo()}`)
+    .join('+');
 
   const str = [lteString, nrString].filter((a) => a.length).join('+');
 
@@ -124,8 +216,53 @@ export function getTotalStreams(combo: Combo): { dl: number; ul: number } {
   const [dlLteComponents, dlNrComponents] = getDlComponents(combo);
   const [ulLteComponents, ulNrComponents] = getUlComponents(combo);
 
+  const lteIndexes = new Set<number>();
+  const nrIndexes = new Set<number>();
+  const lteUlIndexes = new Set<number>();
+  const nrUlIndexes = new Set<number>();
+
   return {
-    dl: dlLteComponents.reduce((acc, c) => acc + (c.mimo() ?? 0), 0) + dlNrComponents.reduce((acc, c) => acc + (c.dlMimo() ?? 0), 0),
-    ul: ulLteComponents.reduce((acc, c) => acc + 1, 0) + ulNrComponents.reduce((acc, c) => acc + (c.ulMimo() ?? 0), 0),
+    dl:
+      dlLteComponents
+        .filter((x) => {
+          if (lteIndexes.has(x.componentIndex())) {
+            return false;
+          }
+
+          lteIndexes.add(x.componentIndex());
+          return true;
+        })
+        .reduce((acc, c) => acc + (c.mimo() ?? 0), 0) +
+      dlNrComponents
+        .filter((x) => {
+          if (nrIndexes.has(x.componentIndex())) {
+            return false;
+          }
+
+          nrIndexes.add(x.componentIndex());
+          return true;
+        })
+        .reduce((acc, c) => acc + (c.dlMimo() ?? 0), 0),
+    ul:
+      ulLteComponents
+        .filter((x) => {
+          if (lteUlIndexes.has(x.componentIndex())) {
+            return false;
+          }
+
+          lteUlIndexes.add(x.componentIndex());
+          return true;
+        })
+        .reduce((acc, c) => acc + 1, 0) +
+      ulNrComponents
+        .filter((x) => {
+          if (nrUlIndexes.has(x.componentIndex())) {
+            return false;
+          }
+
+          nrUlIndexes.add(x.componentIndex());
+          return true;
+        })
+        .reduce((acc, c) => acc + (c.ulMimo() ?? 0), 0),
   };
 }

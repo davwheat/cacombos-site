@@ -38,7 +38,7 @@ export default function DeviceHero({ device, error = false, loading = false }: D
   return (
     <Hero firstElement size="normal" color={Colors.primaryBlue}>
       <h1 className="text-louder">
-        {device.deviceName()} ({device.modelName()})
+        {device.manufacturer()} {device.deviceName()} ({device.modelName()})
       </h1>
       <p role="doc-subtitle" className="text-loud">
         Released {dayjs(device.releaseDate()).format('D MMMM YYYY')}
