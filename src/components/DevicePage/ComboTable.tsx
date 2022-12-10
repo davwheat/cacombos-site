@@ -2,12 +2,12 @@ import ComboTableRow from './ComboTableRow';
 
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 
-import { useApiStore } from '../../api/ApiStoreProvider';
+import { useApiStore } from '@api/ApiStoreProvider';
 import { comboListSorter } from '@functions/sortComboList';
 import { useRecoilValue } from 'recoil';
 
-import type Combo from '../../api/Models/Combo';
-import type CapabilitySet from '../../api/Models/CapabilitySet';
+import type Combo from '@api/Models/Combo';
+import type CapabilitySet from '@api/Models/CapabilitySet';
 import type { Interpolation, Theme } from '@emotion/react';
 
 export interface ComboTableProps {

@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 import { getDlComboString, getDlMimoString, getUlComboString, getUlMimoString } from '@functions/comboDisplayHelpers';
-import type Combo from '../../api/Models/Combo';
+import type Combo from '@api/Models/Combo';
 import { TableCellCss } from './ComboTable';
 import generateTransitions from '@functions/generateTransitions';
 

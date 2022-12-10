@@ -12,12 +12,12 @@ import EyeSlashIcon from 'mdi-react/EyeOffOutlineIcon';
 import Colors from '@data/colors.json';
 import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 
-import { useApiStore } from '../../api/ApiStoreProvider';
+import { useApiStore } from '@api/ApiStoreProvider';
 import { useRecoilState } from 'recoil';
 import { useSnackbar } from 'notistack';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
-import type Modem from '../../api/Models/Modem';
+import type Modem from '@api/Models/Modem';
 
 export const ModemPageContext = React.createContext<Modem | null>(null);
 

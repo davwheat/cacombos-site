@@ -3,7 +3,7 @@ import { getDlComponents, getUlComponents } from '@functions/comboDisplayHelpers
 import friendlyQamConverter from '@functions/friendlyQamConverter';
 import { useRecoilValue } from 'recoil';
 
-import type Combo from '../../api/Models/Combo';
+import type Combo from '@api/Models/Combo';
 import { TableCellCss, TableHeadCellCss } from './ComboTable';
 
 export interface ComboDetailsTablesProps {

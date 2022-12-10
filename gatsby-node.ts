@@ -46,7 +46,7 @@ export const onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions 
         '@styles': path.resolve(__dirname, 'src/styles'),
         '@hooks': path.resolve(__dirname, 'src/hooks'),
         '@atoms': path.resolve(__dirname, 'src/atoms'),
-        // '@templates': path.resolve(__dirname, 'src/templates'),
+        '@api': path.resolve(__dirname, 'src/cloud-api'),
       },
     },
   });

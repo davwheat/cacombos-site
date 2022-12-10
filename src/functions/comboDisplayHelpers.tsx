@@ -1,6 +1,6 @@
-import type Combo from '../api/Models/Combo';
-import type LteComponent from '../api/Models/LteComponent';
-import type NrComponent from '../api/Models/NrComponent';
+import type Combo from '@api/Models/Combo';
+import type LteComponent from '@api/Models/LteComponent';
+import type NrComponent from '@api/Models/NrComponent';
 
 export function getDlComponents(combo: Combo): [LteComponent[], NrComponent[]] {
   const lteComponents = (combo.lteComponents() as LteComponent[]).filter((c) => !!c.dlClass());

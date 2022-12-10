@@ -1,6 +1,6 @@
 import { getDlComponents } from './comboDisplayHelpers';
 
-import type Combo from '../api/Models/Combo';
+import type Combo from '@api/Models/Combo';
 
 export function comboListSorter(a: Combo, b: Combo): number {
   const [lteA, nrA] = getDlComponents(a);

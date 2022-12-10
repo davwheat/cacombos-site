@@ -2,7 +2,7 @@ import Colors from '@data/colors.json';
 import Hero from '@components/Design/Hero';
 import dayjs from 'dayjs';
 
-import type Device from '../../api/Models/Device';
+import type Device from '@api/Models/Device';
 
 export interface DeviceHeroProps {
   device?: Device;

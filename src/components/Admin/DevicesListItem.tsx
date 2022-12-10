@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import CardLink from '@components/Links/CardLink';
 
-import type Device from '../../api/Models/Device';
+import type Device from '@api/Models/Device';
 
 export interface DevicesListItemProps {
   device: Device;

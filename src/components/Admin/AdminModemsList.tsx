@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Button from '@components/Inputs/Button';
 import LoadingSpinner from '@components/LoadingSpinner';
-import { useApiStore } from '../../api/ApiStoreProvider';
+import { useApiStore } from '@api/ApiStoreProvider';
 import ModemsListItem from './ModemsListItem';
 
-import type { JsonApiPayload } from '../../api/Store';
-import type Modem from '../../api/Models/Modem';
+import type { JsonApiPayload } from '@api/Store';
+import type Modem from '@api/Models/Modem';
 
 const PAGE_SIZE = 100;
 

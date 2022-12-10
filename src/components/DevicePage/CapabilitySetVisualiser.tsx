@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import DeviceSettingsAtom from '@atoms/DeviceSettingsAtom';
-import { useApiStore } from '../../api/ApiStoreProvider';
+import { useApiStore } from '@api/ApiStoreProvider';
 import useIsFirstRender from '@hooks/useIsFirstRender';
 import Section from '@components/Design/Section';
 import LoadingSpinner from '@components/LoadingSpinner';
 import ComboTable from './ComboTable';
 
-import type CapabilitySet from '../../api/Models/CapabilitySet';
-import type Combo from '../../api/Models/Combo';
+import type CapabilitySet from '@api/Models/CapabilitySet';
+import type Combo from '@api/Models/Combo';
 
 function isFullCapSetDataLoaded(capSet: CapabilitySet | undefined): boolean {
   if (!capSet) return false;

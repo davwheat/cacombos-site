@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApiStoreContext } from './src/api/ApiStoreProvider';
+import { ApiStoreContext } from '@api/ApiStoreProvider';
 import { RecoilRoot } from 'recoil';
 import { SnackbarProvider } from 'notistack';
 

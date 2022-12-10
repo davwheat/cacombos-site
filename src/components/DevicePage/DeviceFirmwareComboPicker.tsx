@@ -4,12 +4,12 @@ import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 import SelectDropdown from '@components/Inputs/SelectDropdown';
 import { DevicePageContext } from './DevicePage';
 import Section from '@components/Design/Section';
-import { useApiStore } from '../../api/ApiStoreProvider';
+import { useApiStore } from '@api/ApiStoreProvider';
 import dayjs from 'dayjs';
 import Breakpoints from '@data/breakpoints';
 
-import type DeviceFirmware from '../../api/Models/DeviceFirmware';
-import type CapabilitySet from '../../api/Models/CapabilitySet';
+import type DeviceFirmware from '@api/Models/DeviceFirmware';
+import type CapabilitySet from '@api/Models/CapabilitySet';
 
 export interface DeviceFirmwareComboPickerProps {}
 

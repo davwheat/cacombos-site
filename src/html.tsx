@@ -1,4 +1,4 @@
-import { ApiStoreContext } from './api/ApiStoreProvider';
+import { ApiStoreContext } from './cloud-api/ApiStoreProvider';
 
 export default function HTML(props: Props) {
   return (

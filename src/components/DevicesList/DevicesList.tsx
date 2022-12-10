@@ -1,9 +1,9 @@
 import Button from '@components/Inputs/Button';
 import LoadingSpinner from '@components/LoadingSpinner';
 import { useCallback, useEffect, useState } from 'react';
-import { useApiStore } from '../../api/ApiStoreProvider';
-import Device from '../../api/Models/Device';
-import { JsonApiPayload } from '../../api/Store';
+import { useApiStore } from '@api/ApiStoreProvider';
+import Device from '@api/Models/Device';
+import { JsonApiPayload } from '@api/Store';
 import DevicesListItem from './DevicesListItem';
 
 const PAGE_SIZE = 20;

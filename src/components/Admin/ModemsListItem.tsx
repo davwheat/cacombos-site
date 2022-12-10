@@ -1,6 +1,6 @@
 import CardLink from '@components/Links/CardLink';
 
-import type Modem from '../../api/Models/Modem';
+import type Modem from '@api/Models/Modem';
 
 export interface ModemsListItemProps {
   modem: Modem;
