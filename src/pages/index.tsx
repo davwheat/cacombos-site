@@ -13,7 +13,7 @@ export default function AllDevicesPage({ location }: PageProps) {
         <h1 className="text-shout">All devices</h1>
       </Hero>
 
-      <Section>
+      <Section width="full" css={{ padding: '0 32px' }}>
         <DevicesList />
       </Section>
     </Layout>

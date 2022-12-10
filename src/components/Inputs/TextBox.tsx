@@ -155,7 +155,7 @@ export default function TextBox({
           {...attrs}
         />
         {endAppendix && (
-          <span aria-hidden="true" className='textbox-endAppendix'>
+          <span aria-hidden="true" className="textbox-endAppendix">
             {endAppendix}
           </span>
         )}

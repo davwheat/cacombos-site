@@ -3,9 +3,9 @@ export default function generateIdSlug(text: string, instance?: number): string 
     .toLowerCase()
     .replace(/[,. ]/g, '-')
     .replace(/-{2,}/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
+    .replace(/[^a-z0-9-]/g, '');
 
-  if (instance && instance > 1) return `${slug}-${instance}`
+  if (instance && instance > 1) return `${slug}-${instance}`;
 
-  return slug
+  return slug;
 }
