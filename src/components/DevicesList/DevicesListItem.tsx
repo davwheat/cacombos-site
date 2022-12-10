@@ -16,7 +16,7 @@ export default function DevicesListItem({ device }: DevicesListItemProps) {
           {device.deviceName()} ({device.modelName()})
         </h3>
 
-        <dl>
+        <dl css={{ marginTop: 'auto' }}>
           <DevicesListItemDescriptionValue name="Modem" value={modem?.name() ?? 'Unknown'} />
           <DevicesListItemDescriptionValue name="Release date" value={dayjs(device.releaseDate()).format('MMM YYYY')} />
         </dl>

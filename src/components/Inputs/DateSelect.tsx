@@ -80,6 +80,7 @@ export default function DateSelect({
       <span className="text-speak-up">{label}</span>
 
       <div
+        className="text-speak"
         css={{
           display: 'flex',
           alignItems: 'center',

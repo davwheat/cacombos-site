@@ -1,4 +1,3 @@
-import React from 'react';
 import Breakpoints from '@data/breakpoints';
 import Colors from '@data/colors.json';
 
@@ -89,6 +88,7 @@ export default function Section({
           width === 'full'
             ? {
                 padding: '0 8px',
+                maxWidth: 'unset',
               }
             : {},
           width === 'wider'

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useRecoilState } from 'recoil';
 import DeviceSettingsAtom from '@atoms/DeviceSettingsAtom';
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
@@ -8,11 +6,10 @@ import { DevicePageContext } from './DevicePage';
 import Section from '@components/Design/Section';
 import { useApiStore } from '../../api/ApiStoreProvider';
 import dayjs from 'dayjs';
+import Breakpoints from '@data/breakpoints';
 
 import type DeviceFirmware from '../../api/Models/DeviceFirmware';
 import type CapabilitySet from '../../api/Models/CapabilitySet';
-import Breakpoints from '@data/breakpoints';
-import Checkbox from '@components/Inputs/Checkbox';
 
 export interface DeviceFirmwareComboPickerProps {}
 
@@ -134,13 +131,15 @@ export default function DeviceFirmwareComboPicker(props: DeviceFirmwareComboPick
                   }}
                 />
 
-                <Checkbox
-                  label="LTE bandwidth next to class"
-                  checked={displaySettings.showLteBwNextToClass}
-                  onChange={(v) => {
-                    setDisplaySettings((x) => ({ ...x, showLteBwNextToClass: v.target.checked }));
-                  }}
-                />
+                {/* <div css={{ marginBottom: 'auto' }}>
+                  <Checkbox
+                    label="In expanded view, show LTE bandwidth next to class"
+                    checked={displaySettings.showLteBwNextToClass}
+                    onChange={(v) => {
+                      setDisplaySettings((x) => ({ ...x, showLteBwNextToClass: v.target.checked }));
+                    }}
+                  />
+                </div> */}
               </div>
             </div>
           );

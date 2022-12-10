@@ -57,7 +57,7 @@ export default function SelectDropdown({
       </span>
 
       <div
-        className="select-wrapper"
+        className="select-wrapper text-speak"
         css={{
           display: 'flex',
         }}
@@ -106,6 +106,10 @@ export default function SelectDropdown({
               border: '2px solid black',
               borderRadius: 0,
               paddingRight: 48,
+
+              '&:disabled': {
+                cursor: 'not-allowed',
+              },
 
               '&:focus-visible': {
                 borderColor: Colors.primaryRed,
