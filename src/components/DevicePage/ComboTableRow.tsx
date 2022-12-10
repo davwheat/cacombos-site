@@ -4,7 +4,13 @@ import { useRecoilValue } from 'recoil';
 import { css } from '@emotion/react';
 
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
-import { getDlComboString, getDlMimoString, getUlComboString, getUlMimoString } from '@functions/comboDisplayHelpers';
+import {
+  getDlComboString,
+  getDlComponents,
+  getDlMimoString,
+  getUlComboString,
+  getUlMimoString,
+} from '@functions/comboDisplayHelpers';
 import type Combo from '@api/Models/Combo';
 import { TableCellCss } from './ComboTable';
 import generateTransitions from '@functions/generateTransitions';
@@ -120,6 +126,18 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
               {
                 background: '#f5f5f5',
                 padding: '16px 24px',
+              },
+              {
+                background: Object.values(
+                  getDlComponents(combo)[1].reduce((acc, curr) => {
+                    acc[curr.componentIndex()] &&= acc[curr.componentIndex()] + 1;
+                    acc[curr.componentIndex()] ??= 1;
+
+                    return acc;
+                  }, {} as Record<number, number>)
+                ).some((x) => x !== 1)
+                  ? '#f00'
+                  : '#f5f5f5',
               },
             ]}
           >

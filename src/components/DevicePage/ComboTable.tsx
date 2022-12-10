@@ -1,9 +1,12 @@
 import ComboTableRow from './ComboTableRow';
+import ComboTableFilter from './ComboTableFilter';
 
-import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
+import ComboListDisplayOptions, { IComboListDisplayOptions } from '@atoms/ComboListDisplayOptions';
+import ComboTableFilterStateAtom, { IComboTableFilterState } from '@atoms/ComboTableFilterState';
 
 import { useApiStore } from '@api/ApiStoreProvider';
 import { comboListSorter } from '@functions/sortComboList';
+import { getDlComboString, getUlComboString } from '@functions/comboDisplayHelpers';
 import { useRecoilValue } from 'recoil';
 
 import type Combo from '@api/Models/Combo';
@@ -27,27 +30,48 @@ export const TableHeadCellCss: Interpolation<Theme> = [
   },
 ];
 
+function filterCombos(
+  combos: Combo[],
+  comboStringFormat: IComboListDisplayOptions['comboStringType'],
+  filterOptions: IComboTableFilterState
+): Combo[] {
+  if (comboStringFormat === 'full') {
+    // No UL filtering
+
+    return combos.filter((combo) => combo.comboString().toLowerCase().includes(filterOptions.comboStringQuery.toLowerCase()));
+  }
+
+  const filteredCombos = combos.filter((combo) => {
+    const comboString = getDlComboString(combo, comboStringFormat);
+    const ulComboString = getUlComboString(combo, comboStringFormat);
+
+    const dlQuery = filterOptions.comboStringQuery.toLowerCase().trim();
+    const dlQueryMatch = !dlQuery ? true : comboString.toLowerCase().includes(dlQuery);
+
+    const ulQuery = filterOptions.ulComboStringQuery.toLowerCase().trim();
+    const ulQueryMatch = !ulQuery ? true : ulComboString.toLowerCase().includes(ulQuery);
+
+    return dlQueryMatch && ulQueryMatch;
+  });
+
+  return filteredCombos;
+}
+
 export default function ComboTable({ capabilitySetUuid }: ComboTableProps) {
   const store = useApiStore();
   const { comboStringType } = useRecoilValue(ComboListDisplayOptions);
+  const comboTableFilterState = useRecoilValue(ComboTableFilterStateAtom);
 
   const capabilitySet = store.getFirstBy<CapabilitySet>('capability-sets', 'uuid', capabilitySetUuid);
 
   if (!capabilitySet) return null;
 
   // @ts-expect-error Using protected attributes for performance
-  if (!capabilitySet.data!.relationships?.combos?.data)
+  if (!capabilitySet.data!.relationships?.combos?.data) {
     return <p className="text-speak-up">We couldn't find any combos for this device, firmware and capability set.</p>;
+  }
 
-  // const allCombos = useMemo(() => {
-  //   const combos = capabilitySet.combos() as Combo[];
-
-  //   combos.sort(comboListSorter);
-
-  //   return combos;
-  // }, [capabilitySet.uuid(), capabilitySet.data!.relationships?.combos?.data?.length]);
-
-  const allCombos = capabilitySet.combos() as Combo[];
+  const allCombos = filterCombos(capabilitySet.combos() as Combo[], comboStringType, comboTableFilterState);
 
   allCombos.sort(comboListSorter);
 
@@ -79,6 +103,8 @@ export default function ComboTable({ capabilitySetUuid }: ComboTableProps) {
           wordBreak: 'break-all',
         }}
       >
+        <ComboTableFilter />
+
         {allCombos.map((combo) => (
           <ComboTableRow key={combo.uuid()} combo={combo} />
         ))}
