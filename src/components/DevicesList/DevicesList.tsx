@@ -6,9 +6,15 @@ import Device from '@api/Models/Device';
 import { JsonApiPayload } from '@api/Store';
 import DevicesListItem from './DevicesListItem';
 
-const PAGE_SIZE = 20;
+export interface DevicesListProps {
+  itemComponent: ({ device, key }: { device: Device; key: string }) => React.ReactNode;
+  pageSize: number;
+}
 
-export default function DevicesList() {
+export default function DevicesList({
+  pageSize,
+  itemComponent = (props) => <DevicesListItem uriGenerator={(device) => `/admin/devices/edit/${device.uuid()}`} {...props} />,
+}: DevicesListProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [allDevices, setAllDevices] = useState<null | Device[]>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +27,7 @@ export default function DevicesList() {
     setIsLoading(true);
 
     store
-      .find<Device[]>('devices', { page: { limit: PAGE_SIZE }, include: ['modem'] })
+      .find<Device[]>('devices', { page: { limit: pageSize }, include: ['modem'] })
       .then((devices) => {
         if (!devices) {
           setAllDevices([]);
@@ -41,10 +47,11 @@ export default function DevicesList() {
     setIsLoading(true);
 
     store
-      .find<Device[]>('devices', { page: { offset: currentPage * PAGE_SIZE }, include: ['modem'] })
+      .find<Device[]>('devices', { page: { offset: currentPage * pageSize }, include: ['modem'] })
       .then((devices) => {
         if (devices) setAllDevices((dev) => [...(dev ?? []), ...devices]);
         setIsLoading(false);
+        setCurrentPage((page) => page + 1);
       })
       .catch((err) => {
         setError(err);
@@ -72,9 +79,7 @@ export default function DevicesList() {
           gap: 16,
         }}
       >
-        {allDevices?.map((device) => (
-          <DevicesListItem key={device.uuid()} device={device} />
-        ))}
+        {allDevices?.map((device) => itemComponent({ key: device.uuid(), device }))}
       </ul>
 
       {allDevices && ((allDevices as any)?.payload as JsonApiPayload)?.links?.next && (

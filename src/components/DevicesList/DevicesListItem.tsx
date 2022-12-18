@@ -5,14 +5,15 @@ import type Device from '@api/Models/Device';
 
 export interface DevicesListItemProps {
   device: Device;
+  uriGenerator: (device: Device) => string;
 }
 
-export default function DevicesListItem({ device }: DevicesListItemProps) {
+export default function DevicesListItem({ device, uriGenerator }: DevicesListItemProps) {
   const modem = device.modem() || null;
 
   return (
-    <li>
-      <CardLink to={`/devices/${device.uuid()}`} css={{ height: '100%' }}>
+    <li css={{ display: 'block', height: '100%' }}>
+      <CardLink to={uriGenerator(device)} css={{ height: '100%' }}>
         <h3 className="text-loud">
           {device.manufacturer()} {device.deviceName()} ({device.modelName()})
         </h3>

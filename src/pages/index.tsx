@@ -1,8 +1,9 @@
 import { SEO } from '@components/SEO';
 import Layout from '@components/Design/Layout';
 import Section from '@components/Design/Section';
-import DevicesList from '@components/DevicesList/DevicesList';
 import Hero from '@components/Design/Hero';
+import DevicesList from '@components/DevicesList/DevicesList';
+import DevicesListItem from '@components/DevicesList/DevicesListItem';
 
 import type { HeadFC, PageProps } from 'gatsby';
 
@@ -14,7 +15,7 @@ export default function AllDevicesPage({ location }: PageProps) {
       </Hero>
 
       <Section width="full" css={{ padding: '0 32px' }}>
-        <DevicesList />
+        <DevicesList pageSize={20} itemComponent={(props) => <DevicesListItem uriGenerator={(device) => `/devices/${device.uuid()}`} {...props} />} />
       </Section>
     </Layout>
   );
