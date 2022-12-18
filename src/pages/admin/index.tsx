@@ -34,6 +34,10 @@ export default function AdminPage({ location }: PageProps) {
           <CardLink to="/admin/modems">
             <p className="text-loud">Modems</p>
           </CardLink>
+
+          <CardLink to="/admin/upload">
+            <p className="text-loud">Upload combos</p>
+          </CardLink>
         </div>
       </Section>
     </Layout>

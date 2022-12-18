@@ -22,10 +22,6 @@ const LteClassToBwCc: Record<string, string> = {
   F: '100 MHz - 5CC',
 };
 
-function getNrBandwidthsForComponentIndex(combo: Combo, componentIndex: number): number[] {
-  const comps = combo.nrComponents();
-}
-
 export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
   const { showLteBwNextToClass } = useRecoilValue(ComboListDisplayOptions);
 
