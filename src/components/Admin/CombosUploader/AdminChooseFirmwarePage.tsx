@@ -1,63 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 import Section from '@components/Design/Section';
 import Hero from '@components/Design/Hero';
 import Breadcrumbs from '@components/Design/Breadcrumbs';
-import { useApiStore } from '@api/ApiStoreProvider';
-
-import type { RouteComponentProps } from '@gatsbyjs/reach-router';
-import type Device from '@api/Models/Device';
-import { navigate } from 'gatsby';
 import DeviceFirmware from '@api/Models/DeviceFirmware';
 import CardLink from '@components/Links/CardLink';
+import { useLoadDevice } from '@hooks/useLoadDevice';
+import { navigate } from 'gatsby';
+import { useSnackbar } from 'notistack';
+
+import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 
 export interface AdminChooseDevicePageProps extends RouteComponentProps {
   deviceUuid?: string;
 }
 
 export default function AdminChooseFirmwarePage({ deviceUuid }: AdminChooseDevicePageProps) {
-  const store = useApiStore();
-  const [device, setDevice] = useState<Device | undefined | null>(store.getFirstBy<Device>('devices', 'uuid', deviceUuid ?? ''));
-  const shouldLoadDevice = !device || !device.deviceFirmwares?.();
-  const loadingDevice = useRef<boolean>(false);
-  const [error, setError] = useState<any | null>(null);
+  const { enqueueSnackbar } = useSnackbar();
+  const { device, loadingState, error } = useLoadDevice(deviceUuid ?? '', ['modem', 'deviceFirmwares', 'deviceFirmwares.capabilitySets']);
 
   useEffect(() => {
     if (!deviceUuid) {
       navigate(`/admin/upload`);
       return;
     }
-
-    if (shouldLoadDevice && !loadingDevice.current) {
-      loadingDevice.current = true;
-
-      store
-        .find<Device[]>('devices', {
-          filter: {
-            uuid: deviceUuid ?? '',
-          },
-          include: ['deviceFirmwares', 'modem', 'deviceFirmwares.capabilitySets'],
-          page: {
-            limit: 1,
-          },
-        })
-        .then((devices) => {
-          if (!devices) {
-            navigate(`/admin/upload`);
-            return;
-          }
-
-          setDevice(devices[0]);
-        })
-        .catch((err) => {
-          setDevice(null);
-          setError(err);
-        })
-        .finally(() => {
-          loadingDevice.current = false;
-        });
-    }
   }, []);
+
+  useEffect(() => {
+    if (loadingState === 'error') {
+      enqueueSnackbar('Error loading device data from server', { variant: 'error' });
+      navigate(`/admin/upload`);
+    }
+  }, [loadingState]);
 
   return (
     <>

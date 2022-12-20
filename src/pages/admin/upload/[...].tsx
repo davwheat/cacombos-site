@@ -1,12 +1,12 @@
 import Layout from '@components/Design/Layout';
-import EditDevicePage from '@components/Admin/EditDevicePage';
-import AdminChooseDevicePage from '@components/Admin/CombosUploader/AdminChooseDevicePage';
 import { SEO } from '@components/SEO';
+import AdminChooseDevicePage from '@components/Admin/CombosUploader/AdminChooseDevicePage';
+import AdminChooseFirmwarePage from '@components/Admin/CombosUploader/AdminChooseFirmwarePage';
+import AdminChooseCapabilitySetPage from '@components/Admin/CombosUploader/AdminChooseCapabilitySetPage';
+import AdminComboUploadFormPage from '@components/Admin/CombosUploader/AdminComboUploadFormPage';
 import { Router } from '@gatsbyjs/reach-router';
 
 import type { HeadProps, PageProps } from 'gatsby';
-import AdminChooseFirmwarePage from '@components/Admin/CombosUploader/AdminChooseFirmwarePage';
-import AdminUploadCombosPage from '@components/Admin/CombosUploader/AdminUploadCombosPage';
 
 export default function EditDeviceRouterPage({ location }: PageProps) {
   return (
@@ -14,7 +14,8 @@ export default function EditDeviceRouterPage({ location }: PageProps) {
       <Router basepath="/admin/upload">
         <AdminChooseDevicePage path="/" />
         <AdminChooseFirmwarePage path="/:deviceUuid" />
-        <AdminUploadCombosPage path="/:deviceUuid/:firmwareUuid" />
+        <AdminChooseCapabilitySetPage path="/:deviceUuid/:firmwareUuid" />
+        <AdminComboUploadFormPage path="/:deviceUuid/:firmwareUuid/:capSetUuid" />
       </Router>
     </Layout>
   );

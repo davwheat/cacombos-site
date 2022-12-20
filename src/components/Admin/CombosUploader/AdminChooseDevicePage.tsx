@@ -13,6 +13,7 @@ export default function AdminChooseDevicePage({}: AdminChooseDevicePageProps) {
       <Hero firstElement>
         <h1 className="text-shout">Upload combos: select device</h1>
       </Hero>
+
       <Section width="full" css={{ padding: '0 32px' }}>
         <DevicesList
           pageSize={100}
