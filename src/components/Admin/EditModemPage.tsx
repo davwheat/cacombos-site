@@ -6,18 +6,17 @@ import Link from '@components/Links/Link';
 import LoadingSpinner from '@components/LoadingSpinner';
 import Section from '@components/Design/Section';
 import TextBox from '@components/Inputs/TextBox';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
-import EyeSlashIcon from 'mdi-react/EyeOffOutlineIcon';
 
 import Colors from '@data/colors.json';
 import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 
 import { useApiStore } from '@api/ApiStoreProvider';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { useSnackbar } from 'notistack';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 import type Modem from '@api/Models/Modem';
+import AdminAuthDetailsEntry from './AdminAuthDetailsEntry';
 
 export const ModemPageContext = React.createContext<Modem | null>(null);
 
@@ -99,8 +98,7 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
   const store = useApiStore();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const [showToken, setShowToken] = useState(false);
-  const [apiAuthDetails, setAdminAuthDetails] = useRecoilState(AdminAuthDetailsAtom);
+  const apiAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const [modem, setModem] = useState<Modem | undefined>(store.getFirstBy<Modem>('modems', 'uuid', uuid ?? ''));
   const [error, setError] = useState<null | any>(null);
   const [isModemLoading, setIsModemLoading] = useState(!modem);
@@ -188,30 +186,7 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
         <h1 className="text-shout">Editing {modem.name()}</h1>
       </Hero>
 
-      <Section darker usePadding>
-        <h2 className="text-louder">Admin info</h2>
-
-        <TextBox
-          value={apiAuthDetails.token}
-          onInput={(token) => {
-            setAdminAuthDetails((v) => ({ ...v, token }));
-          }}
-          style={showToken ? {} : { fontFamily: 'sans-serif' }}
-          label="Token"
-          helpText="Enter your token. Without this, you cannot save changes. This will be saved and auto-filled next time you load the website. Do not enter this on a public computer."
-          type={showToken ? 'text' : 'password'}
-          endAdornment={
-            <Button
-              onClick={() => {
-                setShowToken((v) => !v);
-              }}
-              css={{ padding: 0, width: 48, height: 36, alignItems: 'center', justifyContent: 'center' }}
-            >
-              {showToken ? <EyeIcon /> : <EyeSlashIcon />}
-            </Button>
-          }
-        />
-      </Section>
+      <AdminAuthDetailsEntry />
 
       <Section>
         <form
