@@ -19,6 +19,16 @@ import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
 import { useRecoilValue } from 'recoil';
 import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 import { useLoadDevice } from '@hooks/useLoadDevice';
+import useStateWithLocalStorage from '@hooks/useStateWithLocalStorage';
+import { NsgUpload } from './UploadForm/NsgUpload';
+import SelectFormType from './UploadForm/SelectFormType';
+import Colors from '@data/colors.json';
+
+export const ADMIN_UPLOAD_FORM_TYPE_OPTIONS = {
+  NSG: NsgUpload,
+} as const;
+
+export type AdminUploadFormType = keyof typeof ADMIN_UPLOAD_FORM_TYPE_OPTIONS;
 
 export interface AdminComboUploadFormPageProps extends RouteComponentProps {
   deviceUuid?: string;
@@ -28,8 +38,11 @@ export interface AdminComboUploadFormPageProps extends RouteComponentProps {
 
 export default function AdminComboUploadFormPage({ deviceUuid, firmwareUuid, capSetUuid }: AdminComboUploadFormPageProps) {
   const store = useApiStore();
-  const adminAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const { enqueueSnackbar } = useSnackbar();
+
+  const [formType, setFormType] = useStateWithLocalStorage<AdminUploadFormType>('admin/combos-upload/form-type', 'NSG', (val) =>
+    Object.keys(ADMIN_UPLOAD_FORM_TYPE_OPTIONS).includes(val)
+  );
 
   const { device, loadingState, error } = useLoadDevice(deviceUuid ?? '', ['modem', 'deviceFirmwares', 'deviceFirmwares.capabilitySets']);
   const firmware = store.getFirstBy<DeviceFirmware>('device-firmwares', 'uuid', firmwareUuid ?? '');
@@ -71,6 +84,8 @@ export default function AdminComboUploadFormPage({ deviceUuid, firmwareUuid, cap
     }
   }, [isValidCapSet, isValidFw, loadingState, deviceUuid, firmwareUuid]);
 
+  const FormComponent = ADMIN_UPLOAD_FORM_TYPE_OPTIONS[formType];
+
   return (
     <>
       <Hero firstElement>
@@ -102,17 +117,29 @@ export default function AdminComboUploadFormPage({ deviceUuid, firmwareUuid, cap
         ]}
       />
 
-      <AdminAuthDetailsEntry sectionProps={{ darker: false }} />
+      <AdminAuthDetailsEntry /*sectionProps={{ darker: false }}*/ />
 
-      <Section width="full" css={{ padding: '0 16px' }}>
+      <Section>
         <div css={{ maxWidth: 720, margin: 'auto' }}>
           <h2 className="text-louder">Upload form</h2>
           <p className="text-speak">
-            You should only overwrite combos in an existing capability set if an import has failed. It's likely you should really be creating a new
-            device firmware and/or a new capability set instead.
+            Upload combos to the capability set <strong>{capSet?.description()}</strong> for the{' '}
+            <strong>
+              {device?.manufacturer()} {device?.deviceName()} ({device?.modelName()})
+            </strong>
+            .
           </p>
-          <p className="text-speak-up">To delete a capability set, you must have an admin-level token, or greater.</p>
+          <p className="speak-text">To skip specific RATs, leave those fields blank when submitting.</p>
         </div>
+
+        <SelectFormType
+          value={formType}
+          onChange={(val) => {
+            setFormType(val);
+          }}
+        />
+
+        <div css={{ marginTop: 24 }}>{isValidCapSet && <FormComponent device={device} capabilitySet={capSet} />}</div>
       </Section>
     </>
   );

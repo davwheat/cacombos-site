@@ -86,7 +86,7 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
 
       <AdminAuthDetailsEntry sectionProps={{ darker: false }} />
 
-      <Section width="full" css={{ padding: '0 16px' }}>
+      <Section>
         <div css={{ maxWidth: 720, margin: 'auto' }}>
           <h2 className="text-louder">All capability sets</h2>
           <p className="text-speak">
