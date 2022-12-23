@@ -25,6 +25,7 @@ export default function Button({ className, children, loading = false, disabled,
           fontSize: '1em',
           fontWeight: 700,
           margin: 'unset',
+          position: 'relative',
           // padding: 0,
 
           padding: '16px 24px',
