@@ -28,11 +28,11 @@ export default function AdminPage({ location }: PageProps) {
           }}
         >
           <CardLink to="/admin/devices">
-            <p className="text-loud">Devices</p>
+            <p className="text-loud">Manage devices</p>
           </CardLink>
 
           <CardLink to="/admin/modems">
-            <p className="text-loud">Modems</p>
+            <p className="text-loud">Manage modems</p>
           </CardLink>
 
           <CardLink to="/admin/upload">
