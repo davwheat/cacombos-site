@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Section from '@components/Design/Section';
 import Link from '@components/Links/Link';
-import ButtonLink from '@components/Links/ButtonLink';
+import LinkButton from '@components/Inputs/LinkButton';
 
 export interface IBreadcrumb {
   /**
@@ -60,9 +60,9 @@ export default function Breadcrumbs({ data }: IBreadcrumbsProps) {
             if (crumb === null) {
               return (
                 <li key="__ellipses__">
-                  <ButtonLink aria-label="Expand breadcrumbs" data-tooltip onClick={() => setBreadcrumbsExpanded(true)}>
+                  <LinkButton aria-label="Expand breadcrumbs" data-tooltip onClick={() => setBreadcrumbsExpanded(true)}>
                     ...
-                  </ButtonLink>
+                  </LinkButton>
                   {separator}
                 </li>
               );

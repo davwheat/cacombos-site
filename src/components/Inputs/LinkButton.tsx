@@ -4,7 +4,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-export default function ButtonLink({ children, className, onClick, ...props }: Props) {
+export default function LinkButton({ children, className, onClick, ...props }: Props) {
   return (
     <button
       onClick={onClick}

@@ -4,7 +4,7 @@ import Section from '@components/Design/Section';
 import Hero from '@components/Design/Hero';
 import Breadcrumbs from '@components/Design/Breadcrumbs';
 import Link from '@components/Links/Link';
-import ButtonLink from '@components/Links/ButtonLink';
+import LinkButton from '@components/Inputs/LinkButton';
 import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
 
 import { useLoadDevice } from '@hooks/useLoadDevice';
@@ -143,7 +143,7 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
                   <td>
                     <div css={{ display: 'flex', gap: 12 }}>
                       <Link href={`/admin/upload/${deviceUuid}/${firmwareUuid}/${capSet.uuid()}`}>Upload combos</Link>
-                      <ButtonLink
+                      <LinkButton
                         onClick={() => {
                           const confirmation = confirm(
                             'Are you sure you want to delete this capability set? You will lose all combos that were attached to this capset.'
@@ -166,7 +166,7 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
                         }}
                       >
                         Delete
-                      </ButtonLink>
+                      </LinkButton>
                     </div>
                   </td>
                 </tr>
