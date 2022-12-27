@@ -4,7 +4,7 @@ import Section from '@components/Design/Section';
 import Hero from '@components/Design/Hero';
 import Breadcrumbs from '@components/Design/Breadcrumbs';
 import Link from '@components/Links/Link';
-import ButtonLink from '@components/Links/ButtonLink';
+import LinkButton from '@components/Inputs/LinkButton';
 import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
 
 import { useLoadDevice } from '@hooks/useLoadDevice';
@@ -25,7 +25,11 @@ export interface AdminUploadCombosPageProps extends RouteComponentProps {
 
 export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: AdminUploadCombosPageProps) {
   const store = useApiStore();
-  const { device, loadingState, error } = useLoadDevice(deviceUuid ?? '', ['modem', 'deviceFirmwares', 'deviceFirmwares.capabilitySets']);
+  const { device, loadingState, error, forceDataReload } = useLoadDevice(deviceUuid ?? '', [
+    'modem',
+    'deviceFirmwares',
+    'deviceFirmwares.capabilitySets',
+  ]);
   const firmware = store.getFirstBy<DeviceFirmware>('device-firmwares', 'uuid', firmwareUuid ?? '');
   const adminAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const { enqueueSnackbar } = useSnackbar();
@@ -65,6 +69,10 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
 
       <Breadcrumbs
         data={[
+          {
+            t: 'Home',
+            url: `/`,
+          },
           {
             t: 'Admin',
             url: `/admin`,
@@ -143,7 +151,7 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
                   <td>
                     <div css={{ display: 'flex', gap: 12 }}>
                       <Link href={`/admin/upload/${deviceUuid}/${firmwareUuid}/${capSet.uuid()}`}>Upload combos</Link>
-                      <ButtonLink
+                      <LinkButton
                         onClick={() => {
                           const confirmation = confirm(
                             'Are you sure you want to delete this capability set? You will lose all combos that were attached to this capset.'
@@ -161,12 +169,12 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
                               enqueueSnackbar(`Failed to delete capability set: fetch error`, { variant: 'error' });
                             })
                             .finally(() => {
-                              loadDeviceData();
+                              forceDataReload();
                             });
                         }}
                       >
                         Delete
-                      </ButtonLink>
+                      </LinkButton>
                     </div>
                   </td>
                 </tr>

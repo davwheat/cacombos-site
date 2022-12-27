@@ -1,49 +1,31 @@
-import * as React from 'react';
-import { Link, HeadFC, PageProps } from 'gatsby';
+import { SEO } from '@components/SEO';
+import Layout from '@components/Design/Layout';
+import Section from '@components/Design/Section';
+import Hero from '@components/Design/Hero';
+import Link from '@components/Links/Link';
 
-const pageStyles = {
-  color: '#232129',
-  padding: '96px',
-  fontFamily: '-apple-system, Roboto, sans-serif, serif',
-};
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-};
+import type { HeadFC, PageProps } from 'gatsby';
 
-const paragraphStyles = {
-  marginBottom: 48,
-};
-const codeStyles = {
-  color: '#8A6534',
-  padding: 4,
-  backgroundColor: '#FFF4DB',
-  fontSize: '1.25rem',
-  borderRadius: 4,
-};
-
-const NotFoundPage: React.FC<PageProps> = () => {
+export default function NotFoundPage({ location }: PageProps) {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === 'development' ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
+    <Layout location={location}>
+      <Hero firstElement>
+        <h1 className="text-shout">Page not found</h1>
+      </Hero>
+      <Section>
+        <p className="text-speak-up">We couldn't find the page you're looking for.</p>
+        <p className="text-speak">Maybe the page was moved, or perhaps it never existed at all.</p>
+
+        <nav>
+          <ul className="list">
+            <li>
+              <Link href="/">Go to the devices list</Link>
+            </li>
+          </ul>
+        </nav>
+      </Section>
+    </Layout>
   );
-};
+}
 
-export default NotFoundPage;
-
-export const Head: HeadFC = () => <title>Not found</title>;
+export const Head: HeadFC = () => <SEO pageName="404 Not Found"></SEO>;

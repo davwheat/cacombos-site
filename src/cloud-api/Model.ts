@@ -32,8 +32,8 @@ export default abstract class Model {
   /**
    * @param data A resource object from the API.
    */
-  constructor(data: ModelData, store: Store) {
-    this.data = data || {};
+  constructor(data: ModelData | null, store: Store) {
+    this.data = data;
     this.store = store;
   }
 

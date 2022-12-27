@@ -5,13 +5,30 @@ import type { HeadFC, PageProps } from 'gatsby';
 import Section from '@components/Design/Section';
 import CardLink from '@components/Links/CardLink';
 import Breakpoints from '@data/breakpoints';
+import Hero from '@components/Design/Hero';
+import Breadcrumbs from '@components/Design/Breadcrumbs';
 
 export default function AdminPage({ location }: PageProps) {
   return (
     <Layout location={location}>
-      <Section>
-        <h2 className="text-shout">Admin dashboard</h2>
+      <Hero firstElement>
+        <h1 className="text-shout">Admin dashboard</h1>
+      </Hero>
 
+      <Breadcrumbs
+        data={[
+          {
+            t: 'Home',
+            url: `/`,
+          },
+          {
+            t: 'Admin',
+            url: `/admin`,
+          },
+        ]}
+      />
+
+      <Section>
         <div
           css={{
             display: 'grid',
