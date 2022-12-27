@@ -279,6 +279,7 @@ export default function Header() {
           }}
         >
           <Link href="/">Devices</Link>
+          <Link href="/contribute-combos">Contribute</Link>
         </nav>
       </div>
     </header>
