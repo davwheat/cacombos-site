@@ -55,6 +55,7 @@ function isDeviceFirmwareCapSetsInfoLoaded(device?: Device): boolean {
 }
 
 interface FormAttributeData {
+  manufacturer: string;
   deviceName: string;
   modelName: string;
   modemId: string;
@@ -69,7 +70,7 @@ interface FormFirmwareData {
 function isValidData(attrs: FormAttributeData | undefined, fws: FormFirmwareData[] | undefined): boolean {
   if (!attrs || !fws) return false;
 
-  if (!attrs.deviceName || !attrs.modelName || !attrs.modemId || !attrs.releaseDate) return false;
+  if (!attrs.manufacturer || !attrs.deviceName || !attrs.modelName || !attrs.modemId || !attrs.releaseDate) return false;
 
   if (fws.some((fw) => !fw.firmwareName)) return false;
 
@@ -80,7 +81,7 @@ function isValidData(attrs: FormAttributeData | undefined, fws: FormFirmwareData
  * See https://jsonapi.org/ext/atomic/ for more information on the atomic extension.
  */
 function assembleAtomicRequest(currentDevice: Device, newAttributes: FormAttributeData, newFirmwares: FormFirmwareData[]) {
-  const { deviceName, modelName, modemId, releaseDate } = newAttributes;
+  const { manufacturer, deviceName, modelName, modemId, releaseDate } = newAttributes;
 
   const firmwaresToAdd = newFirmwares.filter((fw) => !fw.existingFirmwareId);
   const firmwaresToUpdate = newFirmwares.filter((fw) => fw.existingFirmwareId);
@@ -94,6 +95,7 @@ function assembleAtomicRequest(currentDevice: Device, newAttributes: FormAttribu
       type: 'devices',
       id: currentDevice.id(),
       attributes: {
+        manufacturer,
         deviceName,
         modelName,
         releaseDate: releaseDate.toISOString(),
@@ -185,6 +187,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
       const modem = device.modem() || null;
 
       setFormAttributeData({
+        manufacturer: device.manufacturer(),
         deviceName: device.deviceName(),
         modelName: device.modelName(),
         modemId: modem?.id() ?? '',
@@ -428,6 +431,15 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
         >
           <div css={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <h3 className="text-louder">Attributes</h3>
+
+            <TextBox
+              value={formAttributeData?.manufacturer}
+              label="Device manufacturer"
+              onInput={(val) => {
+                setFormAttributeData((v) => ({ ...v!, manufacturer: val }));
+              }}
+              helpText="The manufacturer of the device (e.g., Google/Apple/Samsung)."
+            />
 
             <TextBox
               value={formAttributeData?.deviceName}
