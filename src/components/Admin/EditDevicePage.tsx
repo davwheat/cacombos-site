@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react';
 
+import ModemDropdown from './ModemDropdown';
 import Section from '@components/Design/Section';
 import Link from '@components/Links/Link';
 import LoadingSpinner from '@components/LoadingSpinner';
 import Hero from '@components/Design/Hero';
-
-import Device from '@api/Models/Device';
-import { useApiStore } from '@api/ApiStoreProvider';
-import Colors from '@data/colors.json';
-
-import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 import TextBox from '@components/Inputs/TextBox';
-import { useRecoilState } from 'recoil';
-import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 import Button from '@components/Inputs/Button';
-import ModemDropdown from './ModemDropdown';
 import DateSelect from '@components/Inputs/DateSelect';
-import DeviceFirmware from '@api/Models/DeviceFirmware';
-
-import NewIcon from 'mdi-react/NewBoxIcon';
 import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import EyeSlashIcon from 'mdi-react/EyeOffOutlineIcon';
 import TrashIcon from 'mdi-react/TrashOutlineIcon';
-import EditIcon from 'mdi-react/EditOutlineIcon';
+
+import Device from '@api/Models/Device';
+import { useApiStore } from '@api/ApiStoreProvider';
+import DeviceFirmware from '@api/Models/DeviceFirmware';
 import Model from '@api/Model';
+import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
+import Colors from '@data/colors.json';
+
+import { useRecoilState } from 'recoil';
 import { useSnackbar } from 'notistack';
+
+import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 
 export const DevicePageContext = React.createContext<Device | null>(null);
 

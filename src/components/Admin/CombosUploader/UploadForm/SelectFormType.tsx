@@ -1,5 +1,5 @@
-import RadioButtonGroup from '@components/Inputs/RadioButtonGroup';
 import { AdminUploadFormType, ADMIN_UPLOAD_FORM_TYPE_OPTIONS } from '../AdminComboUploadFormPage';
+import RadioButtonGroup from '@components/Inputs/RadioButtonGroup';
 import Colors from '@data/colors.json';
 
 export interface SelectFormTypeProps {

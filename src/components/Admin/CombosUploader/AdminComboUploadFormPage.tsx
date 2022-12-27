@@ -1,28 +1,23 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
+
+import { NsgUpload } from './UploadForm/NsgUpload';
+import SelectFormType from './UploadForm/SelectFormType';
+import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
 
 import Section from '@components/Design/Section';
 import Hero from '@components/Design/Hero';
 import Breadcrumbs from '@components/Design/Breadcrumbs';
-import { useApiStore } from '@api/ApiStoreProvider';
 
-import type { RouteComponentProps } from '@gatsbyjs/reach-router';
-import type Device from '@api/Models/Device';
-import { navigate } from 'gatsby';
+import { useApiStore } from '@api/ApiStoreProvider';
 import DeviceFirmware from '@api/Models/DeviceFirmware';
-import CardLink from '@components/Links/CardLink';
 import CapabilitySet from '@api/Models/CapabilitySet';
-import dayjs from 'dayjs';
-import Link from '@components/Links/Link';
-import ButtonLink from '@components/Links/ButtonLink';
-import { useSnackbar } from 'notistack';
-import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
-import { useRecoilValue } from 'recoil';
-import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 import { useLoadDevice } from '@hooks/useLoadDevice';
 import useStateWithLocalStorage from '@hooks/useStateWithLocalStorage';
-import { NsgUpload } from './UploadForm/NsgUpload';
-import SelectFormType from './UploadForm/SelectFormType';
-import Colors from '@data/colors.json';
+
+import { navigate } from 'gatsby';
+import { useSnackbar } from 'notistack';
+
+import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 
 export const ADMIN_UPLOAD_FORM_TYPE_OPTIONS = {
   NSG: NsgUpload,

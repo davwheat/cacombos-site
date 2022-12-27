@@ -1,5 +1,6 @@
-import dayjs from 'dayjs';
 import CardLink from '@components/Links/CardLink';
+
+import dayjs from 'dayjs';
 
 import type Device from '@api/Models/Device';
 

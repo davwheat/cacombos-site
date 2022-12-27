@@ -1,12 +1,14 @@
-import { useRecoilState } from 'recoil';
+import { DevicePageContext } from './DevicePage';
+import SelectDropdown from '@components/Inputs/SelectDropdown';
+import Section from '@components/Design/Section';
+
 import DeviceSettingsAtom from '@atoms/DeviceSettingsAtom';
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
-import SelectDropdown from '@components/Inputs/SelectDropdown';
-import { DevicePageContext } from './DevicePage';
-import Section from '@components/Design/Section';
 import { useApiStore } from '@api/ApiStoreProvider';
-import dayjs from 'dayjs';
 import Breakpoints from '@data/breakpoints';
+
+import { useRecoilState } from 'recoil';
+import dayjs from 'dayjs';
 
 import type DeviceFirmware from '@api/Models/DeviceFirmware';
 import type CapabilitySet from '@api/Models/CapabilitySet';

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
+import DeviceHero from './DeviceHero';
+import DeviceFirmwareComboPicker from './DeviceFirmwareComboPicker';
+import CapabilitySetVisualiser from './CapabilitySetVisualiser';
 import Section from '@components/Design/Section';
 import Link from '@components/Links/Link';
 import LoadingSpinner from '@components/LoadingSpinner';
-import DeviceHero from './DeviceHero';
 
 import Device from '@api/Models/Device';
 import { useApiStore } from '@api/ApiStoreProvider';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
-import DeviceFirmwareComboPicker from './DeviceFirmwareComboPicker';
-import CapabilitySetVisualiser from './CapabilitySetVisualiser';
 
 export const DevicePageContext = React.createContext<Device | null>(null);
 

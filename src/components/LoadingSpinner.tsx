@@ -1,4 +1,4 @@
-import { Interpolation, keyframes, SerializedStyles, Theme } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 
 const spin = keyframes`
   from {

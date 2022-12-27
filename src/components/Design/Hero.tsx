@@ -1,6 +1,6 @@
+import Breakpoints from '@data/breakpoints';
 import clsx from 'clsx';
 import bestContrast from 'get-best-contrast-color';
-import Breakpoints from '@data/breakpoints';
 
 export interface HeroProps {
   color?: string;

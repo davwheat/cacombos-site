@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 
-import { useRecoilValue } from 'recoil';
-import { css } from '@emotion/react';
+import { TableCellCss } from './ComboTable';
+import ComboDetailsTables from './ComboDetailsTables';
+import ArrowDown from 'mdi-react/ChevronDownIcon';
 
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
 import { getDlComboString, getDlComponents, getDlMimoString, getUlComboString, getUlMimoString } from '@functions/comboDisplayHelpers';
 import type Combo from '@api/Models/Combo';
-import { TableCellCss } from './ComboTable';
 import generateTransitions from '@functions/generateTransitions';
-
-import ArrowDown from 'mdi-react/ChevronDownIcon';
-import ComboDetailsTables from './ComboDetailsTables';
+import { useRecoilValue } from 'recoil';
+import { css } from '@emotion/react';
 
 export interface ComboTableRowProps {
   combo: Combo;

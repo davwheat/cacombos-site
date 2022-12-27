@@ -1,5 +1,6 @@
-import Breakpoints from '@data/breakpoints';
 import Link from '@components/Links/Link';
+
+import Breakpoints from '@data/breakpoints';
 import { graphql, useStaticQuery } from 'gatsby';
 
 export default function Footer() {

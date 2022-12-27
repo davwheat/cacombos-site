@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
+import { useRecoilState } from 'recoil';
+
 import Section from '@components/Design/Section';
 import Button from '@components/Inputs/Button';
 import TextBox from '@components/Inputs/TextBox';
+import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
+
 import EyeOffOutlineIcon from 'mdi-react/EyeOffOutlineIcon';
 import EyeOutlineIcon from 'mdi-react/EyeOutlineIcon';
-import { useRecoilState } from 'recoil';
 
 export interface AdminAuthDetailsEntryProps {
   sectionProps?: Partial<React.ComponentProps<typeof Section>>;

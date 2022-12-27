@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
-import { nanoid } from 'nanoid';
-
 import generateTransitions from '@functions/generateTransitions';
 import Colors from '@data/colors.json';
+
+import { nanoid } from 'nanoid';
 
 interface Props {
   label: string;

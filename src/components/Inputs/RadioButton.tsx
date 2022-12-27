@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 
 import Colors from '@data/colors.json';
-
 import { nanoid } from 'nanoid';
 
 export interface IRadioButtonProps {

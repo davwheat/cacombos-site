@@ -1,3 +1,5 @@
+import React, { useCallback, useState } from 'react';
+
 import MinorAlert from '@components/Design/MinorAlert';
 import Button from '@components/Inputs/Button';
 import Checkbox from '@components/Inputs/Checkbox';
@@ -5,8 +7,8 @@ import FileInput from '@components/Inputs/FileInput';
 import TextArea from '@components/Inputs/TextArea';
 import TextBox from '@components/Inputs/TextBox';
 import Link from '@components/Links/Link';
+
 import { useSnackbar } from 'notistack';
-import React, { useCallback, useState } from 'react';
 
 interface SubmitFormState {
   email: string;

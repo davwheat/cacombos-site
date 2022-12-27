@@ -1,11 +1,12 @@
+import { useCallback, useEffect, useState } from 'react';
+
 import Button from '@components/Inputs/Button';
 import SelectDropdown from '@components/Inputs/SelectDropdown';
-import LoadingSpinner from '@components/LoadingSpinner';
-import { useCallback, useEffect, useState } from 'react';
 import { useApiStore } from '@api/ApiStoreProvider';
-import type Modem from '@api/Models/Modem';
 
 import RefreshIcon from 'mdi-react/RefreshIcon';
+
+import type Modem from '@api/Models/Modem';
 
 export interface ModemDropdownProps {
   /**

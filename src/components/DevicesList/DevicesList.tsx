@@ -1,11 +1,12 @@
+import { useCallback, useEffect, useState } from 'react';
+
+import DevicesListItem from './DevicesListItem';
 import Button from '@components/Inputs/Button';
 import LoadingSpinner from '@components/LoadingSpinner';
-import { useCallback, useEffect, useState } from 'react';
+
 import { useApiStore } from '@api/ApiStoreProvider';
 import Device from '@api/Models/Device';
 import { JsonApiPayload } from '@api/Store';
-import DevicesListItem from './DevicesListItem';
-
 export interface DevicesListProps {
   itemComponent: ({ device, key }: { device: Device; key: string }) => React.ReactNode;
   pageSize: number;

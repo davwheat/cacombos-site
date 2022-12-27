@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useMemo } from 'react';
 
 import { nanoid } from 'nanoid';
 
@@ -34,9 +34,8 @@ export default function SelectDropdown({
   disabled = false,
   endAdornment,
 }: ISelectDropdownProps) {
-  const {
-    current: { selectId, helpTextId },
-  } = useRef({ selectId: nanoid(), helpTextId: nanoid() });
+  const selectId = useMemo(() => nanoid(), []);
+  const helpTextId = useMemo(() => nanoid(), []);
 
   return (
     <label

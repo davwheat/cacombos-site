@@ -7,6 +7,7 @@ import Link from '@components/Links/Link';
 import ButtonLink from '@components/Links/ButtonLink';
 import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
 
+import { useLoadDevice } from '@hooks/useLoadDevice';
 import { useApiStore } from '@api/ApiStoreProvider';
 import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 import { navigate } from 'gatsby';
@@ -16,7 +17,6 @@ import { useRecoilValue } from 'recoil';
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 import type DeviceFirmware from '@api/Models/DeviceFirmware';
 import type CapabilitySet from '@api/Models/CapabilitySet';
-import { useLoadDevice } from '@hooks/useLoadDevice';
 
 export interface AdminUploadCombosPageProps extends RouteComponentProps {
   deviceUuid?: string;

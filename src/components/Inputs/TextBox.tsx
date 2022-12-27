@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
-import { nanoid } from 'nanoid';
+
 import SearchIcon from 'mdi-react/SearchIcon';
-import clsx from 'clsx';
+
 import Colors from '@data/colors.json';
+import clsx from 'clsx';
+import { nanoid } from 'nanoid';
 
 interface IProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onInput'> {
   /**

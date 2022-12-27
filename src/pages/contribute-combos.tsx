@@ -7,7 +7,6 @@ import Colors from '@data/colors.json';
 import Accordion from '@components/Design/Accordion';
 import Link from '@components/Links/Link';
 import CodeBlock from '@components/CodeBlock';
-import TextBox from '@components/Inputs/TextBox';
 import SubmitForm from '@components/SubmitPage/SubmitForm';
 import OpenInNewIcon from 'mdi-react/OpenInNewIcon';
 

@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
-import { nanoid } from 'nanoid';
+
 import PlusIcon from 'mdi-react/PlusIcon';
 import MinusIcon from 'mdi-react/MinusIcon';
+
 import Colors from '@data/colors.json';
+import { nanoid } from 'nanoid';
 
 export interface AccordionProps {
   heading: string;

@@ -3,18 +3,18 @@ import TextBox from '@components/Inputs/TextBox';
 import RadioButtonGroup from '@components/Inputs/RadioButtonGroup';
 import TextArea from '@components/Inputs/TextArea';
 import FileInput from '@components/Inputs/FileInput';
+import Button from '@components/Inputs/Button';
+import MinorAlert from '@components/Design/MinorAlert';
+import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 import useStateWithLocalStorage from '@hooks/useStateWithLocalStorage';
 import Colors from '@data/colors.json';
 
+import { useRecoilValue } from 'recoil';
+import { useSnackbar } from 'notistack';
 import UploadIcon from 'mdi-react/CloudUploadOutlineIcon';
 
 import type CapabilitySet from '@api/Models/CapabilitySet';
 import type Device from '@api/Models/Device';
-import Button from '@components/Inputs/Button';
-import MinorAlert from '@components/Design/MinorAlert';
-import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
-import { useRecoilValue } from 'recoil';
-import { useSnackbar } from 'notistack';
 
 export interface NsgUploadProps {
   device: Device;

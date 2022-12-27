@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { useMemo } from 'react';
-import { nanoid } from 'nanoid';
-import clsx from 'clsx';
 import Colors from '@data/colors.json';
+import { nanoid } from 'nanoid';
 
 interface IProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'onInput'> {
   /**

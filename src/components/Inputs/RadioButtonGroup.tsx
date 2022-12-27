@@ -1,6 +1,8 @@
 import { useRef } from 'react';
-import { nanoid } from 'nanoid';
+
 import RadioButton from './RadioButton';
+
+import { nanoid } from 'nanoid';
 
 export interface IRadioButtonGroupOption<T> {
   label: string;
