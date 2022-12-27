@@ -1,38 +1,47 @@
-// import Link from '../Links/Link';
-// import SocialButtons from '../SocialButtons';
-
-import { graphql, useStaticQuery } from 'gatsby';
 import Breakpoints from '@data/breakpoints';
+import Link from '@components/Links/Link';
+import { graphql, useStaticQuery } from 'gatsby';
 
 export default function Footer() {
   const {
     siteBuildMetadata,
-  }: // gitCommit,
-  {
+    gitCommit,
+  }: {
     siteBuildMetadata: {
       /**
        * String date/time formatted as YYYY-MM-DD HH:mm
        */
       buildTime: string;
     };
-    // gitCommit: {
-    //   /**
-    //    * Latest git commit hash at build-time
-    //    */
-    //   hash: string;
-    // };
+    gitCommit: {
+      /**
+       * Latest git commit hash at build-time
+       */
+      hash: string;
+    };
   } = useStaticQuery(
     graphql`
       {
         siteBuildMetadata {
           buildTime(formatString: "YYYY-MM-DD HH:mm z")
         }
-        # gitCommit(latest: { eq: true }) {
-        #  hash
-        # }
+        gitCommit(latest: { eq: true }) {
+          hash
+        }
       }
     `
   );
+
+  const buildDateString = new Intl.DateTimeFormat(Intl.DateTimeFormat().resolvedOptions().locale, {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+
+    hour: 'numeric',
+    minute: 'numeric',
+
+    timeZoneName: 'short',
+  }).format(new Date(siteBuildMetadata.buildTime));
 
   return (
     <footer
@@ -78,35 +87,24 @@ export default function Footer() {
             </p>
 
             <p className="text-whisper">
-              {/* <a href="https://github.com/davwheat/mastdatabase.co.uk" rel="noopener noreferrer">
-                View this site on GitHub
-              </a>
-              <BulletSeparator /> */}
+              <Link href="https://github.com/mobilecombos/website-frontend">View this site on GitHub</Link>
+              <BulletSeparator />
               This site collects anonymised analytics that do not track individual users.{' '}
               <a href="https://blog.cloudflare.com/free-privacy-first-analytics-for-a-better-web" rel="noopener noreferrer">
                 Learn more about Cloudflare analytics
               </a>
             </p>
             <p className="text-whisper">
-              Website last updated {/* e.g., 14 Nov 2022, 23:50 GMT */}
-              {new Intl.DateTimeFormat(Intl.DateTimeFormat().resolvedOptions().locale, {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-
-                hour: 'numeric',
-                minute: 'numeric',
-
-                timeZoneName: 'short',
-              }).format(new Date(siteBuildMetadata.buildTime))}
+              Website version: {buildDateString} (
+              <Link target="_blank" href={`https://github.com/mobilecombos/website-frontend/commit/${gitCommit.hash}`}>
+                {gitCommit.hash.substring(0, 6)})
+              </Link>
               .
             </p>
           </div>
-
-          {/* <SocialButtons /> */}
         </section>
 
-        {/* <nav
+        <nav
           css={{
             marginTop: 24,
             display: 'flex',
@@ -134,8 +132,8 @@ export default function Footer() {
           }}
         >
           <Link href="/">Home</Link>
-          <Link href="https://davwheat.dev/">David Wheatley</Link>
-        </nav> */}
+          <Link href="https://mastdatabase.co.uk/">mastdatabase.co.uk</Link>
+        </nav>
       </main>
     </footer>
   );
@@ -146,11 +144,8 @@ function BulletSeparator() {
     <span
       css={{
         display: 'inline-block',
-        verticalAlign: 'middle',
-        transformOrigin: 'center',
-        transform: 'scale(2)',
-        marginLeft: 8,
-        marginRight: 8,
+        marginLeft: 6,
+        marginRight: 6,
         color: '#fff',
       }}
     >
