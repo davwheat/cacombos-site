@@ -8,6 +8,7 @@ const config: GatsbyConfig = {
   flags: {
     // https://www.gatsbyjs.com/docs/how-to/performance/partial-hydration/
     // PARTIAL_HYDRATION: true,
+    DEV_SSR: true,
   },
   siteMetadata: {
     title: `Mobile Combos`,
