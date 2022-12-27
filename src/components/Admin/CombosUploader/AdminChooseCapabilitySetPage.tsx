@@ -25,7 +25,11 @@ export interface AdminUploadCombosPageProps extends RouteComponentProps {
 
 export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: AdminUploadCombosPageProps) {
   const store = useApiStore();
-  const { device, loadingState, error } = useLoadDevice(deviceUuid ?? '', ['modem', 'deviceFirmwares', 'deviceFirmwares.capabilitySets']);
+  const { device, loadingState, error, forceDataReload } = useLoadDevice(deviceUuid ?? '', [
+    'modem',
+    'deviceFirmwares',
+    'deviceFirmwares.capabilitySets',
+  ]);
   const firmware = store.getFirstBy<DeviceFirmware>('device-firmwares', 'uuid', firmwareUuid ?? '');
   const adminAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const { enqueueSnackbar } = useSnackbar();
@@ -161,7 +165,7 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
                               enqueueSnackbar(`Failed to delete capability set: fetch error`, { variant: 'error' });
                             })
                             .finally(() => {
-                              loadDeviceData();
+                              forceDataReload();
                             });
                         }}
                       >
