@@ -70,6 +70,10 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
       <Breadcrumbs
         data={[
           {
+            t: 'Home',
+            url: `/`,
+          },
+          {
             t: 'Admin',
             url: `/admin`,
           },

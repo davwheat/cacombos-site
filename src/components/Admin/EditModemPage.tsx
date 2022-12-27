@@ -7,6 +7,7 @@ import Link from '@components/Links/Link';
 import LoadingSpinner from '@components/LoadingSpinner';
 import Section from '@components/Design/Section';
 import TextBox from '@components/Inputs/TextBox';
+import Breadcrumbs from '@components/Design/Breadcrumbs';
 
 import Colors from '@data/colors.json';
 import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
@@ -133,12 +134,38 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
     }
   }, []);
 
+  useEffect(() => {
+    document.title = modem?.name() ? `Editing ${modem.name()}` : 'Not found';
+  });
+
   if (error) {
     return (
       <>
         <Hero color={Colors.primaryRed} firstElement>
           <h1 className="text-shout">Oops...</h1>
         </Hero>
+
+        <Breadcrumbs
+          data={[
+            {
+              t: 'Home',
+              url: `/`,
+            },
+            {
+              t: 'Admin',
+              url: `/admin`,
+            },
+            {
+              t: 'Manage modems',
+              url: `/admin/modems`,
+            },
+            {
+              t: `Edit ${modem?.name() ?? 'modem'}`,
+              url: `/admin/modems/edit/${uuid}`,
+            },
+          ]}
+        />
+
         <Section>
           <p className="text-speak" css={{ textAlign: 'center', marginTop: 16 }}>
             Something went wrong when fetching data for this modem. Please try again later.
@@ -154,6 +181,28 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
         <Hero color={Colors.lightGrey} firstElement>
           <h1 className="text-shout">Loading...</h1>
         </Hero>
+
+        <Breadcrumbs
+          data={[
+            {
+              t: 'Home',
+              url: `/`,
+            },
+            {
+              t: 'Admin',
+              url: `/admin`,
+            },
+            {
+              t: 'Manage modems',
+              url: `/admin/modems`,
+            },
+            {
+              t: 'Edit modem',
+              url: `/admin/modems/edit/${uuid}`,
+            },
+          ]}
+        />
+
         <Section>
           <LoadingSpinner />
           <p className="text-speak" css={{ textAlign: 'center', marginTop: 16 }}>
@@ -170,6 +219,28 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
         <Hero color={Colors.primaryRed} firstElement>
           <h1 className="text-shout">Oops...</h1>
         </Hero>
+
+        <Breadcrumbs
+          data={[
+            {
+              t: 'Home',
+              url: `/`,
+            },
+            {
+              t: 'Admin',
+              url: `/admin`,
+            },
+            {
+              t: 'Manage modems',
+              url: `/admin/modems`,
+            },
+            {
+              t: 'Edit modem',
+              url: `/admin/modems/edit/${uuid}`,
+            },
+          ]}
+        />
+
         <Section>
           <p className="text-speak">
             We couldn't find the modem you were looking for (<code className="code">{uuid}</code>).
@@ -185,6 +256,27 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
       <Hero color={Colors.primaryBlue} firstElement>
         <h1 className="text-shout">Editing {modem.name()}</h1>
       </Hero>
+
+      <Breadcrumbs
+        data={[
+          {
+            t: 'Home',
+            url: `/`,
+          },
+          {
+            t: 'Admin',
+            url: `/admin`,
+          },
+          {
+            t: 'Manage modems',
+            url: `/admin/modems`,
+          },
+          {
+            t: `Edit ${modem?.name() ?? 'modem'}`,
+            url: `/admin/modems/edit/${uuid}`,
+          },
+        ]}
+      />
 
       <AdminAuthDetailsEntry />
 

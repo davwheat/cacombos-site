@@ -8,10 +8,10 @@ import Hero from '@components/Design/Hero';
 import TextBox from '@components/Inputs/TextBox';
 import Button from '@components/Inputs/Button';
 import DateSelect from '@components/Inputs/DateSelect';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
-import EyeSlashIcon from 'mdi-react/EyeOffOutlineIcon';
+import Breadcrumbs from '@components/Design/Breadcrumbs';
 import TrashIcon from 'mdi-react/TrashOutlineIcon';
 
+import AdminAuthDetailsEntry from './AdminAuthDetailsEntry';
 import Device from '@api/Models/Device';
 import { useApiStore } from '@api/ApiStoreProvider';
 import DeviceFirmware from '@api/Models/DeviceFirmware';
@@ -19,7 +19,7 @@ import Model from '@api/Model';
 import AdminAuthDetailsAtom from '@atoms/AdminAuthDetailsAtom';
 import Colors from '@data/colors.json';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { useSnackbar } from 'notistack';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
@@ -149,8 +149,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
   const store = useApiStore();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const [showToken, setShowToken] = useState(false);
-  const [apiAuthDetails, setAdminAuthDetails] = useRecoilState(AdminAuthDetailsAtom);
+  const apiAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const [device, setDevice] = useState<Device | undefined>(store.getFirstBy<Device>('devices', 'uuid', uuid ?? ''));
   const [isBasicDataLoading, setIsBasicDataLoading] = useState<boolean>(!isDeviceBasicInfoLoaded(device));
   const [isFirmwareCapSetDataLoading, setIsFirmwareCapSetDataLoading] = useState<boolean>(!isDeviceFirmwareCapSetsInfoLoaded(device));
@@ -217,6 +216,28 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
         <Hero color={Colors.primaryRed} firstElement>
           <h1 className="text-shout">Oops...</h1>
         </Hero>
+
+        <Breadcrumbs
+          data={[
+            {
+              t: 'Home',
+              url: `/`,
+            },
+            {
+              t: 'Admin',
+              url: `/admin`,
+            },
+            {
+              t: 'Manage devices',
+              url: `/admin/devices`,
+            },
+            {
+              t: 'Edit device',
+              url: `/admin/devices/edit/${uuid}`,
+            },
+          ]}
+        />
+
         <Section>
           <p className="text-speak" css={{ textAlign: 'center', marginTop: 16 }}>
             Something went wrong when fetching data for this device. Please try again later.
@@ -232,6 +253,28 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
         <Hero color={Colors.lightGrey} firstElement>
           <h1 className="text-shout">Loading...</h1>
         </Hero>
+
+        <Breadcrumbs
+          data={[
+            {
+              t: 'Home',
+              url: `/`,
+            },
+            {
+              t: 'Admin',
+              url: `/admin`,
+            },
+            {
+              t: 'Manage devices',
+              url: `/admin/devices`,
+            },
+            {
+              t: 'Edit device',
+              url: `/admin/devices/edit/${uuid}`,
+            },
+          ]}
+        />
+
         <Section>
           <LoadingSpinner />
           <p className="text-speak" css={{ textAlign: 'center', marginTop: 16 }}>
@@ -248,6 +291,28 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
         <Hero color={Colors.primaryRed} firstElement>
           <h1 className="text-shout">Oops...</h1>
         </Hero>
+
+        <Breadcrumbs
+          data={[
+            {
+              t: 'Home',
+              url: `/`,
+            },
+            {
+              t: 'Admin',
+              url: `/admin`,
+            },
+            {
+              t: 'Manage devices',
+              url: `/admin/devices`,
+            },
+            {
+              t: 'Edit device',
+              url: `/admin/devices/edit/${uuid}`,
+            },
+          ]}
+        />
+
         <Section>
           <p className="text-speak">
             We couldn't find the device you were looking for (<code className="code">{uuid}</code>).
@@ -266,30 +331,28 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
         </h1>
       </Hero>
 
-      <Section darker usePadding>
-        <h2 className="text-louder">Admin info</h2>
+      <Breadcrumbs
+        data={[
+          {
+            t: 'Home',
+            url: `/`,
+          },
+          {
+            t: 'Admin',
+            url: `/admin`,
+          },
+          {
+            t: 'Manage devices',
+            url: `/admin/devices`,
+          },
+          {
+            t: `Edit ${device.deviceName()}`,
+            url: `/admin/devices/edit/${uuid}`,
+          },
+        ]}
+      />
 
-        <TextBox
-          value={apiAuthDetails.token}
-          onInput={(token) => {
-            setAdminAuthDetails((v) => ({ ...v, token }));
-          }}
-          style={showToken ? {} : { fontFamily: 'sans-serif' }}
-          label="Token"
-          helpText="Enter your token. Without this, you cannot save changes. This will be saved and auto-filled next time you load the website. Do not enter this on a public computer."
-          type={showToken ? 'text' : 'password'}
-          endAdornment={
-            <Button
-              onClick={() => {
-                setShowToken((v) => !v);
-              }}
-              css={{ padding: 0, width: 48, height: 36, alignItems: 'center', justifyContent: 'center' }}
-            >
-              {showToken ? <EyeIcon /> : <EyeSlashIcon />}
-            </Button>
-          }
-        />
-      </Section>
+      <AdminAuthDetailsEntry />
 
       <Section>
         <form
@@ -302,8 +365,6 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
             }
 
             const body = assembleAtomicRequest(device, formAttributeData!, formFirmwareData!);
-
-            console.log(body);
 
             fetch(`${process.env.GATSBY_API_BASE_URL}/operations`, {
               method: 'POST',
@@ -376,6 +437,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
               }}
               helpText="The name of the device. Can include region identifier if needed (e.g., Europe/Global/NA)."
             />
+
             <TextBox
               value={formAttributeData?.modelName}
               label="Model name"

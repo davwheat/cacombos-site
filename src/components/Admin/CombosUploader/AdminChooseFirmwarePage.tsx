@@ -42,6 +42,10 @@ export default function AdminChooseFirmwarePage({ deviceUuid }: AdminChooseDevic
       <Breadcrumbs
         data={[
           {
+            t: 'Home',
+            url: `/`,
+          },
+          {
             t: 'Admin',
             url: `/admin`,
           },
