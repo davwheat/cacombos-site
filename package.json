@@ -12,7 +12,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write \".\""
+    "format": "prettier --write \".\"",
+    "format:check": "prettier --check \".\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
