@@ -6,7 +6,7 @@ export interface SEOProps {
 export function SEO({ children, pageName }: SEOProps) {
   return (
     <>
-      <title>{pageName} | Mobile Combos</title>
+      <title>{`${pageName} | Mobile Combos`}</title>
 
       {children}
     </>
