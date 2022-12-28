@@ -25,59 +25,49 @@ export default function Hero({ children, color = '#000', size = 'normal', firstE
           color: '#fff',
           overflow: 'hidden',
         },
-        firstElement
-          ? {
-              marginTop: -24,
-            }
-          : {},
-        size === 'small'
-          ? {
-              '& .Hero-inner': {
-                paddingTop: 24,
-                paddingBottom: 24,
-                [Breakpoints.upTo.desktopSmall]: {
-                  paddingTop: 16,
-                  paddingBottom: 16,
-                },
-              },
-            }
-          : {},
-        size === 'normal'
-          ? {
-              '& .Hero-inner': {
-                paddingTop: 48,
-                paddingBottom: 48,
-                [Breakpoints.upTo.desktopSmall]: {
-                  paddingTop: 24,
-                  paddingBottom: 24,
-                },
-              },
-            }
-          : {},
-        size === 'large'
-          ? {
-              '& .Hero-inner': {
-                paddingTop: 56,
-                paddingBottom: 56,
-                [Breakpoints.upTo.desktopSmall]: {
-                  paddingTop: 36,
-                  paddingBottom: 36,
-                },
-              },
-            }
-          : {},
-        size === 'huge'
-          ? {
-              '& .Hero-inner': {
-                paddingTop: 72,
-                paddingBottom: 72,
-                [Breakpoints.upTo.desktopSmall]: {
-                  paddingTop: 48,
-                  paddingBottom: 48,
-                },
-              },
-            }
-          : {},
+        firstElement && {
+          marginTop: -24,
+        },
+        size === 'small' && {
+          '& .Hero-inner': {
+            paddingTop: 24,
+            paddingBottom: 24,
+            [Breakpoints.upTo.desktopSmall]: {
+              paddingTop: 16,
+              paddingBottom: 16,
+            },
+          },
+        },
+        size === 'normal' && {
+          '& .Hero-inner': {
+            paddingTop: 48,
+            paddingBottom: 48,
+            [Breakpoints.upTo.desktopSmall]: {
+              paddingTop: 24,
+              paddingBottom: 24,
+            },
+          },
+        },
+        size === 'large' && {
+          '& .Hero-inner': {
+            paddingTop: 56,
+            paddingBottom: 56,
+            [Breakpoints.upTo.desktopSmall]: {
+              paddingTop: 36,
+              paddingBottom: 36,
+            },
+          },
+        },
+        size === 'huge' && {
+          '& .Hero-inner': {
+            paddingTop: 72,
+            paddingBottom: 72,
+            [Breakpoints.upTo.desktopSmall]: {
+              paddingTop: 48,
+              paddingBottom: 48,
+            },
+          },
+        },
       ]}
       style={{ backgroundColor: color, color: bestContrast(color, ['#000', '#fff']) }}
     >

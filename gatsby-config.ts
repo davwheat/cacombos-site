@@ -8,6 +8,7 @@ const config: GatsbyConfig = {
   flags: {
     // https://www.gatsbyjs.com/docs/how-to/performance/partial-hydration/
     // PARTIAL_HYDRATION: true,
+    DEV_SSR: true,
   },
   siteMetadata: {
     title: `Mobile Combos`,
@@ -18,6 +19,16 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    {
+      resolve: `gatsby-plugin-emotion`,
+      options: {
+        sourceMap: true,
+        autoLabel: 'always',
+        labelFormat: `[local]`,
+        cssPropOptimization: true,
+      },
+    },
+    `gatsby-plugin-less`,
     `gatsby-plugin-provide-react`,
     {
       resolve: 'gatsby-plugin-manifest',
@@ -54,18 +65,6 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
         siteUrl: `https://mobilecombos.com`,
-      },
-    },
-    `gatsby-plugin-less`,
-    {
-      resolve: `gatsby-plugin-emotion`,
-      options: {
-        // Accepts the following options, all of which are defined by `@emotion/babel-plugin` plugin.
-        // The values for each key in this example are the defaults the plugin uses.
-        sourceMap: true,
-        autoLabel: 'dev-only',
-        labelFormat: `[local]`,
-        cssPropOptimization: true,
       },
     },
   ],

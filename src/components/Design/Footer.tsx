@@ -1,6 +1,8 @@
 import Link from '@components/Links/Link';
 
 import Breakpoints from '@data/breakpoints';
+
+import dayjs from 'dayjs';
 import { graphql, useStaticQuery } from 'gatsby';
 
 export default function Footer() {
@@ -32,17 +34,6 @@ export default function Footer() {
       }
     `
   );
-
-  const buildDateString = new Intl.DateTimeFormat(Intl.DateTimeFormat().resolvedOptions().locale, {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-
-    hour: 'numeric',
-    minute: 'numeric',
-
-    timeZoneName: 'short',
-  }).format(new Date(siteBuildMetadata.buildTime));
 
   return (
     <footer
@@ -96,7 +87,7 @@ export default function Footer() {
               </a>
             </p>
             <p className="text-whisper">
-              Website version: {buildDateString} (
+              Website version: {siteBuildMetadata.buildTime} (
               <Link target="_blank" href={`https://github.com/mobilecombos/website-frontend/commit/${gitCommit.hash}`}>
                 {gitCommit.hash.substring(0, 6)})
               </Link>
@@ -121,7 +112,7 @@ export default function Footer() {
               borderLeft: '1px #ccc solid',
               marginBottom: 8,
               fontWeight: 400,
-              '&:not(:first-child)': {
+              '&:not(:first-of-type)': {
                 marginLeft: -1,
               },
               '&:hover, &:focus, &:active': {

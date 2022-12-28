@@ -30,19 +30,22 @@ export default function AdminPage({ location }: PageProps) {
 
       <Section>
         <div
-          css={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: 16,
+          css={[
+            {
+              display: 'grid',
+              gridTemplateColumns: '1fr',
+              gap: 16,
 
-            '& p': {
-              margin: 0,
+              '& p': {
+                margin: 0,
+              },
             },
-
-            [Breakpoints.downTo.tablet]: {
-              gridTemplateColumns: '1fr 1fr',
+            {
+              [Breakpoints.downTo.tablet]: {
+                gridTemplateColumns: '1fr 1fr',
+              },
             },
-          }}
+          ]}
         >
           <CardLink to="/admin/devices">
             <p className="text-loud">Manage devices</p>
