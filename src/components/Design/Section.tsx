@@ -33,48 +33,40 @@ export default function Section({
             marginBottom: 48,
           },
         },
-        usePadding
-          ? {
-              marginTop: 0,
-              marginBottom: 0,
-              paddingTop: 24,
-              paddingBottom: 24,
-              [Breakpoints.downTo.desktopSmall]: {
-                marginTop: 0,
-                marginBottom: 0,
-                paddingTop: 48,
-                paddingBottom: 48,
-              },
-            }
-          : {},
-        width === 'full'
-          ? {
-              width: '100vw',
-              position: 'relative',
-              marginLeft: '-50vw',
-              left: '50%',
-            }
-          : {},
-        width === 'wider'
-          ? {
-              width: '100vw',
-              position: 'relative',
-              marginLeft: '-50vw',
-              left: '50%',
-            }
-          : {},
-        darker
-          ? {
-              background: Colors.lightGrey,
-              paddingTop: 36,
-              paddingBottom: 36,
+        usePadding && {
+          marginTop: 0,
+          marginBottom: 0,
+          paddingTop: 24,
+          paddingBottom: 24,
+          [Breakpoints.downTo.desktopSmall]: {
+            marginTop: 0,
+            marginBottom: 0,
+            paddingTop: 48,
+            paddingBottom: 48,
+          },
+        },
+        width === 'full' && {
+          width: '100vw',
+          position: 'relative',
+          marginLeft: '-50vw',
+          left: '50%',
+        },
+        width === 'wider' && {
+          width: '100vw',
+          position: 'relative',
+          marginLeft: '-50vw',
+          left: '50%',
+        },
+        darker && {
+          background: Colors.lightGrey,
+          paddingTop: 36,
+          paddingBottom: 36,
 
-              width: '100vw',
-              position: 'relative',
-              marginLeft: '-50vw',
-              left: '50%',
-            }
-          : {},
+          width: '100vw',
+          position: 'relative',
+          marginLeft: '-50vw',
+          left: '50%',
+        },
       ]}
     >
       <div
@@ -85,20 +77,16 @@ export default function Section({
             paddingLeft: 24,
             paddingRight: 24,
           },
-          width === 'full'
-            ? {
-                padding: '0 8px',
-                maxWidth: 'unset',
-              }
-            : {},
-          width === 'wider'
-            ? {
-                maxWidth: 960,
-                margin: 'auto',
-                paddingLeft: 24,
-                paddingRight: 24,
-              }
-            : {},
+          width === 'full' && {
+            padding: '0 8px',
+            maxWidth: 'unset',
+          },
+          width === 'wider' && {
+            maxWidth: 960,
+            margin: 'auto',
+            paddingLeft: 24,
+            paddingRight: 24,
+          },
         ]}
       >
         {children}
