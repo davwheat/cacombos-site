@@ -19,6 +19,16 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    {
+      resolve: `gatsby-plugin-emotion`,
+      options: {
+        sourceMap: true,
+        autoLabel: 'always',
+        labelFormat: `[local]`,
+        cssPropOptimization: true,
+      },
+    },
+    `gatsby-plugin-less`,
     `gatsby-plugin-provide-react`,
     {
       resolve: 'gatsby-plugin-manifest',
@@ -55,16 +65,6 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
         siteUrl: `https://mobilecombos.com`,
-      },
-    },
-    `gatsby-plugin-less`,
-    {
-      resolve: `gatsby-plugin-emotion`,
-      options: {
-        sourceMap: true,
-        autoLabel: 'always',
-        labelFormat: `[local]`,
-        cssPropOptimization: true,
       },
     },
   ],
