@@ -4,6 +4,7 @@ import Hero from '@components/Design/Hero';
 import Section from '@components/Design/Section';
 import AdminModemsList from '@components/Admin/AdminModemsList';
 import Breadcrumbs from '@components/Design/Breadcrumbs';
+import Link from '@components/Links/Link';
 
 import type { HeadFC, PageProps } from 'gatsby';
 
@@ -32,6 +33,10 @@ export default function AdminModemsPage({ location }: PageProps) {
       />
 
       <Section>
+        <div css={{ marginBottom: 16 }}>
+          <Link href="/admin/modems/new">Create a new modem</Link>
+        </div>
+
         <AdminModemsList />
       </Section>
     </Layout>

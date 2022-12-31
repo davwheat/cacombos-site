@@ -104,7 +104,13 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
   const [error, setError] = useState<null | any>(null);
   const [isModemLoading, setIsModemLoading] = useState(!modem);
 
-  const [formAttributeData, setFormAttributeData] = useState<FormAttributeData | undefined>();
+  const [formAttributeData, setFormAttributeData] = useState<FormAttributeData | undefined>(
+    !!modem
+      ? {
+          name: modem.name(),
+        }
+      : undefined
+  );
 
   async function loadModem() {
     setIsModemLoading(true);
@@ -124,6 +130,9 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
 
     setIsModemLoading(false);
     setModem(data?.[0]);
+    setFormAttributeData({
+      name: data?.[0]?.name() ?? '',
+    });
 
     document.title = modem?.name() ? `Editing ${modem.name()}` : 'Not found';
   }

@@ -49,6 +49,7 @@ interface IProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onInput'>
    * RegEx pattern for validation
    */
   pattern?: string;
+  disabled?: boolean;
 }
 
 export default function DateSelect({
@@ -61,6 +62,7 @@ export default function DateSelect({
   helpText,
   startAdornment: startAppendix,
   endAdornment: endAppendix,
+  disabled = false,
   ...attrs
 }: IProps) {
   const id = useMemo(() => nanoid(), []);
@@ -117,6 +119,7 @@ export default function DateSelect({
           value={dayjs(value).format('YYYY-MM-DD')}
           placeholder={placeholder}
           aria-describedby={helpText ? helpTextId : undefined}
+          disabled={disabled}
           {...attrs}
           css={{
             padding: '6px 8px',
