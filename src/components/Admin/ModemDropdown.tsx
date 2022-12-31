@@ -14,9 +14,10 @@ export interface ModemDropdownProps {
    */
   modemId: string;
   onSelectModem: (modemId: string) => void;
+  disabled?: boolean;
 }
 
-export default function ModemDropdown({ modemId, onSelectModem }: ModemDropdownProps) {
+export default function ModemDropdown({ modemId, onSelectModem, disabled = false }: ModemDropdownProps) {
   const [loadingModems, setLoadingModems] = useState(true);
   const [modems, setModems] = useState<Modem[]>([]);
   const store = useApiStore();
@@ -40,7 +41,7 @@ export default function ModemDropdown({ modemId, onSelectModem }: ModemDropdownP
       label="Choose modem"
       value={modemId}
       options={options}
-      disabled={loadingModems}
+      disabled={loadingModems || disabled}
       onChange={(val) => {
         onSelectModem(val);
       }}
