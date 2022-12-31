@@ -19,7 +19,7 @@ export default function AdminAuthDetailsEntry({ sectionProps }: AdminAuthDetails
 
   return (
     <Section darker usePadding {...sectionProps}>
-      <h2 className="text-louder">Admin info</h2>
+      <h2 className="text-louder">Authentication</h2>
 
       <TextBox
         value={apiAuthDetails.token}
