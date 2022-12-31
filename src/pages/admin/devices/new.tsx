@@ -36,6 +36,7 @@ interface FormAttributeData {
 }
 
 export default function AdminNewDevicePage({ location }: PageProps) {
+  const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
   const [formAttributeData, setFormAttributeData] = useState<FormAttributeData | undefined>();
   const adminAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const store = useApiStore();
@@ -73,9 +74,11 @@ export default function AdminNewDevicePage({ location }: PageProps) {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            setFormSubmitting(true);
 
             if (!isValidData(formAttributeData)) {
               alert('Invalid data!');
+              setFormSubmitting(false);
               return;
             }
 
@@ -104,11 +107,16 @@ export default function AdminNewDevicePage({ location }: PageProps) {
               .then((response) => {
                 if (!response) {
                   enqueueSnackbar('Failed to create device', { variant: 'error' });
+                  setFormSubmitting(false);
                   return;
                 }
 
                 enqueueSnackbar('Successfully created device. Redirecting to edit page...', { variant: 'success' });
                 navigate(`/admin/devices/edit/${response.uuid()}`);
+              })
+              .catch(() => {
+                enqueueSnackbar('Failed to create device (network error)', { variant: 'error' });
+                setFormSubmitting(false);
               });
           }}
           css={{ display: 'flex', flexDirection: 'column', gap: 32 }}
@@ -118,6 +126,7 @@ export default function AdminNewDevicePage({ location }: PageProps) {
 
             <TextBox
               value={formAttributeData?.manufacturer}
+              disabled={formSubmitting}
               label="Device manufacturer"
               onInput={(val) => {
                 setFormAttributeData((v) => ({ ...v!, manufacturer: val }));
@@ -127,6 +136,7 @@ export default function AdminNewDevicePage({ location }: PageProps) {
 
             <TextBox
               value={formAttributeData?.deviceName}
+              disabled={formSubmitting}
               label="Device name"
               onInput={(val) => {
                 setFormAttributeData((v) => ({ ...v!, deviceName: val }));
@@ -136,6 +146,7 @@ export default function AdminNewDevicePage({ location }: PageProps) {
 
             <TextBox
               value={formAttributeData?.modelName}
+              disabled={formSubmitting}
               label="Model name"
               onInput={(val) => {
                 setFormAttributeData((v) => ({ ...v!, modelName: val }));
@@ -143,9 +154,14 @@ export default function AdminNewDevicePage({ location }: PageProps) {
               helpText="The device's model name/number."
             />
 
-            <ModemDropdown modemId={formAttributeData?.modemId!} onSelectModem={(modemId) => setFormAttributeData((v) => ({ ...v!, modemId }))} />
+            <ModemDropdown
+              disabled={formSubmitting}
+              modemId={formAttributeData?.modemId!}
+              onSelectModem={(modemId) => setFormAttributeData((v) => ({ ...v!, modemId }))}
+            />
 
             <DateSelect
+              disabled={formSubmitting}
               label="Release date"
               onInput={(val) => {
                 setFormAttributeData((v) => ({ ...v!, releaseDate: val }));
@@ -154,8 +170,8 @@ export default function AdminNewDevicePage({ location }: PageProps) {
             />
           </div>
 
-          <Button type="submit" css={{ alignSelf: 'center' }} disabled={!isValidData(formAttributeData)}>
-            Save changes
+          <Button type="submit" css={{ alignSelf: 'center' }} disabled={!isValidData(formAttributeData) || formSubmitting}>
+            Create device
           </Button>
         </form>
       </Section>
@@ -163,4 +179,4 @@ export default function AdminNewDevicePage({ location }: PageProps) {
   );
 }
 
-export const Head: HeadFC = () => <SEO pageName="Admin"></SEO>;
+export const Head: HeadFC = () => <SEO pageName="Create new device"></SEO>;
