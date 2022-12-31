@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import AdminAuthDetailsEntry from './AdminAuthDetailsEntry';
 import ModemDropdown from './ModemDropdown';
 import Section from '@components/Design/Section';
 import Link from '@components/Links/Link';
@@ -9,9 +10,9 @@ import TextBox from '@components/Inputs/TextBox';
 import Button from '@components/Inputs/Button';
 import DateSelect from '@components/Inputs/DateSelect';
 import Breadcrumbs from '@components/Design/Breadcrumbs';
+import LinkButton from '@components/Inputs/LinkButton';
 import TrashIcon from 'mdi-react/TrashOutlineIcon';
 
-import AdminAuthDetailsEntry from './AdminAuthDetailsEntry';
 import Device from '@api/Models/Device';
 import { useApiStore } from '@api/ApiStoreProvider';
 import DeviceFirmware from '@api/Models/DeviceFirmware';
@@ -21,6 +22,7 @@ import Colors from '@data/colors.json';
 
 import { useRecoilValue } from 'recoil';
 import { useSnackbar } from 'notistack';
+import { navigate } from 'gatsby';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 
@@ -553,6 +555,37 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
           <Button type="submit" css={{ alignSelf: 'center' }} disabled={!isValidData(formAttributeData, formFirmwareData)}>
             Save changes
           </Button>
+
+          <LinkButton
+            type="button"
+            onClick={() => {
+              if (!device) {
+                alert('Device not found.');
+                return;
+              }
+
+              if (!confirm('Are you sure you want to delete this device?')) {
+                return;
+              }
+
+              device
+                .delete(apiAuthDetails.token)
+                .then((success) => {
+                  if (!success) {
+                    enqueueSnackbar('Failed to delete device', { variant: 'error' });
+                    return;
+                  }
+
+                  enqueueSnackbar('Device deleted successfully', { variant: 'success' });
+                  navigate('/admin/devices');
+                })
+                .catch(() => {
+                  enqueueSnackbar('Failed to delete device (network error)', { variant: 'error' });
+                });
+            }}
+          >
+            Delete device
+          </LinkButton>
         </form>
       </Section>
     </DevicePageContext.Provider>
