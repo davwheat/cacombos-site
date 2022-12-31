@@ -2,13 +2,15 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export default function LinkButton({ children, className, onClick, ...props }: Props) {
+export default function LinkButton({ children, className, onClick, type = 'button', ...props }: Props) {
   return (
     <button
       onClick={onClick}
       className={className}
+      type={type}
       css={{
         appearance: 'none',
         background: 'none',
