@@ -544,7 +544,7 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
                 key="add-fw"
                 css={{ margin: 'auto', marginTop: 24 }}
                 onClick={() => {
-                  setFormFirmwareData((v) => [...v!, { firmwareName: '' }]);
+                  setFormFirmwareData((v) => [...(v ?? []), { firmwareName: '' }]);
                 }}
               >
                 Add new firmware

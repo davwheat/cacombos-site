@@ -4,6 +4,7 @@ import AdminChooseDevicePage from '@components/Admin/CombosUploader/AdminChooseD
 import AdminChooseFirmwarePage from '@components/Admin/CombosUploader/AdminChooseFirmwarePage';
 import AdminChooseCapabilitySetPage from '@components/Admin/CombosUploader/AdminChooseCapabilitySetPage';
 import AdminComboUploadFormPage from '@components/Admin/CombosUploader/AdminComboUploadFormPage';
+import AdminNewCapabilitySetPage from '@components/Admin/CombosUploader/AdminNewCapabilitySetPage';
 import { Router } from '@gatsbyjs/reach-router';
 
 import type { HeadProps, PageProps } from 'gatsby';
@@ -15,6 +16,7 @@ export default function EditDeviceRouterPage({ location }: PageProps) {
         <AdminChooseDevicePage path="/" />
         <AdminChooseFirmwarePage path="/:deviceUuid" />
         <AdminChooseCapabilitySetPage path="/:deviceUuid/:firmwareUuid" />
+        <AdminNewCapabilitySetPage path="/:deviceUuid/:firmwareUuid/new" />
         <AdminComboUploadFormPage path="/:deviceUuid/:firmwareUuid/:capSetUuid" />
       </Router>
     </Layout>

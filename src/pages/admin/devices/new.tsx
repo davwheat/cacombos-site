@@ -37,7 +37,13 @@ interface FormAttributeData {
 
 export default function AdminNewDevicePage({ location }: PageProps) {
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
-  const [formAttributeData, setFormAttributeData] = useState<FormAttributeData | undefined>();
+  const [formAttributeData, setFormAttributeData] = useState<FormAttributeData>({
+    deviceName: '',
+    modelName: '',
+    manufacturer: '',
+    modemId: '',
+    releaseDate: new Date(),
+  });
   const adminAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const store = useApiStore();
 
@@ -129,7 +135,7 @@ export default function AdminNewDevicePage({ location }: PageProps) {
               disabled={formSubmitting}
               label="Device manufacturer"
               onInput={(val) => {
-                setFormAttributeData((v) => ({ ...v!, manufacturer: val }));
+                setFormAttributeData((v) => ({ ...v, manufacturer: val }));
               }}
               helpText="The manufacturer of the device (e.g., Google/Apple/Samsung)."
             />
@@ -139,7 +145,7 @@ export default function AdminNewDevicePage({ location }: PageProps) {
               disabled={formSubmitting}
               label="Device name"
               onInput={(val) => {
-                setFormAttributeData((v) => ({ ...v!, deviceName: val }));
+                setFormAttributeData((v) => ({ ...v, deviceName: val }));
               }}
               helpText="The name of the device. Can include region identifier if needed (e.g., Europe/Global/NA)."
             />
@@ -149,7 +155,7 @@ export default function AdminNewDevicePage({ location }: PageProps) {
               disabled={formSubmitting}
               label="Model name"
               onInput={(val) => {
-                setFormAttributeData((v) => ({ ...v!, modelName: val }));
+                setFormAttributeData((v) => ({ ...v, modelName: val }));
               }}
               helpText="The device's model name/number."
             />
@@ -157,14 +163,14 @@ export default function AdminNewDevicePage({ location }: PageProps) {
             <ModemDropdown
               disabled={formSubmitting}
               modemId={formAttributeData?.modemId!}
-              onSelectModem={(modemId) => setFormAttributeData((v) => ({ ...v!, modemId }))}
+              onSelectModem={(modemId) => setFormAttributeData((v) => ({ ...v, modemId }))}
             />
 
             <DateSelect
               disabled={formSubmitting}
               label="Release date"
               onInput={(val) => {
-                setFormAttributeData((v) => ({ ...v!, releaseDate: val }));
+                setFormAttributeData((v) => ({ ...v, releaseDate: val }));
               }}
               value={formAttributeData?.releaseDate!}
             />

@@ -4,6 +4,7 @@ import Section from '@components/Design/Section';
 import Hero from '@components/Design/Hero';
 import Breadcrumbs from '@components/Design/Breadcrumbs';
 import CardLink from '@components/Links/CardLink';
+import Link from '@components/Links/Link';
 import DeviceFirmware from '@api/Models/DeviceFirmware';
 import { useLoadDevice } from '@hooks/useLoadDevice';
 import { navigate } from 'gatsby';
@@ -72,6 +73,13 @@ export default function AdminChooseFirmwarePage({ deviceUuid }: AdminChooseDevic
                 </CardLink>
               </li>
             ))}
+
+          {device?.deviceFirmwares() && (device.deviceFirmwares() as DeviceFirmware[])?.length === 0 && (
+            <p className="text-speak">
+              There appears to be no firmwares for this device. You might need to{' '}
+              <Link href={`/admin/devices/edit/${deviceUuid}`}>create one first</Link>.
+            </p>
+          )}
         </ul>
       </Section>
     </>

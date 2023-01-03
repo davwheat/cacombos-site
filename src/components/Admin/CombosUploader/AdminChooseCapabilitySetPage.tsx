@@ -181,6 +181,10 @@ export default function AdminUploadCombosPage({ deviceUuid, firmwareUuid }: Admi
               ))}
           </tbody>
         </table>
+
+        <div css={{ marginTop: 32 }}>
+          <LinkButton onClick={() => navigate(`/admin/upload/${deviceUuid}/${firmwareUuid}/new`)}>Create new capability set</LinkButton>
+        </div>
       </Section>
     </>
   );
