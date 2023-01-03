@@ -3,6 +3,9 @@ import Colors from '@data/colors.json';
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
+import dayjsUTC from 'dayjs/plugin/utc';
+
+dayjs.extend(dayjsUTC);
 
 interface IProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onInput'> {
   /**
@@ -113,7 +116,7 @@ export default function DateSelect({
           id={id}
           onInput={(e) => {
             const v = (e.target as HTMLInputElement).value;
-            const date = dayjs(v).toDate();
+            const date = dayjs.utc(v).toDate();
             onInput(date);
           }}
           value={dayjs(value).format('YYYY-MM-DD')}
