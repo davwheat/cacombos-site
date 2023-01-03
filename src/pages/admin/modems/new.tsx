@@ -31,7 +31,9 @@ interface FormAttributeData {
 
 export default function AdminNewModemPage({ location }: PageProps) {
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
-  const [formAttributeData, setFormAttributeData] = useState<FormAttributeData | undefined>();
+  const [formAttributeData, setFormAttributeData] = useState<FormAttributeData>({
+    name: '',
+  });
   const adminAuthDetails = useRecoilValue(AdminAuthDetailsAtom);
   const store = useApiStore();
 
@@ -112,7 +114,7 @@ export default function AdminNewModemPage({ location }: PageProps) {
               disabled={formSubmitting}
               label="Modem name"
               onInput={(val) => {
-                setFormAttributeData((v) => ({ ...v!, name: val }));
+                setFormAttributeData((v) => ({ ...v, name: val }));
               }}
               helpText="The name of the modem (e.g., Shannon 5100 or Snapdragon X65)."
             />
