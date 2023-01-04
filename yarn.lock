@@ -1419,6 +1419,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:7.12.1":
+  version: 7.12.1
+  resolution: "@babel/runtime@npm:7.12.1"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: fb4b4c8f704a338d3500ff75bfd28a35927444e0c48254d60ce87a9402d7e149e2189e5f55fa3bd2927d4c10fa25fe34c239ae0be68df77af040b01561c5bcc8
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.18.0, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.20.7
   resolution: "@babel/runtime@npm:7.20.7"
@@ -7468,6 +7477,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-vercel@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "gatsby-plugin-vercel@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": 7.12.1
+    web-vitals: 0.2.4
+  checksum: dc6a052aab94ee7c3aef4ac9f0dbe7d387ceffe30a1f8ad014ccd6d5064e32f4764adf083cb3bea13b35e529cb2b7d8fb38b0183eb83dcab11e7f58f1e03b84b
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-webpack-size@npm:^2.0.1":
   version: 2.0.1
   resolution: "gatsby-plugin-webpack-size@npm:2.0.1"
@@ -9959,6 +9978,7 @@ __metadata:
     gatsby-plugin-provide-react: ^1.0.2
     gatsby-plugin-react-svg: ^3.3.0
     gatsby-plugin-sitemap: ^6.3.1
+    gatsby-plugin-vercel: ^1.0.3
     gatsby-plugin-webpack-size: ^2.0.1
     gatsby-source-local-git: ^1.3.0
     get-best-contrast-color: ^0.3.1
@@ -11849,7 +11869,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.11, regenerator-runtime@npm:^0.13.7":
+"regenerator-runtime@npm:^0.13.11, regenerator-runtime@npm:^0.13.4, regenerator-runtime@npm:^0.13.7":
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
@@ -13727,6 +13747,13 @@ __metadata:
   version: 1.2.2
   resolution: "weak-lru-cache@npm:1.2.2"
   checksum: 0fbe16839d193ed82ddb4fe331ca8cfaee2ecbd42596aa02366c708956cf41f7258f2d5411c3bc9aa099c26058dc47afbd2593d449718a18e4ef4d870c5ace18
+  languageName: node
+  linkType: hard
+
+"web-vitals@npm:0.2.4":
+  version: 0.2.4
+  resolution: "web-vitals@npm:0.2.4"
+  checksum: 128a4e87730b0a02fb6af3eef7d31f9a79b4646e83cfe4465aa8ce6054fe16f7b1f4125a384f1b4f039091bd9513cb54b4e559c0b10ae953c01900786a16b1c2
   languageName: node
   linkType: hard
 
