@@ -133,7 +133,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                 <th css={TableHeadCellCss}>Class</th>
                 <th css={TableHeadCellCss}>Streams</th>
                 <th css={TableHeadCellCss}>Modulation</th>
-                <th css={TableHeadCellCss}>NR bandwidth</th>
+                {/* <th css={TableHeadCellCss}>NR bandwidth</th> */}
                 <th css={TableHeadCellCss}>NR SCS</th>
               </tr>
             </thead>
@@ -148,7 +148,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                     <td>{cc.ulClass()}</td>
                     <td>{/* {cc.mimo()} */}1</td>
                     <td>{friendlyQamConverter(cc.ulModulation() ?? '16qam')}</td>
-                    <td />
+                    {/* <td /> */}
                     <td />
                   </tr>
                 ));
@@ -162,7 +162,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                     <td>{cc.ulClass()}</td>
                     <td>{cc.ulMimo()}</td>
                     <td>{friendlyQamConverter(cc.ulModulation() ?? '64qam')}</td>
-                    <td>{cc.bandwidth()} MHz</td>
+                    {/* <td>{cc.bandwidth()} MHz</td> */}
                     <td>{cc.subcarrierSpacing()} kHz</td>
                   </tr>
                 ));
