@@ -4,6 +4,8 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const PROD_PLUGINS = process.env.NODE_ENV !== 'production' ? [] : [`gatsby-plugin-vercel`];
+
 const config: GatsbyConfig = {
   flags: {
     // https://www.gatsbyjs.com/docs/how-to/performance/partial-hydration/
@@ -67,6 +69,8 @@ const config: GatsbyConfig = {
         siteUrl: `https://mobilecombos.com`,
       },
     },
+
+    ...PROD_PLUGINS,
   ],
 };
 
