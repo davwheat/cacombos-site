@@ -32,6 +32,7 @@
     "gatsby-plugin-react-svg": "^3.3.0",
     "gatsby-plugin-sitemap": "^6.3.1",
     "gatsby-plugin-vercel": "^1.0.3",
+    "gatsby-plugin-vercel-dynamic-routes": "^0.0.1-alpha.2",
     "gatsby-plugin-webpack-size": "^2.0.1",
     "gatsby-source-local-git": "^1.3.0",
     "get-best-contrast-color": "^0.3.1",

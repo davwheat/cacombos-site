@@ -69,7 +69,7 @@ const config: GatsbyConfig = {
         siteUrl: `https://mobilecombos.com`,
       },
     },
-
+    `gatsby-plugin-vercel-dynamic-routes`,
     ...PROD_PLUGINS,
   ],
 };

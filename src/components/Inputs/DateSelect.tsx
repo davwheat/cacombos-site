@@ -129,6 +129,7 @@ export default function DateSelect({
             border: 'none',
             font: 'inherit',
             width: '100%',
+            background: 'white',
 
             '&:focus': {
               outline: 'none',
