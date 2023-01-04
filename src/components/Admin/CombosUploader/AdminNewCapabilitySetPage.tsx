@@ -149,9 +149,9 @@ export default function AdminNewCapabilitySetPage({ deviceUuid, firmwareUuid }: 
               return;
             }
 
-            const newModem = new CapabilitySet(null, store);
+            const newCapSet = new CapabilitySet(null, store);
 
-            newModem
+            newCapSet
               .saveData<CapabilitySet>(
                 {
                   attributes: {
@@ -206,7 +206,7 @@ export default function AdminNewCapabilitySetPage({ deviceUuid, firmwareUuid }: 
           </div>
 
           <Button type="submit" css={{ alignSelf: 'center' }} disabled={!isValidData(formAttributeData) || formSubmitting}>
-            Create modem
+            Create capability set
           </Button>
         </form>
       </Section>
@@ -214,4 +214,4 @@ export default function AdminNewCapabilitySetPage({ deviceUuid, firmwareUuid }: 
   );
 }
 
-export const Head: HeadFC = () => <SEO pageName="Create new modem"></SEO>;
+export const Head: HeadFC = () => <SEO pageName="Create new capability set"></SEO>;
