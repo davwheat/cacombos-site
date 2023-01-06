@@ -4,7 +4,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-const PROD_PLUGINS = process.env.NODE_ENV !== 'production' ? [] : [`gatsby-plugin-vercel`];
+const PROD_PLUGINS = process.env.NODE_ENV !== 'production' ? [] : [];
 
 const config: GatsbyConfig = {
   flags: {
@@ -69,7 +69,7 @@ const config: GatsbyConfig = {
         siteUrl: `https://mobilecombos.com`,
       },
     },
-    `gatsby-plugin-vercel-dynamic-routes`,
+    `@vtex/gatsby-plugin-nginx`,
     ...PROD_PLUGINS,
   ],
 };
