@@ -87,4 +87,4 @@ jobs:
           SOURCE: 'public/'
           REMOTE_HOST: 'cacombos.hetzner.cloud.davw.network'
           REMOTE_USER: 'www'
-          TARGET: '/var/www/'
+          TARGET: '/home/www/frontend/src/'
