@@ -168,6 +168,10 @@ export default function SubmitForm() {
           When you submit your device log to this form, it will be sent securely to our site administrator. No logs are kept for longer than is needed
           to process them, and are deleted after they are processed and uploaded (or deemed unusable).
         </p>
+        <p className="text-speak">
+          The anonymous capability data from any submitted files will be stored to allow them to be reprocessed in the future to allow more data to be
+          extracted or to fix issues with previously processed data.
+        </p>
       </MinorAlert>
 
       <Checkbox
