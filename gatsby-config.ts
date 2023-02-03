@@ -41,9 +41,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Atkinson Hyperlegible\:400,400i,700`, // you can also specify font weights and styles
-        ],
+        fonts: [`Atkinson Hyperlegible\:400,400i,700`, `Azeret Mono\:400`],
         display: 'swap',
       },
     },
