@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist({
-  key: 'comboListDisplayOptions',
+  key: 'adminAuthDetails',
 });
 
 export interface IAdminAuthDetailsAtom {
@@ -10,7 +10,7 @@ export interface IAdminAuthDetailsAtom {
 }
 
 export default atom<IAdminAuthDetailsAtom>({
-  key: 'adminAuthDetailsAtom',
+  key: 'adminAuthDetails',
   default: {
     token: '',
   },
