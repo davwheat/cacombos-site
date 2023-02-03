@@ -48,13 +48,6 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v2
-        if: github.ref == 'refs/heads/deploy' && github.event_name == 'push'
-        with:
-          static_site_generator: gatsby
-
       - name: Install dependencies
         run: |
           yarn install --immutable
@@ -72,12 +65,6 @@ jobs:
         run: yarn build:ci
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        if: github.ref == 'refs/heads/deploy' && github.event_name == 'push'
-        with:
-          path: ./public
 
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@4c8eee72bdf0e96b6d1ed1e67da2472e370a96cb

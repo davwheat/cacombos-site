@@ -403,8 +403,6 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
                 // Saved successfully
                 if (resp.status !== 204) {
                   resp.json().then((data) => {
-                    console.log(data);
-
                     const results = data['atomic:results'];
 
                     results.forEach((result: any) => {

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
 import { NsgUpload } from './UploadForm/NsgUpload';
+import { QualcommHexdumpUpload } from './UploadForm/QualcommHexdumpUpload';
+
 import SelectFormType from './UploadForm/SelectFormType';
 import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
 
@@ -21,6 +23,7 @@ import type { RouteComponentProps } from '@gatsbyjs/reach-router';
 
 export const ADMIN_UPLOAD_FORM_TYPE_OPTIONS = {
   NSG: NsgUpload,
+  'Qualcomm 0xB0CD/0xB826 hexdump': QualcommHexdumpUpload,
 } as const;
 
 export type AdminUploadFormType = keyof typeof ADMIN_UPLOAD_FORM_TYPE_OPTIONS;
