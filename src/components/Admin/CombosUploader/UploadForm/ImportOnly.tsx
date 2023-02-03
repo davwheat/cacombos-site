@@ -196,7 +196,7 @@ export function ImportOnlyUpload({ capabilitySet, device }: ImportOnlyUploadProp
             setFormOptions({ ...formOptions, eutraNrIsFile: isFile });
             setFormState({ ...formState, eutraNr: isFile ? null : '' });
           }}
-          groupLabel="EUTRA-NR input"
+          groupLabel="ENDC input"
           options={[
             { label: 'Text', value: '' },
             { label: 'File', value: 'file' },
