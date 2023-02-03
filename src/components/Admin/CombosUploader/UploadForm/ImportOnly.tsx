@@ -39,7 +39,7 @@ export function ImportOnlyUpload({ capabilitySet, device }: ImportOnlyUploadProp
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [formState, setFormState] = useState<ImportOnlyFormState>({ eutra: '', eutraNr: '', nr: '' });
   const adminAuth = useRecoilValue(AdminAuthDetailsAtom);
-  const [formOptions, setFormOptions] = useStateWithLocalStorage<ImportOnlyFormOptions>('admin/combos-upload/nsg-form-options', {
+  const [formOptions, setFormOptions] = useStateWithLocalStorage<ImportOnlyFormOptions>('admin/combos-upload/import-csv-form-options', {
     eutraIsFile: false,
     eutraNrIsFile: false,
     nrIsFile: false,
