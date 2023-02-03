@@ -93,6 +93,8 @@ export default function SelectDropdown({
             className={selectClassName}
             disabled={disabled}
             css={{
+              '--border-size': '2px',
+
               // A reset of styles, including removing the default dropdown arrow
               appearance: 'none',
               // Additional resets for further consistency
@@ -102,9 +104,10 @@ export default function SelectDropdown({
               font: 'inherit',
               cursor: 'pointer',
               padding: '6px 12px',
-              border: '2px solid black',
+              border: 'var(--border-size) solid black',
               borderRadius: 0,
               paddingRight: 48,
+              height: 'calc(36px + 2 * var(--border-size))',
 
               '&:disabled': {
                 cursor: 'not-allowed',
