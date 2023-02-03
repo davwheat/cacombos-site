@@ -365,7 +365,7 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
               value={formAttributeData?.name}
               label="Modem name"
               onInput={(val) => {
-                setFormAttributeData((v) => ({ ...v!, deviceName: val }));
+                setFormAttributeData((v) => ({ ...v!, name: val }));
               }}
             />
           </div>
