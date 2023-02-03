@@ -20,10 +20,12 @@ import { navigate } from 'gatsby';
 import { useSnackbar } from 'notistack';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
+import { ImportOnlyUpload } from './UploadForm/ImportOnly';
 
 export const ADMIN_UPLOAD_FORM_TYPE_OPTIONS = {
   NSG: NsgUpload,
   'Qualcomm 0xB0CD/0xB826 hexdump': QualcommHexdumpUpload,
+  'Import pre-parsed CSV': ImportOnlyUpload,
 } as const;
 
 export type AdminUploadFormType = keyof typeof ADMIN_UPLOAD_FORM_TYPE_OPTIONS;
