@@ -26,7 +26,7 @@ function isFullCapSetDataLoaded(capSet: CapabilitySet | undefined): boolean {
 export default function CapabilitySetVisualiser() {
   const { selectedCapabilitySetUuid } = useRecoilValue(DeviceSettingsAtom);
   const store = useApiStore();
-  const [error, setError] = useState<null | any>(null);
+  const [error, setError] = useState<{ capSetUuid: string; error: any } | null>(null);
   const abortController = useRef<AbortController | null>(null);
 
   const capSet = store.getFirstBy<CapabilitySet>('capability-sets', 'uuid', selectedCapabilitySetUuid);
@@ -60,26 +60,35 @@ export default function CapabilitySetVisualiser() {
       .then((data) => {
         const foundCapSet = data?.[0];
 
-        setIsLoadingCapSetInfo(false);
-
         if (!foundCapSet) {
-          setError('Capability set not found');
+          setError({ error: 'Capability set not found', capSetUuid: selectedCapabilitySetUuid });
+        } else {
+          setError(null);
         }
+
+        setIsLoadingCapSetInfo(false);
       })
       .catch((err) => {
-        if (err.name === 'AbortError') return;
+        if (err.name === 'AbortError') {
+          setError(null);
+          return;
+        }
 
-        setError(err);
+        setError({ error: err, capSetUuid: selectedCapabilitySetUuid });
       });
   }
 
   useEffect(() => {
-    if (!isFullCapSetDataLoaded(capSet)) {
-      loadFullCapSetData();
+    if (error && error.capSetUuid !== selectedCapabilitySetUuid) {
+      setError(null);
     } else {
-      if (isLoadingCapSetInfo) setIsLoadingCapSetInfo(false);
+      if (!isFullCapSetDataLoaded(capSet)) {
+        loadFullCapSetData();
+      } else {
+        if (isLoadingCapSetInfo) setIsLoadingCapSetInfo(false);
+      }
     }
-  }, [selectedCapabilitySetUuid, abortController.current]);
+  }, [capSet, selectedCapabilitySetUuid, abortController.current]);
 
   if (error) {
     return (
