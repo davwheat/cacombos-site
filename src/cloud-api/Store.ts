@@ -7,6 +7,8 @@ import LteComponent from './Models/LteComponent';
 import Modem from './Models/Modem';
 import NrComponent from './Models/NrComponent';
 
+type ConstructorFunction<T extends Model> = new (...args: any[]) => T;
+
 export interface StoreQuery {
   include?: string[];
   filter?: Record<string, string>;
@@ -147,7 +149,7 @@ export default class Store {
 
     this.dataStore[type] ||= new Map();
 
-    const modelClass = this.models[modelData.type] as any as Model | undefined;
+    const modelClass = this.models[modelData.type] as any as ConstructorFunction<Model> | undefined;
 
     if (!modelClass) {
       console.warn(`[Store] Attempted to push model of type "${modelData.type}" to database, but no such model is defined.`);
