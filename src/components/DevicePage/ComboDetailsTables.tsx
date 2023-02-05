@@ -71,7 +71,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
             <tbody>
               {(() => {
                 const lteCcRows = dlLteComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-lte-${i}`}>
+                  <tr key={`${combo.uuid()}-lte-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">{cc.band()}</code>
@@ -87,7 +87,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                 ));
 
                 const nrCcRows = dlNrComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-nr-${i}`}>
+                  <tr key={`${combo.uuid()}-nr-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">n{cc.band()}</code>
@@ -141,7 +141,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
             <tbody>
               {(() => {
                 const lteCcRows = ulLteComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-lte-${i}`}>
+                  <tr key={`${combo.uuid()}-lte-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">{cc.band()}</code>
@@ -155,7 +155,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                 ));
 
                 const nrCcRows = ulNrComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-nr-${i}`}>
+                  <tr key={`${combo.uuid()}-nr-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">n{cc.band()}</code>
