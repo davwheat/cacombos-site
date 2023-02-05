@@ -20,6 +20,7 @@ const LteClassToBwCc: Record<string, string> = {
   D: '60 MHz - 3CC',
   E: '80 MHz - 4CC',
   F: '100 MHz - 5CC',
+  I: '160 MHz - 8CC',
 };
 
 export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
