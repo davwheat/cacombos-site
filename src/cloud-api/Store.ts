@@ -7,6 +7,8 @@ import LteComponent from './Models/LteComponent';
 import Modem from './Models/Modem';
 import NrComponent from './Models/NrComponent';
 
+type ConstructorFunction<T extends Model> = new (...args: any[]) => T;
+
 export interface StoreQuery {
   include?: string[];
   filter?: Record<string, string>;
@@ -14,6 +16,10 @@ export interface StoreQuery {
     offset?: number;
     limit?: number;
   };
+}
+
+export interface RequestOptions {
+  abortController: AbortController;
 }
 
 export interface JsonApiPayload {
@@ -80,11 +86,12 @@ export default class Store {
     return this.getById(type, matchingId!) as M;
   }
 
-  async find<M extends Model>(type: string, idOrQuery: number | string): Promise<M | undefined>;
-  async find<M extends Model[]>(type: string, idOrQuery?: StoreQuery): Promise<M | undefined>;
+  async find<M extends Model>(type: string, idOrQuery: number | string, options?: RequestOptions): Promise<M | undefined>;
+  async find<M extends Model[]>(type: string, idOrQuery?: StoreQuery, options?: RequestOptions): Promise<M | undefined>;
   async find<M extends Model | Model[]>(
     type: string,
-    idOrQuery: undefined | number | string | StoreQuery
+    idOrQuery: undefined | number | string | StoreQuery,
+    options?: RequestOptions
   ): Promise<M | (M[] & { payload: JsonApiPayload }) | undefined> {
     const query = (['string', 'number'].includes(typeof idOrQuery) ? null : idOrQuery) as StoreQuery | null;
     const id = query ? null : (idOrQuery as string | number);
@@ -107,6 +114,7 @@ export default class Store {
       headers: {
         Accept: 'application/vnd.api+json',
       },
+      signal: options?.abortController.signal,
     });
 
     if (!response.ok) {
@@ -147,7 +155,7 @@ export default class Store {
 
     this.dataStore[type] ||= new Map();
 
-    const modelClass = this.models[modelData.type] as any as Model | undefined;
+    const modelClass = this.models[modelData.type] as any as ConstructorFunction<Model> | undefined;
 
     if (!modelClass) {
       console.warn(`[Store] Attempted to push model of type "${modelData.type}" to database, but no such model is defined.`);
