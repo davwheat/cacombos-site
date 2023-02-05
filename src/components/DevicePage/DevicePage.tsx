@@ -130,11 +130,11 @@ export default function DevicePage({ uuid }: DevicePageProps) {
 
   return (
     <DevicePageContext.Provider value={device}>
-      <DeviceHero key={'hero_' + uuid} device={device} />
+      <DeviceHero device={device} />
 
-      <DeviceFirmwareComboPicker key={'fw_' + uuid} />
+      <DeviceFirmwareComboPicker />
 
-      <CapabilitySetVisualiser key={'combos_' + uuid} />
+      <CapabilitySetVisualiser />
     </DevicePageContext.Provider>
   );
 }

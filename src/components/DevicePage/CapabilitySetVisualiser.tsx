@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import DeviceSettingsAtom from '@atoms/DeviceSettingsAtom';
 import { useApiStore } from '@api/ApiStoreProvider';
@@ -24,9 +24,10 @@ function isFullCapSetDataLoaded(capSet: CapabilitySet | undefined): boolean {
 }
 
 export default function CapabilitySetVisualiser() {
-  const [{ selectedCapabilitySetUuid }, setDeviceSettingsState] = useRecoilState(DeviceSettingsAtom);
+  const { selectedCapabilitySetUuid } = useRecoilValue(DeviceSettingsAtom);
   const store = useApiStore();
   const [error, setError] = useState<null | any>(null);
+  const abortController = useRef<AbortController | null>(null);
 
   const capSet = store.getFirstBy<CapabilitySet>('capability-sets', 'uuid', selectedCapabilitySetUuid);
   const isFirstRender = useIsFirstRender();
@@ -36,26 +37,38 @@ export default function CapabilitySetVisualiser() {
   function loadFullCapSetData() {
     setIsLoadingCapSetInfo(true);
 
+    if (abortController.current) {
+      abortController.current.abort();
+    }
+
+    abortController.current = new AbortController();
+
     store
-      .find<CapabilitySet[]>('capability-sets', {
-        include: ['combos', 'combos.lteComponents', 'combos.nrComponents'],
-        filter: {
-          uuid: selectedCapabilitySetUuid,
+      .find<CapabilitySet[]>(
+        'capability-sets',
+        {
+          include: ['combos', 'combos.lteComponents', 'combos.nrComponents'],
+          filter: {
+            uuid: selectedCapabilitySetUuid,
+          },
+          page: {
+            limit: 1,
+          },
         },
-        page: {
-          limit: 1,
-        },
-      })
+        { abortController: abortController.current }
+      )
       .then((data) => {
         const foundCapSet = data?.[0];
 
         setIsLoadingCapSetInfo(false);
 
         if (!foundCapSet) {
-          setDeviceSettingsState((state) => ({ ...state, selectedCapabilitySetUuid: 'null' }));
+          setError('Capability set not found');
         }
       })
       .catch((err) => {
+        if (err.name === 'AbortError') return;
+
         setError(err);
       });
   }
@@ -66,7 +79,7 @@ export default function CapabilitySetVisualiser() {
     } else {
       if (isLoadingCapSetInfo) setIsLoadingCapSetInfo(false);
     }
-  }, [selectedCapabilitySetUuid]);
+  }, [selectedCapabilitySetUuid, abortController.current]);
 
   if (error) {
     return (
@@ -74,6 +87,12 @@ export default function CapabilitySetVisualiser() {
         <h3 className="text-loud">Combos</h3>
 
         <p className="text-speak">Something went wrong when fetching data for this device. Please try again later.</p>
+
+        {typeof error === 'string' && (
+          <p className="text-speak">
+            <strong>Error:</strong> {error}
+          </p>
+        )}
       </Section>
     );
   }

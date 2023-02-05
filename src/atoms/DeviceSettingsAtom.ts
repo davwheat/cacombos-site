@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 
 export interface IDeviceSettingsAtom {
+  deviceUuid: string;
   selectedFirmwareUuid: string;
   selectedCapabilitySetUuid: string;
 }
@@ -8,6 +9,7 @@ export interface IDeviceSettingsAtom {
 export default atom<IDeviceSettingsAtom>({
   key: 'deviceSettings',
   default: {
+    deviceUuid: '',
     selectedFirmwareUuid: '',
     selectedCapabilitySetUuid: '',
   },
