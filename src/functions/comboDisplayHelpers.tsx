@@ -225,7 +225,7 @@ const nrFr2ClassToMultiplier: Record<string, number> = {
   Q: 4,
 };
 
-function getDlStreamCountForComponent(component: LteComponent | NrComponent): number[] {
+export function getDlStreamCountForComponent(component: LteComponent | NrComponent): number[] {
   if (component instanceof LteComponent) {
     const ccClass = component.dlClass() ?? 'A';
 
@@ -244,7 +244,7 @@ function getDlStreamCountForComponent(component: LteComponent | NrComponent): nu
   return [0];
 }
 
-function getUlStreamCountForComponent(component: LteComponent | NrComponent): number[] {
+export function getUlStreamCountForComponent(component: LteComponent | NrComponent): number[] {
   if (component instanceof LteComponent) {
     const ccClass = component.ulClass() ?? 'A';
 

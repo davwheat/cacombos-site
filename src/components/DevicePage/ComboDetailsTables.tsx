@@ -1,5 +1,5 @@
 import ComboListDisplayOptions from '@atoms/ComboListDisplayOptions';
-import { getDlComponents, getUlComponents } from '@functions/comboDisplayHelpers';
+import { getDlComponents, getDlStreamCountForComponent, getUlComponents, getUlStreamCountForComponent } from '@functions/comboDisplayHelpers';
 import friendlyQamConverter from '@functions/friendlyQamConverter';
 import { TableCellCss, TableHeadCellCss } from './ComboTable';
 
@@ -78,7 +78,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                     <td>
                       {cc.dlClass()} {showLteBwNextToClass && cc.dlClass() && <span className="text-whisper">({LteClassToBwCc[cc.dlClass()!]})</span>}
                     </td>
-                    <td>{cc.mimo()}</td>
+                    <td>{getDlStreamCountForComponent(cc).join('+')}</td>
                     <td>{friendlyQamConverter(cc.dlModulation() ?? '64qam')}</td>
                     <td />
                     <td />
@@ -92,7 +92,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                       <code className="code">n{cc.band()}</code>
                     </td>
                     <td>{cc.dlClass()}</td>
-                    <td>{cc.dlMimo()}</td>
+                    <td>{getDlStreamCountForComponent(cc).join('+')}</td>
                     <td>{friendlyQamConverter(cc.dlModulation() ?? '256qam')}</td>
                     <td>{cc.bandwidth()} MHz</td>
                     <td>{cc.subcarrierSpacing()} kHz</td>
@@ -146,7 +146,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                       <code className="code">{cc.band()}</code>
                     </td>
                     <td>{cc.ulClass()}</td>
-                    <td>{/* {cc.mimo()} */}1</td>
+                    <td>{getUlStreamCountForComponent(cc).join('+')}</td>
                     <td>{friendlyQamConverter(cc.ulModulation() ?? '16qam')}</td>
                     {/* <td /> */}
                     <td />
@@ -160,7 +160,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                       <code className="code">n{cc.band()}</code>
                     </td>
                     <td>{cc.ulClass()}</td>
-                    <td>{cc.ulMimo()}</td>
+                    <td>{getUlStreamCountForComponent(cc).join('+')}</td>
                     <td>{friendlyQamConverter(cc.ulModulation() ?? '64qam')}</td>
                     {/* <td>{cc.bandwidth()} MHz</td> */}
                     <td>{cc.subcarrierSpacing()} kHz</td>
