@@ -38,7 +38,7 @@ export default function SubmitForm() {
   const showError = useCallback(
     (message: string) => {
       enqueueSnackbar(message, { variant: 'error' });
-      setFormError(message);
+      setFormError(<>{message}</>);
     },
     [enqueueSnackbar, setFormError]
   );
@@ -74,6 +74,55 @@ export default function SubmitForm() {
         formData.append('deviceFirmware', formState.deviceFirmware);
         formData.append('comment', formState.comment);
         if (formState.log) formData.append('log', formState.log);
+
+        const promise = fetch(`${process.env.GATSBY_API_ACTIONS_BASE_URL}/submit-combos`, {
+          method: 'POST',
+          body: formData,
+        });
+
+        promise
+          .then((response) => {
+            if (!response.ok) {
+              const body = response.json();
+
+              body
+                .then((data) => {
+                  showError(data?.errors?.join?.('\n'));
+                })
+                .catch((e: Error | unknown) => {
+                  showError(`An error occurred while submitting your data. Please try again later. (HTTP Error ${response.status})`);
+                  if (e instanceof Error) {
+                    setFormError(
+                      <>
+                        An error occurred while submitting your data. Please try again later. (HTTP Error {response.status})
+                        <br />
+                        <br />
+                        Error: {e.message}
+                      </>
+                    );
+                  }
+                });
+            }
+          })
+          .catch((e: Error | unknown) => {
+            showError(
+              'An network error occurred while submitting your data. Make sure your device has an internet connection. If it does, please try again later.'
+            );
+            if (e instanceof Error) {
+              setFormError(
+                <>
+                  An network error occurred while submitting your data. Make sure your device has an internet connection. If it does, please try again
+                  later.
+                  <br />
+                  <br />
+                  Error: {e.message}
+                </>
+              );
+            }
+          })
+          .finally(() => {
+            setFormSubmitting(false);
+          });
       }}
       css={{
         marginTop: 24,
@@ -137,7 +186,7 @@ export default function SubmitForm() {
               if ((val?.size ?? 0) > 1024 * 1024 * 25) {
                 showError('The log file must be smaller than 25 MB.');
                 setFormState((s) => ({ ...s, log: null }));
-                return;
+                return false;
               }
 
               setFormState((s) => ({ ...s, log: val }));
