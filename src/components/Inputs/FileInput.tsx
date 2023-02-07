@@ -13,8 +13,12 @@ export interface FileInputProps<Multiselect extends boolean> {
   multiselect?: Multiselect;
   /**
    * `null` if the user cancels the file selection dialog.
+   *
+   * Return `false` to mark input as invalid to allow the state to reset.
+   *
+   * You **cannot** return `false` when the parameter is `null`.
    */
-  onInput: Multiselect extends true ? (file: null | File[]) => void : (file: null | File) => void;
+  onInput: Multiselect extends true ? (file: null | File[]) => false | void : (file: null | File) => false | void;
 }
 
 export default function FileInput<Multiselect extends boolean = false>({
@@ -86,12 +90,22 @@ export default function FileInput<Multiselect extends boolean = false>({
           if (inp.files) {
             if (multiselect) {
               const files = Array.from(inp.files);
-              setSelectedFile(files);
-              onInput(files as any);
+              const valid = onInput(files as any);
+
+              if (valid === false) {
+                setSelectedFile(null);
+              } else {
+                setSelectedFile(files);
+              }
             } else {
               const file = inp.files[0];
-              setSelectedFile(file);
-              onInput(file as any);
+              const valid = onInput(file as any);
+
+              if (valid === false) {
+                setSelectedFile(null);
+              } else {
+                setSelectedFile(file);
+              }
             }
           } else {
             setSelectedFile(null);
