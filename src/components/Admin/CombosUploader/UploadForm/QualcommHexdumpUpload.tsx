@@ -152,7 +152,7 @@ export function QualcommHexdumpUpload({ capabilitySet, device }: QualcommHexdump
               <FileInput
                 disabled={isSubmitting}
                 css={{ margin: 'auto' }}
-                label="Select 0xB826 packet hexdump"
+                label="Select 0xB0CD packet hexdump"
                 icon={<UploadIcon />}
                 onInput={(file) => {
                   if (file) setFormState({ ...formState, B0CD: file });
