@@ -87,10 +87,11 @@ export default function SubmitForm() {
 
               body
                 .then((data) => {
-                  showError(data?.errors?.join?.('\n'));
+                  showError(Object.values(data?.errors).join(' '));
                 })
                 .catch((e: Error | unknown) => {
                   showError(`An error occurred while submitting your data. Please try again later. (HTTP Error ${response.status})`);
+
                   if (e instanceof Error) {
                     setFormError(
                       <>
