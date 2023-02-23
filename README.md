@@ -1,54 +1,22 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal TypeScript starter
-</h1>
+# Mobile Combos frontend
 
-## 🚀 Quick start
+This is the web frontend for mobilecombos.com, written with React and Gatsby.
 
-1.  **Create a Gatsby site.**
+## Local development
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+> ⚠️ You might need to modify `.env.development` and/or `.env.production` in order to ensure the frontend web app works correctly. In development, it defaults to a backend running on `local.davw.network` which resolves to `127.0.0.1`.
+>
+> In production (e.g., `gatsby build && gatsby serve`), it will attempt to use the live backend at `api.mobilecombos.com`.
 
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby
-    ```
+1. Clone the repository locally
+2. Install all dependencies by running `yarn`
+3. Run `yarn develop` to spawn a development server
+4. Access a live instance at `localhost:8000`
 
-2.  **Start developing.**
+### Considerations
 
-    Navigate into your new site’s directory and start it up.
+#### SSR in development
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+The development environment runs with Gatsby's `DEV_SSR` flag by default, which means it will use the same rendering method in development as it will in production. This loses us some performance, but allows us to locate SSR/SSG errors during development as opposed to only in production.
 
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.tsx` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+If this flag needs to be disabled, simply comment the flag out in `gatsby-config.ts`.
