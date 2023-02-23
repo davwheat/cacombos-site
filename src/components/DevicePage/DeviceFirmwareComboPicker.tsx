@@ -15,52 +15,53 @@ import dayjs from 'dayjs';
 
 import type DeviceFirmware from '@api/Models/DeviceFirmware';
 import type CapabilitySet from '@api/Models/CapabilitySet';
+import type Store from '@api/Store';
+
+function getCapabilitySetsForFirmware(deviceFirmwareUuid: string, store: Store): CapabilitySet[] {
+  if (deviceFirmwareUuid === '' || !deviceFirmwareUuid) return [];
+
+  const fw = store.getFirstBy<DeviceFirmware>('device-firmwares', 'uuid', deviceFirmwareUuid)!;
+  const capSets = fw.capabilitySets() as CapabilitySet[];
+
+  return capSets;
+}
+
+function isCapabilitySetIdValidChoiceForDeviceFirmware(capabilitySetUuid: string, deviceFirmwareUuid: string, store: Store) {
+  const firmwares = getCapabilitySetsForFirmware(deviceFirmwareUuid, store);
+
+  return firmwares.some((cs) => cs!.uuid() === capabilitySetUuid);
+}
+
+function getNewestCapabilitySetUuidForDevice(device: Device): [string, string] {
+  const allFirmwares = device.deviceFirmwares();
+
+  if (!allFirmwares) return ['', ''];
+
+  let newestCapSet = null as CapabilitySet | null;
+  let firmwareForNewestCapSet = null as DeviceFirmware | null;
+  let capSetUpdatedAt = 0;
+
+  allFirmwares.forEach((fw) => {
+    const capSets = fw!.capabilitySets() as CapabilitySet[];
+    capSets.forEach((cs) => {
+      if (cs.updatedAt().getTime() > capSetUpdatedAt) {
+        newestCapSet = cs;
+        firmwareForNewestCapSet = fw!;
+        capSetUpdatedAt = cs.updatedAt().getTime();
+      }
+    });
+  });
+
+  if (!newestCapSet || !firmwareForNewestCapSet) return ['', ''];
+
+  return [firmwareForNewestCapSet.uuid(), newestCapSet.uuid()];
+}
 
 export default function DeviceFirmwareComboPicker() {
   const [deviceSettings, setDeviceSettings] = useRecoilState(DeviceSettingsAtom);
   const [displaySettings, setDisplaySettings] = useRecoilState(ComboListDisplayOptions);
   const store = useApiStore();
   const device = useContext(DevicePageContext);
-
-  function getCapabilitySetsForFirmware(deviceFirmwareUuid: string): CapabilitySet[] {
-    if (deviceFirmwareUuid === '' || !deviceFirmwareUuid) return [];
-
-    const fw = store.getFirstBy<DeviceFirmware>('device-firmwares', 'uuid', deviceFirmwareUuid)!;
-    const capSets = fw.capabilitySets() as CapabilitySet[];
-
-    return capSets;
-  }
-
-  function getNewestCapabilitySetUuidForDevice(device: Device): [string, string] {
-    const allFirmwares = device.deviceFirmwares();
-
-    if (!allFirmwares) return ['', ''];
-
-    let newestCapSet = null as CapabilitySet | null;
-    let firmwareForNewestCapSet = null as DeviceFirmware | null;
-    let capSetUpdatedAt = 0;
-
-    allFirmwares.forEach((fw) => {
-      const capSets = fw!.capabilitySets() as CapabilitySet[];
-      capSets.forEach((cs) => {
-        if (cs.updatedAt().getTime() > capSetUpdatedAt) {
-          newestCapSet = cs;
-          firmwareForNewestCapSet = fw!;
-          capSetUpdatedAt = cs.updatedAt().getTime();
-        }
-      });
-    });
-
-    if (!newestCapSet || !firmwareForNewestCapSet) return ['', ''];
-
-    return [firmwareForNewestCapSet.uuid(), newestCapSet.uuid()];
-  }
-
-  function isCapabilitySetIdValidChoiceForDeviceFirmware(capabilitySetUuid: string, deviceFirmwareUuid: string) {
-    const firmwares = getCapabilitySetsForFirmware(deviceFirmwareUuid);
-
-    return firmwares.some((cs) => cs!.uuid() === capabilitySetUuid);
-  }
 
   const firmwareOptions = !device
     ? []
@@ -71,7 +72,7 @@ export default function DeviceFirmwareComboPicker() {
 
   const capSetOptions = !device
     ? []
-    : getCapabilitySetsForFirmware(deviceSettings.selectedFirmwareUuid).map((cs) => ({
+    : getCapabilitySetsForFirmware(deviceSettings.selectedFirmwareUuid, store).map((cs) => ({
         value: cs.uuid(),
         // em dash
         label: `${cs.description()} — ${dayjs(cs.updatedAt()).format('YYYY-MM-DD')}`,
@@ -97,7 +98,7 @@ export default function DeviceFirmwareComboPicker() {
         deviceUuid: device.uuid(),
       });
     }
-  }, [device, setDeviceSettings, deviceSettings.deviceUuid]);
+  }, [device, setDeviceSettings, deviceSettings, getNewestCapabilitySetUuidForDevice]);
 
   return (
     <Section darker usePadding width="wider">
@@ -129,7 +130,7 @@ export default function DeviceFirmwareComboPicker() {
                 selectedFirmwareUuid = value;
 
                 if (selectedCapabilitySetUuid !== '') {
-                  if (value === '' || !isCapabilitySetIdValidChoiceForDeviceFirmware(selectedCapabilitySetUuid!, value)) {
+                  if (value === '' || !isCapabilitySetIdValidChoiceForDeviceFirmware(selectedCapabilitySetUuid!, value, store)) {
                     selectedCapabilitySetUuid = '';
                   }
                 }
