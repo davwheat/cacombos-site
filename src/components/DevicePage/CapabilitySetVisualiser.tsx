@@ -36,6 +36,7 @@ export default function CapabilitySetVisualiser() {
 
   function loadFullCapSetData() {
     setIsLoadingCapSetInfo(true);
+    setError(null);
 
     if (abortController.current) {
       abortController.current.abort();
@@ -61,7 +62,11 @@ export default function CapabilitySetVisualiser() {
         const foundCapSet = data?.[0];
 
         if (!foundCapSet) {
-          setError({ error: 'Capability set not found', capSetUuid: selectedCapabilitySetUuid });
+          const message = 'Capability set not found';
+
+          if (error?.error !== message && error?.capSetUuid !== selectedCapabilitySetUuid) {
+            setError({ error: message, capSetUuid: selectedCapabilitySetUuid });
+          }
         } else {
           setError(null);
         }
@@ -83,12 +88,12 @@ export default function CapabilitySetVisualiser() {
       setError(null);
     } else {
       if (!isFullCapSetDataLoaded(capSet)) {
-        loadFullCapSetData();
+        if (!error || error?.capSetUuid !== selectedCapabilitySetUuid) loadFullCapSetData();
       } else {
         if (isLoadingCapSetInfo) setIsLoadingCapSetInfo(false);
       }
     }
-  }, [capSet, selectedCapabilitySetUuid, abortController.current]);
+  }, [error, capSet, isLoadingCapSetInfo, selectedCapabilitySetUuid]);
 
   if (error) {
     return (
