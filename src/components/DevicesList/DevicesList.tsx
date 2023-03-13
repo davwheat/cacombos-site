@@ -7,6 +7,7 @@ import LoadingSpinner from '@components/LoadingSpinner';
 import { useApiStore } from '@api/ApiStoreProvider';
 import Device from '@api/Models/Device';
 import { JsonApiPayload } from '@api/Store';
+
 export interface DevicesListProps {
   itemComponent: ({ device, key }: { device: Device; key: string }) => React.ReactNode;
   pageSize: number;
