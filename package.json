@@ -37,11 +37,11 @@
     "get-best-contrast-color": "^0.3.1",
     "mdi-react": "^9.1.0",
     "nanoid": "^4.0.1",
-    "notistack": "alpha",
+    "notistack": "3.0.1",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "recoil": "^0.7.6",
+    "recoil": "^0.7.7",
     "recoil-persist": "^4.2.0"
   },
   "devDependencies": {
@@ -49,7 +49,7 @@
     "@sentry/webpack-plugin": "^1.20.0",
     "@types/case-sensitive-paths-webpack-plugin": "^2.1.6",
     "@types/gatsbyjs__reach-router": "^2.0.0",
-    "@types/node": "^18.14.0",
+    "@types/node": "^18.15.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
