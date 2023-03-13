@@ -12,6 +12,7 @@ type ConstructorFunction<T extends Model> = new (...args: any[]) => T;
 export interface StoreQuery {
   include?: string[];
   filter?: Record<string, string>;
+  sort?: string;
   page?: {
     offset?: number;
     limit?: number;
@@ -104,6 +105,7 @@ export default class Store {
     if (filter) newQ.filter = filter;
     if (include) newQ.include = include;
     if (query?.page) newQ.page = query.page;
+    if (query?.sort) newQ.sort = query.sort;
 
     const queryStr = serializeQueryString(newQ);
 
