@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import DevicesListItem from './DevicesListItem';
 import Button from '@components/Inputs/Button';
@@ -10,16 +10,19 @@ import { JsonApiPayload } from '@api/Store';
 export interface DevicesListProps {
   itemComponent: ({ device, key }: { device: Device; key: string }) => React.ReactNode;
   pageSize: number;
+  sort?: string;
 }
 
 export default function DevicesList({
   pageSize,
   itemComponent = (props) => <DevicesListItem uriGenerator={(device) => `/admin/devices/edit/${device.uuid()}`} {...props} />,
+  sort = '-releaseDate',
 }: DevicesListProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [allDevices, setAllDevices] = useState<null | Device[]>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<null | any>(null);
+  const abortController = useRef<AbortController | null>(null);
 
   const store = useApiStore();
 
@@ -27,8 +30,14 @@ export default function DevicesList({
     // Initial data fetch
     setIsLoading(true);
 
+    if (abortController.current) {
+      abortController.current.abort();
+    }
+
+    abortController.current = new AbortController();
+
     store
-      .find<Device[]>('devices', { page: { limit: pageSize }, include: ['modem'] })
+      .find<Device[]>('devices', { page: { limit: pageSize }, include: ['modem'], sort }, { abortController: abortController.current })
       .then((devices) => {
         if (!devices) {
           setAllDevices([]);
@@ -39,6 +48,11 @@ export default function DevicesList({
         setIsLoading(false);
       })
       .catch((err) => {
+        if (err.name === 'AbortError') {
+          setError(null);
+          return;
+        }
+
         setError(err);
         setIsLoading(false);
       });
