@@ -35,5 +35,5 @@ export function useStateDebounced<T>(initialValue: T, delayMs: number): [T, T, R
     }
   };
 
-  return [inputValue, debouncedInputValue, setInputValue] as const;
+  return [inputValue, debouncedInputValue, setInputValue];
 }
