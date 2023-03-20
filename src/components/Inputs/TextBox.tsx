@@ -1,10 +1,9 @@
-import { useMemo } from 'react';
+import { useId } from 'react';
 
 import SearchIcon from 'mdi-react/SearchIcon';
 
 import Colors from '@data/colors.json';
 import clsx from 'clsx';
-import { nanoid } from 'nanoid';
 
 interface IProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onInput'> {
   /**
@@ -72,8 +71,9 @@ export default function TextBox({
   disabled = false,
   ...attrs
 }: IProps) {
-  const id = useMemo(() => nanoid(), []);
-  const helpTextId = useMemo(() => nanoid(), []);
+  const rootId = useId();
+  const id = `textbox-${rootId}`;
+  const helpTextId = `textbox-help-${rootId}`;
 
   return (
     <label

@@ -1,6 +1,4 @@
-import { useMemo } from 'react';
-
-import { nanoid } from 'nanoid';
+import { useId } from 'react';
 
 import Colors from '@data/colors.json';
 
@@ -34,8 +32,9 @@ export default function SelectDropdown({
   disabled = false,
   endAdornment,
 }: ISelectDropdownProps) {
-  const selectId = useMemo(() => nanoid(), []);
-  const helpTextId = useMemo(() => nanoid(), []);
+  const rootId = useId();
+  const selectId = `select-${rootId}`;
+  const helpTextId = `help-text-${rootId}`;
 
   return (
     <label

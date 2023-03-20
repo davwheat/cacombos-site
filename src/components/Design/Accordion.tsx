@@ -1,10 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useId, useState } from 'react';
 
 import PlusIcon from 'mdi-react/PlusIcon';
 import MinusIcon from 'mdi-react/MinusIcon';
 
 import Colors from '@data/colors.json';
-import { nanoid } from 'nanoid';
 
 export interface AccordionProps {
   heading: string;
@@ -13,8 +12,10 @@ export interface AccordionProps {
 }
 
 export default function Accordion({ heading, children, headingComponent: HeadingComponent = 'h2' }: AccordionProps) {
-  const buttonId = useMemo(() => `accordion-button-${nanoid()}`, []);
-  const panelId = useMemo(() => `accordion-panel-${nanoid()}`, []);
+  const rootId = useId();
+
+  const buttonId = `accordion-button-${rootId}`;
+  const panelId = `accordion-panel-${rootId}`;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
