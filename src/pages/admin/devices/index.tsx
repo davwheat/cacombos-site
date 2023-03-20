@@ -40,6 +40,8 @@ export default function AdminDevicesPage({ location }: PageProps) {
 
         <DevicesList
           pageSize={100}
+          allowSearch
+          allowSort
           itemComponent={(props) => <DevicesListItem uriGenerator={(device) => `/admin/devices/edit/${device.uuid()}`} {...props} />}
         />
       </Section>
