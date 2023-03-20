@@ -97,7 +97,11 @@ export default function DevicesList({
       >
         {allDevices?.map((device) => itemComponent({ key: device.uuid(), device }))}
 
-        {allDevices?.length === 0 && <p className="text-speak">There appears to be no devices.</p>}
+        {allDevices?.length === 0 && (
+          <p className="text-loud" css={{ gridColumn: '1/-1', textAlign: 'center' }}>
+            There appears to be no devices.
+          </p>
+        )}
       </ul>
 
       {allDevices && ((allDevices as any)?.payload as JsonApiPayload)?.links?.next && (
