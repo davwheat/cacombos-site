@@ -36,7 +36,7 @@ export default function DevicesList({
 }: DevicesListProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [allDevices, setAllDevices] = useState<null | Device[]>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean | 'next'>(true);
   const [error, setError] = useState<null | any>(null);
   const abortController = useRef<AbortController | null>(null);
   const [searchQuery, searchQueryDebounced, setSearchQuery] = useStateDebounced<string>('', 1000);
@@ -82,7 +82,7 @@ export default function DevicesList({
   }, [searchQueryDebounced, selectedSort]);
 
   const loadNextPage = useCallback(() => {
-    setIsLoading(true);
+    setIsLoading('next');
 
     const oldQuery = searchQuery;
 
@@ -155,28 +155,29 @@ export default function DevicesList({
         </div>
       )}
 
-      <ul
-        css={{
-          margin: 0,
-          padding: 0,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          // placeItems: 'center',
-          gap: 16,
-        }}
-      >
-        {allDevices?.map((device) => itemComponent({ key: device.uuid(), device }))}
+      {isLoading !== true && (
+        <ul
+          css={{
+            margin: 0,
+            padding: 0,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: 16,
+          }}
+        >
+          {allDevices?.map((device) => itemComponent({ key: device.uuid(), device }))}
 
-        {allDevices?.length === 0 && (
-          <p className="text-loud" css={{ gridColumn: '1/-1', textAlign: 'center' }}>
-            There appears to be no devices.
-          </p>
-        )}
-      </ul>
+          {allDevices?.length === 0 && (
+            <p className="text-loud" css={{ gridColumn: '1/-1', textAlign: 'center' }}>
+              There appears to be no devices.
+            </p>
+          )}
+        </ul>
+      )}
 
-      {allDevices && ((allDevices as any)?.payload as JsonApiPayload)?.links?.next && (
+      {[false, 'next'].includes(isLoading) && allDevices && ((allDevices as any)?.payload as JsonApiPayload)?.links?.next && (
         <Button
-          disabled={isLoading}
+          disabled={!!isLoading}
           onClick={() => {
             loadNextPage();
           }}
