@@ -4,6 +4,7 @@ import DevicesListItem from './DevicesListItem';
 import Button from '@components/Inputs/Button';
 import LoadingSpinner from '@components/LoadingSpinner';
 import TextBox from '@components/Inputs/TextBox';
+import SelectDropdown from '@components/Inputs/SelectDropdown';
 
 import Device from '@api/Models/Device';
 import { useApiStore } from '@api/ApiStoreProvider';
@@ -11,18 +12,27 @@ import { JsonApiPayload } from '@api/Store';
 import { useStateDebounced } from '@hooks/useStateDebounced';
 import Colors from '@data/colors.json';
 
+const SORT_OPTIONS = [
+  { label: 'Release date (newest first)', value: '-releaseDate' },
+  { label: 'Release date (oldest first)', value: 'releaseDate' },
+  { label: 'Name (A to Z)', value: 'manufacturer,deviceName,modelName' },
+  { label: 'Name (Z to A)', value: '-manufacturer,-deviceName,-modelName' },
+];
+
 export interface DevicesListProps {
   itemComponent: ({ device, key }: { device: Device; key: string }) => React.ReactNode;
   pageSize: number;
   sort?: string;
   allowSearch?: boolean;
+  allowSort?: boolean;
 }
 
 export default function DevicesList({
   pageSize,
   itemComponent = (props) => <DevicesListItem uriGenerator={(device) => `/admin/devices/edit/${device.uuid()}`} {...props} />,
-  sort = '-releaseDate',
+  sort: defaultSort = '-releaseDate',
   allowSearch = false,
+  allowSort = false,
 }: DevicesListProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [allDevices, setAllDevices] = useState<null | Device[]>(null);
@@ -30,6 +40,7 @@ export default function DevicesList({
   const [error, setError] = useState<null | any>(null);
   const abortController = useRef<AbortController | null>(null);
   const [searchQuery, searchQueryDebounced, setSearchQuery] = useStateDebounced<string>('', 1000);
+  const [selectedSort, setSort] = useState(defaultSort ?? '-releaseDate');
 
   const store = useApiStore();
 
@@ -49,7 +60,7 @@ export default function DevicesList({
     store
       .find<Device[]>(
         'devices',
-        { page: { offset: currentPage * pageSize, limit: pageSize }, include: ['modem'], sort, ...filter },
+        { page: { offset: currentPage * pageSize, limit: pageSize }, include: ['modem'], sort: selectedSort, ...filter },
         { abortController: abortController.current }
       )
       .then((devices) => {
@@ -70,7 +81,7 @@ export default function DevicesList({
         setError(err);
         setIsLoading(false);
       });
-  }, [searchQueryDebounced]);
+  }, [searchQueryDebounced, selectedSort]);
 
   const loadNextPage = useCallback(() => {
     setIsLoading(true);
@@ -80,7 +91,7 @@ export default function DevicesList({
     const filter = searchQuery ? { filter: { deviceFullName: oldQuery } } : {};
 
     store
-      .find<Device[]>('devices', { page: { offset: currentPage * pageSize, limit: pageSize }, include: ['modem'], sort, ...filter })
+      .find<Device[]>('devices', { page: { offset: currentPage * pageSize, limit: pageSize }, include: ['modem'], sort: selectedSort, ...filter })
       .then((devices) => {
         setError(null);
 
@@ -98,7 +109,7 @@ export default function DevicesList({
         setError(err);
         setIsLoading(false);
       });
-  }, [store, allDevices, searchQuery]);
+  }, [store, allDevices, searchQueryDebounced, selectedSort]);
 
   if (error) {
     return (
@@ -110,23 +121,39 @@ export default function DevicesList({
 
   return (
     <div>
-      {allowSearch && (
+      {(allowSearch || allowSort) && (
         <div
           css={{
             padding: 16,
             background: Colors.lightGrey,
-            marginTop: 24,
-            marginBottom: 24,
+            margin: '24px auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: 16,
+            maxWidth: 900,
           }}
         >
-          <TextBox
-            label="Search devices"
-            placeholder="Search devices"
-            value={searchQuery}
-            onInput={(value) => {
-              setSearchQuery(value);
-            }}
-          />
+          {allowSearch && (
+            <TextBox
+              label="Search devices"
+              placeholder="Search devices"
+              value={searchQuery}
+              onInput={(value) => {
+                setSearchQuery(value);
+              }}
+            />
+          )}
+
+          {allowSort && (
+            <SelectDropdown
+              label="Sort by"
+              options={SORT_OPTIONS}
+              value={selectedSort}
+              onChange={(value) => {
+                setSort(value);
+              }}
+            />
+          )}
         </div>
       )}
 
