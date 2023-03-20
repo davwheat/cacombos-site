@@ -49,9 +49,7 @@ export default function DevicesList({
     setIsLoading(true);
     setCurrentPage(0);
 
-    if (abortController.current) {
-      abortController.current.abort();
-    }
+    abortController.current?.abort();
 
     abortController.current = new AbortController();
 
