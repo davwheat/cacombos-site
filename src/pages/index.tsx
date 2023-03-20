@@ -15,7 +15,12 @@ export default function AllDevicesPage({ location }: PageProps) {
       </Hero>
 
       <Section width="full" css={{ padding: '0 32px' }}>
-        <DevicesList pageSize={20} itemComponent={(props) => <DevicesListItem uriGenerator={(device) => `/devices/${device.uuid()}`} {...props} />} />
+        <DevicesList
+          allowSearch
+          allowSort
+          pageSize={20}
+          itemComponent={(props) => <DevicesListItem uriGenerator={(device) => `/devices/${device.uuid()}`} {...props} />}
+        />
       </Section>
     </Layout>
   );

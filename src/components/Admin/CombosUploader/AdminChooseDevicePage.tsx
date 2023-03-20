@@ -34,6 +34,8 @@ export default function AdminChooseDevicePage({}: AdminChooseDevicePageProps) {
 
       <Section width="full" css={{ padding: '0 32px' }}>
         <DevicesList
+          allowSearch
+          allowSort
           pageSize={100}
           itemComponent={(props) => <DevicesListItem uriGenerator={(device) => `/admin/upload/${device.uuid()}`} {...props} />}
         />
