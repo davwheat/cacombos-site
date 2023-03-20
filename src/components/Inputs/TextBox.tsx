@@ -96,6 +96,7 @@ export default function TextBox({
           marginTop: 8,
           position: 'relative',
           background: 'white',
+          height: 40,
 
           border: '2px solid black',
 
