@@ -1,7 +1,6 @@
+import { useId } from 'react';
 import Colors from '@data/colors.json';
 
-import { useMemo } from 'react';
-import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
 import dayjsUTC from 'dayjs/plugin/utc';
 
@@ -68,8 +67,9 @@ export default function DateSelect({
   disabled = false,
   ...attrs
 }: IProps) {
-  const id = useMemo(() => nanoid(), []);
-  const helpTextId = useMemo(() => nanoid(), []);
+  const rootId = useId();
+  const id = `date-${rootId}`;
+  const helpTextId = `date-help-${rootId}`;
 
   return (
     <label

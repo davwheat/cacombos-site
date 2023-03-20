@@ -1,8 +1,6 @@
-import { useRef } from 'react';
+import { useId } from 'react';
 
 import RadioButton from './RadioButton';
-
-import { nanoid } from 'nanoid';
 
 export interface IRadioButtonGroupOption<T> {
   label: string;
@@ -26,7 +24,7 @@ export default function RadioButtonGroup<T extends string | number>({
   value,
   disabled = false,
 }: IRadioButtonGroupProps<T>) {
-  const { current: groupName } = useRef(nanoid());
+  const groupName = useId();
 
   return (
     <fieldset

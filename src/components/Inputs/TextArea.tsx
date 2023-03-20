@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useId } from 'react';
 
 import Colors from '@data/colors.json';
-import { nanoid } from 'nanoid';
 
 interface IProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'onInput'> {
   /**
@@ -46,8 +45,9 @@ export default function TextArea({
   disabled = false,
   ...attrs
 }: IProps) {
-  const id = useMemo(() => nanoid(), []);
-  const helpTextId = useMemo(() => nanoid(), []);
+  const rootId = useId();
+  const id = `textarea-${rootId}`;
+  const helpTextId = `textarea-help-${rootId}`;
 
   return (
     <label

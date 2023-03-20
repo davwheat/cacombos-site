@@ -1,9 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useId } from 'react';
 
 import generateTransitions from '@functions/generateTransitions';
 import Colors from '@data/colors.json';
-
-import { nanoid } from 'nanoid';
 
 interface Props {
   label: string;
@@ -17,7 +15,7 @@ interface Props {
 }
 
 function Checkbox({ label, onChange, checked, disabled, className }: Props) {
-  const id = useMemo(nanoid, []);
+  const id = useId();
 
   return (
     <div

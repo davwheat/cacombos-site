@@ -1,7 +1,6 @@
-import { useRef } from 'react';
+import { useId } from 'react';
 
 import Colors from '@data/colors.json';
-import { nanoid } from 'nanoid';
 
 export interface IRadioButtonProps {
   className?: string;
@@ -13,7 +12,7 @@ export interface IRadioButtonProps {
 }
 
 export default function RadioButton({ name, className, label, checked, onChecked, disabled = false }: IRadioButtonProps) {
-  const { current: id } = useRef(nanoid());
+  const id = useId();
 
   return (
     <div className={className}>
