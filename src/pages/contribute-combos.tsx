@@ -79,9 +79,17 @@ diag_mdlog -o /sdcard/diag_logs -f /sdcard/diag_logs/Diag.cfg -m /sdcard/diag_lo
                 </CodeBlock>
               </li>
               <li>
-                When logging, turn Airplane Mode on, wait 5 seconds, then turn it back off. Wait 2 mins to reconnect to your network. After this, end
-                the logging session with <kbd>Ctrl + C</kbd>. Your log file will be saved in <code className="code">/sdcard/diag_log</code>. This is
-                the file you need to send.
+                <p className="text-speak">
+                  When logging, turn Airplane Mode on, wait 5 seconds, then turn it back off. Wait 2 mins to reconnect to your network. After this,
+                  end the logging session with <kbd>Ctrl + C</kbd>.
+                </p>
+              </li>
+              <li>
+                <p className="text-speak">
+                  Your log files will be saved in <code className="code">/sdcard/diag_log</code>. Make sure you{' '}
+                  <strong>zip and send all files</strong> in this folder. Some newer devices produce different log files and need to be processed
+                  differently.
+                </p>
               </li>
             </ol>
           </Accordion>
