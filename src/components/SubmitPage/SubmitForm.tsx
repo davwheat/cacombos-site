@@ -30,22 +30,30 @@ export default function SubmitForm() {
     log: null,
     privacyAgree: false,
   });
-  const [formError, setFormError] = useState<React.ReactNode>(null);
+  const [formResult, setFormResult] = useState<null | { content: React.ReactNode; type: 'error' | 'success' }>(null);
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
 
   const { enqueueSnackbar } = useSnackbar();
 
   const showError = useCallback(
-    (message: string) => {
-      enqueueSnackbar(message, { variant: 'error' });
-      setFormError(<>{message}</>);
+    (message: string, messageShort?: string) => {
+      enqueueSnackbar(messageShort ?? message, { variant: 'error' });
+      setFormResult({ type: 'error', content: <>{message}</> });
     },
-    [enqueueSnackbar, setFormError]
+    [enqueueSnackbar, setFormResult]
   );
 
-  const hideError = useCallback(() => {
-    setFormError(null);
-  }, [setFormError]);
+  const showSuccess = useCallback(
+    (message: string, messageShort?: string) => {
+      enqueueSnackbar(messageShort ?? message, { variant: 'success' });
+      setFormResult({ type: 'success', content: <>{message}</> });
+    },
+    [enqueueSnackbar, setFormResult]
+  );
+
+  const hideFormResult = useCallback(() => {
+    setFormResult(null);
+  }, [setFormResult]);
 
   return (
     <form
@@ -64,7 +72,7 @@ export default function SubmitForm() {
 
         // Validation complete
 
-        hideError();
+        hideFormResult();
         setFormSubmitting(true);
 
         const formData = new FormData();
@@ -93,16 +101,25 @@ export default function SubmitForm() {
                   showError(`An error occurred while submitting your data. Please try again later. (HTTP Error ${response.status})`);
 
                   if (e instanceof Error) {
-                    setFormError(
-                      <>
-                        An error occurred while submitting your data. Please try again later. (HTTP Error {response.status})
-                        <br />
-                        <br />
-                        Error: {e.message}
-                      </>
-                    );
+                    setFormResult({
+                      type: 'error',
+                      content: (
+                        <>
+                          An error occurred while submitting your data. Please try again later. (HTTP Error {response.status})
+                          <br />
+                          <br />
+                          Error: {e.message}
+                        </>
+                      ),
+                    });
                   }
                 });
+            } else {
+              // All ok!
+              showSuccess(
+                'Your submission has been received successfully. If you provided your email address, you will be contacted when your data has been processed and uploaded.',
+                'Submitted data successfully'
+              );
             }
           })
           .catch((e: Error | unknown) => {
@@ -110,15 +127,18 @@ export default function SubmitForm() {
               'An network error occurred while submitting your data. Make sure your device has an internet connection. If it does, please try again later.'
             );
             if (e instanceof Error) {
-              setFormError(
-                <>
-                  An network error occurred while submitting your data. Make sure your device has an internet connection. If it does, please try again
-                  later.
-                  <br />
-                  <br />
-                  Error: {e.message}
-                </>
-              );
+              setFormResult({
+                type: 'error',
+                content: (
+                  <>
+                    An network error occurred while submitting your data. Make sure your device has an internet connection. If it does, please try
+                    again later.
+                    <br />
+                    <br />
+                    Error: {e.message}
+                  </>
+                ),
+              });
             }
           })
           .finally(() => {
@@ -234,16 +254,20 @@ export default function SubmitForm() {
         }}
       />
 
-      {formError && (
+      {formResult && (
         <MinorAlert
           coloredBackground
-          color="primaryRed"
-          heading="Error"
+          color={formResult.type === 'error' ? 'primaryRed' : 'green'}
+          heading={formResult.type}
           css={{
             marginTop: 16,
+
+            '& h3': {
+              textTransform: 'capitalize',
+            },
           }}
         >
-          <p className="text-speak">{formError}</p>
+          <p className="text-speak">{formResult.content}</p>
         </MinorAlert>
       )}
 

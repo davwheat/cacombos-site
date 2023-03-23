@@ -7,6 +7,7 @@
   "linkColor": "#00528a",
   "excessiveYellow": "#ffce1a",
   "cautioningAmber": "#fcc31e",
+  "green": "#43a047",
   "pale": {
     "primaryRed": "#fde7ea",
     "primaryBlue": "#e8f7fa",
@@ -15,6 +16,7 @@
     "lightGrey": "#fdfdfd",
     "linkColor": "#dde8ef",
     "excessiveYellow": "#fff8e0",
-    "cautioningAmber": "#fff7e1"
+    "cautioningAmber": "#fff7e1",
+    "green": "#d3f0d4"
   }
 }
