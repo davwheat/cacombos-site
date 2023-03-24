@@ -181,6 +181,7 @@ export default function DevicesList({
           onClick={() => {
             loadNextPage();
           }}
+          css={{ margin: 'auto', marginTop: 16 }}
         >
           Load more
         </Button>
