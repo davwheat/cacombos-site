@@ -3162,10 +3162,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.15.5":
-  version: 18.15.5
-  resolution: "@types/node@npm:18.15.5"
-  checksum: 5fbf3453bd5ce1402bb2964e55d928fc8a8a7de5451b1b0fe66587fecb8a3eb86854ca9cefa5076a5971e2cff00e1773ceeb5d872a54f6c6ddfbbc1064b4e91a
+"@types/node@npm:^18.15.11":
+  version: 18.15.11
+  resolution: "@types/node@npm:18.15.11"
+  checksum: 977b4ad04708897ff0eb049ecf82246d210939c82461922d20f7d2dcfd81bbc661582ba3af28869210f7e8b1934529dcd46bff7d448551400f9d48b9d3bddec3
   languageName: node
   linkType: hard
 
@@ -3208,7 +3208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.28":
+"@types/react@npm:*":
   version: 18.0.28
   resolution: "@types/react@npm:18.0.28"
   dependencies:
@@ -3216,6 +3216,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: e752df961105e5127652460504785897ca6e77259e0da8f233f694f9e8f451cde7fa0709d4456ade0ff600c8ce909cfe29f9b08b9c247fa9b734e126ec53edd7
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18.0.33":
+  version: 18.0.33
+  resolution: "@types/react@npm:18.0.33"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 4fbd2b2b6a26378bdfde121081a6406ec2d39e4ba87ea5f6897ab7bb2198713165e6fd703ad4ed7ba1d4f23ef54a4c9f108f3105c7ed8e136411ee6bdebc5669
   languageName: node
   linkType: hard
 
@@ -7304,7 +7315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-parcel-config@npm:^1.8.0":
+"gatsby-parcel-config@npm:1.8.0":
   version: 1.8.0
   resolution: "gatsby-parcel-config@npm:1.8.0"
   dependencies:
@@ -7569,9 +7580,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby@npm:^5.8.0":
-  version: 5.8.0
-  resolution: "gatsby@npm:5.8.0"
+"gatsby@npm:^5.8.1":
+  version: 5.8.1
+  resolution: "gatsby@npm:5.8.1"
   dependencies:
     "@babel/code-frame": ^7.18.6
     "@babel/core": ^7.20.12
@@ -7659,7 +7670,7 @@ __metadata:
     gatsby-legacy-polyfills: ^3.8.0
     gatsby-link: ^5.8.0
     gatsby-page-utils: ^3.8.0
-    gatsby-parcel-config: ^1.8.0
+    gatsby-parcel-config: 1.8.0
     gatsby-plugin-page-creator: ^5.8.0
     gatsby-plugin-typescript: ^5.8.0
     gatsby-plugin-utils: ^4.8.0
@@ -7745,7 +7756,7 @@ __metadata:
       optional: true
   bin:
     gatsby: ./cli.js
-  checksum: 58a814dcf0c86b7d62fc6fce1f1ca03b2b09941b607f95348eca416583f9564299fcdf14ec84120a6b38d7aa713d41df7a93b62ee4d60ea38fc04693eb06d962
+  checksum: b0204a29930ec2e1103ea156c11932b450a12a49d2716b3035b7eb78d27795dfe7108d1cb97844b4db2b737f870a8147f6dfc52682fdba9513c43277949ecf33
   languageName: node
   linkType: hard
 
@@ -10021,15 +10032,15 @@ __metadata:
     "@sentry/webpack-plugin": ^1.20.0
     "@types/case-sensitive-paths-webpack-plugin": ^2.1.6
     "@types/gatsbyjs__reach-router": ^2.0.0
-    "@types/node": ^18.15.5
-    "@types/react": ^18.0.28
+    "@types/node": ^18.15.11
+    "@types/react": ^18.0.33
     "@types/react-dom": ^18.0.11
     "@vtex/gatsby-plugin-nginx": ^1.5.21-avon.0
     case-sensitive-paths-webpack-plugin: ^2.4.0
     clsx: ^1.2.1
     cross-env: ^7.0.3
     dayjs: ^1.11.7
-    gatsby: ^5.8.0
+    gatsby: ^5.8.1
     gatsby-plugin-canonical-urls: ^5.8.0
     gatsby-plugin-emotion: ^8.8.0
     gatsby-plugin-google-fonts: ^1.0.1
@@ -10042,15 +10053,15 @@ __metadata:
     gatsby-source-local-git: ^1.3.0
     get-best-contrast-color: ^0.3.1
     mdi-react: ^9.2.0
-    nanoid: ^4.0.1
+    nanoid: ^4.0.2
     notistack: 3.0.1
-    prettier: ^2.8.6
+    prettier: ^2.8.7
     query-string: ^8.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
     recoil: ^0.7.7
     recoil-persist: ^4.2.0
-    typescript: ^5.0.2
+    typescript: ^5.0.3
   languageName: unknown
   linkType: soft
 
@@ -10156,12 +10167,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "nanoid@npm:4.0.1"
+"nanoid@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "nanoid@npm:4.0.2"
   bin:
     nanoid: bin/nanoid.js
-  checksum: 21022a7910aa690cb05872c07f0c4a317dfe2aa79cc2b5e4ab41d17476e23d973d24c683206d6fa7e1b56bf657cf5dfbc0f1cac7d596bcd2dea0f49635316628
+  checksum: 747c399cea4664dd0be1d0ec498ffd1ef8f1f5221676fc8b577e3f46f66d9afcddb9595d63d19a2e78d0bc6cc33984f65e66bf1682c850b9e26288883d96b53f
   languageName: node
   linkType: hard
 
@@ -11454,12 +11465,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.6":
-  version: 2.8.6
-  resolution: "prettier@npm:2.8.6"
+"prettier@npm:^2.8.7":
+  version: 2.8.7
+  resolution: "prettier@npm:2.8.7"
   bin:
     prettier: bin-prettier.js
-  checksum: 8ac94fa67aec0e65743ea15ebf954ef2f1e52638abd129dc04e8b49e8bb3224c0233c98df6b5c98efd31bd2a43866590486559438ee4ead09dc81be389068572
+  checksum: fdc8f2616f099f5f0d685907f4449a70595a0fc1d081a88919604375989e0d5e9168d6121d8cc6861f21990b31665828e00472544d785d5940ea08a17660c3a6
   languageName: node
   linkType: hard
 
@@ -13530,23 +13541,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.0.2":
-  version: 5.0.2
-  resolution: "typescript@npm:5.0.2"
+"typescript@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "typescript@npm:5.0.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bef1dcd166acfc6934b2ec4d72f93edb8961a5fab36b8dd2aaf6f4f4cd5c0210f2e0850aef4724f3b4913d5aef203a94a28ded731b370880c8bcff7e4ff91fc1
+  checksum: 3cce0576d218cb4277ff8b6adfef1a706e9114a98b4261a38ad658a7642f1b274a8396394f6cbff8c0ba852996d7ed2e233e9b8431d5d55ac7c2f6fea645af02
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.0.2#~builtin<compat/typescript>":
-  version: 5.0.2
-  resolution: "typescript@patch:typescript@npm%3A5.0.2#~builtin<compat/typescript>::version=5.0.2&hash=85af82"
+"typescript@patch:typescript@^5.0.3#~builtin<compat/typescript>":
+  version: 5.0.3
+  resolution: "typescript@patch:typescript@npm%3A5.0.3#~builtin<compat/typescript>::version=5.0.3&hash=85af82"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: b63cb742fbb9aeb3085e002ad8f10d5fd963606aa4d6b3b65b4e76c396ff09739f03b5dbae08e1698c3bce9d5619d3f67aeb7ee470ed4016bd345b3cfe37b54a
+  checksum: 5580367025ff7ee1f2a61e5affdbddccfe6e893bc662aa33fefdbf12de7e493173fa7d47475e9e15121828691004c4ed13bcd115e57866baed97b54c60954e1c
   languageName: node
   linkType: hard
 
