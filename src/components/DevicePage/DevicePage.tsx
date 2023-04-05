@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import DeviceHero from './DeviceHero';
+import DeviceDetailedInfo from './DeviceDetailedInfo';
 import DeviceFirmwareComboPicker from './DeviceFirmwareComboPicker';
 import CapabilitySetVisualiser from './CapabilitySetVisualiser';
 import Section from '@components/Design/Section';
@@ -131,6 +132,8 @@ export default function DevicePage({ uuid }: DevicePageProps) {
   return (
     <DevicePageContext.Provider value={device}>
       <DeviceHero device={device} />
+
+      <DeviceDetailedInfo />
 
       <DeviceFirmwareComboPicker />
 
