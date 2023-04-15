@@ -183,7 +183,11 @@ export default function EditDevicePage({ uuid }: DevicePageProps) {
     setIsFirmwareCapSetDataLoading(false);
     setDevice(data?.[0]);
 
-    document.title = device?.modelName() ? `Editing ${device.modelName()}` : 'Not found';
+    const title: HTMLTitleElement | null = document.head.querySelector('title[data-gatsby-head]');
+
+    if (title) {
+      title.innerText = device?.modelName() ? `Editing ${device.modelName()}` : 'Not found';
+    }
 
     if (device) {
       const modem = device.modem() || null;
