@@ -89,7 +89,12 @@ export default function DevicesList({
     const filter = searchQuery ? { filter: { deviceFullName: oldQuery } } : {};
 
     store
-      .find<Device[]>('devices', { page: { offset: currentPage * pageSize, limit: pageSize }, include: ['modem'], sort: selectedSort, ...filter })
+      .find<Device[]>('devices', {
+        page: { offset: (currentPage + 1) * pageSize, limit: pageSize },
+        include: ['modem'],
+        sort: selectedSort,
+        ...filter,
+      })
       .then((devices) => {
         setError(null);
 
