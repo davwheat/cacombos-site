@@ -7,13 +7,29 @@ import MinorAlert from '@components/Design/MinorAlert';
 
 import Colors from '@data/colors.json';
 
+import dayjs from 'dayjs';
+
 import type { HeadFC, PageProps } from 'gatsby';
+
+/**
+ * HELLO ME IN THE FUTURE!
+ *
+ * We MUST update this date when we make changes to the privacy policy.
+ *
+ * This date is reused in other areas of the site to help users identify when
+ * our privacy policy was last updated so they can be more easily informed
+ * of future changes.
+ */
+export const privacyPolicyLastUpdated = new Date('2023-04-15 01:00:00Z');
 
 export default function PrivacyPolicyPage({ location }: PageProps) {
   return (
     <Layout location={location}>
       <Hero firstElement>
         <h1 className="text-shout">Privacy policy</h1>
+        <p className="text-speak">
+          Last updated on <time dateTime={privacyPolicyLastUpdated.toISOString()}>{dayjs(privacyPolicyLastUpdated).format('D MMMM YYYY')}</time>
+        </p>
       </Hero>
       <Section>
         <p className="text-speak">
