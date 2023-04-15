@@ -134,7 +134,11 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
       name: data?.[0]?.name() ?? '',
     });
 
-    document.title = modem?.name() ? `Editing ${modem.name()}` : 'Not found';
+    const title: HTMLTitleElement | null = document.head.querySelector('title[data-gatsby-head]');
+
+    if (title) {
+      title.innerText = modem?.name() ? `Editing ${modem.name()}` : 'Not found';
+    }
   }
 
   useEffect(() => {
@@ -144,8 +148,12 @@ export default function EditDevicePage({ uuid }: ModemPageProps) {
   }, []);
 
   useEffect(() => {
-    document.title = modem?.name() ? `Editing ${modem.name()}` : 'Not found';
-  });
+    const title: HTMLTitleElement | null = document.head.querySelector('title[data-gatsby-head]');
+
+    if (title) {
+      title.innerText = modem?.name() ? `Editing ${modem.name()}` : 'Not found';
+    }
+  }, [modem, modem?.name()]);
 
   if (error) {
     return (

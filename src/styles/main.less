@@ -33,6 +33,14 @@ ol {
   margin-left: 20px;
   counter-reset: none;
 
+  &.list {
+    // Ignore nested lists
+    &:not(ul ul, ol ul, ul ol, ol ol) {
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
   &:not(.list) {
     list-style: none;
   }

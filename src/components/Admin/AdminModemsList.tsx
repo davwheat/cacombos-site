@@ -42,7 +42,7 @@ export default function AdminModemsList() {
     setIsLoading(true);
 
     store
-      .find<Modem[]>('modems', { page: { offset: currentPage * PAGE_SIZE } })
+      .find<Modem[]>('modems', { page: { offset: (currentPage + 1) * PAGE_SIZE } })
       .then((modems) => {
         if (modems) setAllModems((modem) => [...(modem ?? []), ...modems]);
         setIsLoading(false);

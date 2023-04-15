@@ -124,6 +124,8 @@ export default function Footer() {
           }}
         >
           <Link href="/">Home</Link>
+          <Link href="/privacy-policy">Privacy policy</Link>
+          <Link href="https://status.davw.network/status/mobile-combos">Status page</Link>
           <Link href="https://mastdatabase.co.uk/">mastdatabase.co.uk</Link>
         </nav>
       </main>

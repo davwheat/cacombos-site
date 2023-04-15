@@ -72,12 +72,18 @@ export default function DevicePage({ uuid }: DevicePageProps) {
   };
 
   useEffect(() => {
+    const title: HTMLTitleElement | null = document.head.querySelector('title[data-gatsby-head]');
+
+    if (!title) {
+      return;
+    }
+
     if (device) {
-      document.title = `${device.manufacturer()} ${device.deviceName()} | Mobile Combos`;
+      title.innerText = `${device.manufacturer()} ${device.deviceName()} | Mobile Combos`;
     }
 
     if (!device && !isBasicDataLoading) {
-      document.title = `No such device | Mobile Combos`;
+      title.innerText = `No such device | Mobile Combos`;
       document.getElementById('device-combos-robots-tag')?.setAttribute('content', 'noindex');
     }
   });

@@ -76,39 +76,48 @@ export default function ComboTable({ capabilitySetUuid }: ComboTableProps) {
   allCombos.sort(comboListSorter);
 
   return (
-    <table
+    <div
       css={{
-        borderCollapse: 'collapse',
         width: '100%',
-
-        // Fixed width for column with expand/collapse button
-        '& > thead, > tbody': {
-          '.ComboTable-expanderCell': {
-            width: 36,
-          },
-        },
+        overflowX: 'auto',
       }}
     >
-      <thead css={{ fontWeight: 'bold' }}>
-        <tr>
-          <th className="ComboTable-expanderCell" css={TableHeadCellCss} />
-          {comboStringType === 'full' ? <th css={TableHeadCellCss}>Combo</th> : <th css={TableHeadCellCss}>DL combo</th>}
-          <th css={TableHeadCellCss}>DL MIMO (streams)</th>
-          {comboStringType !== 'full' && <th css={TableHeadCellCss}>UL combo</th>}
-          <th css={TableHeadCellCss}>UL MIMO (streams)</th>
-        </tr>
-      </thead>
-      <tbody
+      <table
         css={{
-          wordBreak: 'break-all',
+          borderCollapse: 'collapse',
+          width: '100%',
+
+          minWidth: 'fit-content',
+
+          // Fixed width for column with expand/collapse button
+          '& > thead, > tbody': {
+            '.ComboTable-expanderCell': {
+              width: 36,
+            },
+          },
         }}
       >
-        <ComboTableFilter />
+        <thead css={{ fontWeight: 'bold' }}>
+          <tr>
+            <th className="ComboTable-expanderCell" css={TableHeadCellCss} />
+            {comboStringType === 'full' ? <th css={TableHeadCellCss}>Combo</th> : <th css={TableHeadCellCss}>DL combo</th>}
+            <th css={TableHeadCellCss}>DL MIMO (streams)</th>
+            {comboStringType !== 'full' && <th css={TableHeadCellCss}>UL combo</th>}
+            <th css={TableHeadCellCss}>UL MIMO (streams)</th>
+          </tr>
+        </thead>
+        <tbody
+          css={{
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <ComboTableFilter />
 
-        {allCombos.map((combo) => (
-          <ComboTableRow key={combo.uuid()} combo={combo} />
-        ))}
-      </tbody>
-    </table>
+          {allCombos.map((combo) => (
+            <ComboTableRow key={combo.uuid()} combo={combo} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
