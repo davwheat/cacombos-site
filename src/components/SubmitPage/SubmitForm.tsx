@@ -7,7 +7,9 @@ import FileInput from '@components/Inputs/FileInput';
 import TextArea from '@components/Inputs/TextArea';
 import TextBox from '@components/Inputs/TextBox';
 import Link from '@components/Links/Link';
+import { privacyPolicyLastUpdated } from '../../pages/privacy-policy';
 
+import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
 
 interface SubmitFormState {
@@ -248,7 +250,8 @@ export default function SubmitForm() {
         <p className="text-speak">
           <strong>
             For full details about how we store, handle and process your personal information, please read our{' '}
-            <Link href="/privacy-policy">privacy policy</Link>.
+            <Link href="/privacy-policy">privacy policy</Link>. Our privacy policy was last updated on{' '}
+            {dayjs(privacyPolicyLastUpdated).format('D MMMM YYYY')}.
           </strong>
         </p>
       </MinorAlert>
