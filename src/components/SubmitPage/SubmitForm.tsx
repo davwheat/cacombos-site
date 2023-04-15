@@ -231,16 +231,25 @@ export default function SubmitForm() {
       </div>
 
       <MinorAlert color="primaryBlue" coloredBackground css={{ marginTop: 32 }} heading="Privacy information">
+        <p className="text-speak">Some device logs may contain sensitive and personally identifiable information.</p>
         <p className="text-speak">
-          Some device logs may contain sensitive information, such as device information, IMEIs, SIM ICCIDs, phone numbers, location, and more.
+          When you submit your device log to this form, it will be sent securely to our site administrator. Logs are stored and used purely to
+          retrieve device capability data and are never shared with third parties without your explicit consent.
         </p>
         <p className="text-speak">
-          When you submit your device log to this form, it will be sent securely to our site administrator. No logs are kept for longer than is needed
-          to process them, and are deleted after they are processed and uploaded (or deemed unusable).
+          Any submitted files may be stored to allow them to be reprocessed in the future to extract additional data, or to fix issues with previously
+          processed data.
         </p>
         <p className="text-speak">
-          The anonymous capability data from any submitted files will be stored to allow them to be reprocessed in the future to allow more data to be
-          extracted or to fix issues with previously processed data.
+          Under UK and EU GDPR, you have various rights surrounding your personal information. If you think you may wish to execise these rights in
+          the future, please provide your email address, otherwise we will not be able to link your identity to any submissions and will be unable to
+          process your request.
+        </p>
+        <p className="text-speak">
+          <strong>
+            For full details about how we store, handle and process your personal information, please read our{' '}
+            <Link href="/privacy-policy">privacy policy</Link>.
+          </strong>
         </p>
       </MinorAlert>
 
