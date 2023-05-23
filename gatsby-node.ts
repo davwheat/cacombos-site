@@ -11,22 +11,22 @@ export const onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions 
     });
   }
 
-  const { sentryWebpackPlugin } = require('@sentry/webpack-plugin');
+  // const { sentryWebpackPlugin } = require('@sentry/webpack-plugin');
 
-  if (process.env.NODE_ENV !== 'development' && process.env.SENTRY_AUTH_TOKEN) {
-    actions.setWebpackConfig({
-      plugins: [
-        sentryWebpackPlugin({
-          sourcemaps: {
-            assets: ['./public/**'],
-            ignore: [],
-            deleteFilesAfterUpload: [],
-          },
-          // ignore: ['app-*', 'polyfill-*', 'framework-*', 'webpack-runtime-*'],
-        }),
-      ],
-    });
-  }
+  // if (process.env.NODE_ENV !== 'development' && process.env.SENTRY_AUTH_TOKEN) {
+  //   actions.setWebpackConfig({
+  //     plugins: [
+  //       sentryWebpackPlugin({
+  //         sourcemaps: {
+  //           assets: ['./public/**'],
+  //           ignore: [],
+  //           deleteFilesAfterUpload: [],
+  //         },
+  //         // ignore: ['app-*', 'polyfill-*', 'framework-*', 'webpack-runtime-*'],
+  //       }),
+  //     ],
+  //   });
+  // }
 
   actions.setWebpackConfig({
     module: {
