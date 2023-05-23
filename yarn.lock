@@ -3223,10 +3223,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.16.14":
-  version: 18.16.14
-  resolution: "@types/node@npm:18.16.14"
-  checksum: c11cb3c787236414efe58240ae71854971592554d82ff9d201876ce7cafd51c37aaa001c63602d002e8238614d7331bd6d48ac4c1c0caa826799980b6846fb08
+"@types/node@npm:^20.2.3":
+  version: 20.2.3
+  resolution: "@types/node@npm:20.2.3"
+  checksum: 576065e8fc1fa45798c8f59a6bf809169582d04abc2e25fab1a048ffc734975b9992ae31be0d960cf705a21fb37112f7fcde11aa322beddf7491e73d5a5a988c
   languageName: node
   linkType: hard
 
@@ -10062,7 +10062,7 @@ __metadata:
     "@reach/tabs": ^0.18.0
     "@types/case-sensitive-paths-webpack-plugin": ^2.1.6
     "@types/gatsbyjs__reach-router": ^2.0.0
-    "@types/node": ^18.16.14
+    "@types/node": ^20.2.3
     "@types/react": ^18.2.6
     "@types/react-dom": ^18.2.4
     case-sensitive-paths-webpack-plugin: ^2.4.0
