@@ -1,4 +1,4 @@
-import { URL, type EventContext, type Fetcher } from '@cloudflare/workers-types';
+import { type EventContext, type Fetcher } from '@cloudflare/workers-types';
 
 const NEW_URI = '/devices/[...]/';
 
