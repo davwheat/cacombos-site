@@ -20,7 +20,6 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@reach/tabs": "^0.18.0",
-    "@vtex/gatsby-plugin-nginx": "^1.5.21-avon.0",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.7",
     "gatsby": "^5.10.0",
