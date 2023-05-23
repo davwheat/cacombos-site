@@ -67,7 +67,6 @@ const config: GatsbyConfig = {
         siteUrl: `https://mobilecombos.com`,
       },
     },
-    `@vtex/gatsby-plugin-nginx`,
     ...PROD_PLUGINS,
   ],
 };

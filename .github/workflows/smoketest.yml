@@ -65,13 +65,3 @@ jobs:
         run: yarn build:ci
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@4c8eee72bdf0e96b6d1ed1e67da2472e370a96cb
-        if: github.ref == 'refs/heads/deploy' && github.event_name == 'push'
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
-          SOURCE: 'public/'
-          REMOTE_HOST: 'cacombos.hetzner.cloud.davw.network'
-          REMOTE_USER: 'www'
-          TARGET: '/home/www/frontend/src/'
