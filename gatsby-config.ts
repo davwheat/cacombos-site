@@ -21,6 +21,7 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    'gatsby-plugin-cloudflare-pages',
     {
       resolve: `gatsby-plugin-emotion`,
       options: {
