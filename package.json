@@ -24,6 +24,7 @@
     "dayjs": "^1.11.8",
     "gatsby": "^5.11.0",
     "gatsby-plugin-canonical-urls": "^5.11.0",
+    "gatsby-plugin-cloudflare-pages": "^1.0.0-alpha.1",
     "gatsby-plugin-emotion": "^8.11.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-less": "^7.11.0",
@@ -41,7 +42,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.7",
-    "recoil-persist": "^4.2.0"
+    "recoil-persist": "^5.0.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230518.0",
@@ -49,7 +50,7 @@
     "@types/case-sensitive-paths-webpack-plugin": "^2.1.6",
     "@types/gatsbyjs__reach-router": "^2.0.0",
     "@types/node": "^20.3.1",
-    "@types/react": "^18.2.13",
+    "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "cross-env": "^7.0.3",
