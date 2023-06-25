@@ -6,6 +6,7 @@ import generateTransitions, { Durations } from '@functions/generateTransitions';
 
 import MenuIcon from '@assets/icons/menu.svg';
 import CloseIcon from '@assets/icons/close.svg';
+import TelegramIcon from '@assets/icons/telegram.inline.svg';
 import { keyframes } from '@emotion/react';
 
 const MOBILE_NAV_ZINDEX = 1000000;
@@ -219,13 +220,18 @@ export default function Header() {
           className="Header-nav"
           style={{ animationName: 'none' }}
           css={{
+            [Breakpoints.downTo.tablet]: {
+              display: 'flex',
+            },
+
             '& a:any-link': {
               textDecoration: 'none',
               paddingLeft: 12,
               paddingRight: 12,
               lineHeight: '56px',
               height: 56,
-              display: 'inline-block',
+              display: 'inline-flex',
+              alignItems: 'center',
               outline: 'none',
 
               // hover colour
@@ -276,10 +282,23 @@ export default function Header() {
                 paddingBottom: 48,
               },
             },
+
+            '& .hide-on-desktop': {
+              display: 'none',
+              [Breakpoints.upTo.tablet]: {
+                display: 'block',
+              },
+            },
           }}
         >
           <Link href="/">Devices</Link>
           <Link href="/contribute-combos">Contribute</Link>
+          <Link href="https://t.me/mobilecombos" target="_blank">
+            <TelegramIcon css={{ height: '1em' }} />
+            <span css={{ marginLeft: 12 }} className="hide-on-desktop">
+              Telegram
+            </span>
+          </Link>
         </nav>
       </div>
     </header>
