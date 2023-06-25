@@ -7485,9 +7485,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-cloudflare-pages@npm:^1.0.0-alpha.1":
-  version: 1.0.0-alpha.1
-  resolution: "gatsby-plugin-cloudflare-pages@npm:1.0.0-alpha.1"
+"gatsby-plugin-cloudflare-pages@npm:1.0.0-alpha.2":
+  version: 1.0.0-alpha.2
+  resolution: "gatsby-plugin-cloudflare-pages@npm:1.0.0-alpha.2"
   dependencies:
     "@babel/runtime": ^7.22.5
     fs-extra: ^10.1.0
@@ -7497,7 +7497,7 @@ __metadata:
     webpack-assets-manifest: ^5.1.0
   peerDependencies:
     gatsby: ^4.0.0 || ^5.0.0
-  checksum: 291c359655648bd7772f29ff67c6af1e0a52e62d783bc52b30a3743548826edd51ea885aae9ffa2d10853265ae80175584034d099ebda1d897eeed0b0a42ece8
+  checksum: 97c8f61c1a31157c663e9a504a1a772ac3b70a8343895117d8772ea7bccf6744abaa695712bccdde554cb6b7946564a2d68f6c3fc37228d2370c403dee8f1c5e
   languageName: node
   linkType: hard
 
@@ -10210,7 +10210,7 @@ __metadata:
     dayjs: ^1.11.8
     gatsby: ^5.11.0
     gatsby-plugin-canonical-urls: ^5.11.0
-    gatsby-plugin-cloudflare-pages: ^1.0.0-alpha.1
+    gatsby-plugin-cloudflare-pages: 1.0.0-alpha.2
     gatsby-plugin-emotion: ^8.11.0
     gatsby-plugin-google-fonts: ^1.0.1
     gatsby-plugin-less: ^7.11.0
