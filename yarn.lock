@@ -1549,7 +1549,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.22.5
   resolution: "@babel/runtime@npm:7.22.5"
   dependencies:
@@ -7200,7 +7200,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^10.0.0":
+"fs-extra@npm:^10.1.0":
   version: 10.1.0
   resolution: "fs-extra@npm:10.1.0"
   dependencies:
@@ -7369,7 +7369,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-core-utils@npm:^4.0.0, gatsby-core-utils@npm:^4.11.0":
+"gatsby-core-utils@npm:^4.11.0":
   version: 4.11.0
   resolution: "gatsby-core-utils@npm:4.11.0"
   dependencies:
@@ -7474,6 +7474,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-cloudflare-pages@npm:^1.0.0-alpha.1":
+  version: 1.0.0-alpha.1
+  resolution: "gatsby-plugin-cloudflare-pages@npm:1.0.0-alpha.1"
+  dependencies:
+    "@babel/runtime": ^7.22.5
+    fs-extra: ^10.1.0
+    gatsby-core-utils: ^4.11.0
+    kebab-hash: ^0.1.2
+    lodash.mergewith: ^4.6.2
+    webpack-assets-manifest: ^5.1.0
+  peerDependencies:
+    gatsby: ^4.0.0 || ^5.0.0
+  checksum: 291c359655648bd7772f29ff67c6af1e0a52e62d783bc52b30a3743548826edd51ea885aae9ffa2d10853265ae80175584034d099ebda1d897eeed0b0a42ece8
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-emotion@npm:^8.11.0":
   version: 8.11.0
   resolution: "gatsby-plugin-emotion@npm:8.11.0"
@@ -7519,22 +7535,6 @@ __metadata:
   peerDependencies:
     gatsby: ^5.0.0-next
   checksum: 785b9c333d35334f067415200fe837029066cc3a1dcb7cc2b363f63b6ae14108872b252aa6d737e0a9764b54fdde7b0e7b496aa20163573ab9f4d121e4e6b61a
-  languageName: node
-  linkType: hard
-
-"gatsby-plugin-netlify@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "gatsby-plugin-netlify@npm:5.1.0"
-  dependencies:
-    "@babel/runtime": ^7.16.7
-    fs-extra: ^10.0.0
-    gatsby-core-utils: ^4.0.0
-    kebab-hash: ^0.1.2
-    lodash.mergewith: ^4.6.2
-    webpack-assets-manifest: ^5.0.6
-  peerDependencies:
-    gatsby: ^4.0.0 || ^5.0.0
-  checksum: 7b2dabf72f875f013ebc81af829cf33e72c5ad474b76e8425c98b210462f13598fa77938a34d6498bb58be1e5042579347eb4154178cac34303f08a90649805c
   languageName: node
   linkType: hard
 
@@ -10199,11 +10199,11 @@ __metadata:
     dayjs: ^1.11.8
     gatsby: ^5.11.0
     gatsby-plugin-canonical-urls: ^5.11.0
+    gatsby-plugin-cloudflare-pages: ^1.0.0-alpha.1
     gatsby-plugin-emotion: ^8.11.0
     gatsby-plugin-google-fonts: ^1.0.1
     gatsby-plugin-less: ^7.11.0
     gatsby-plugin-manifest: ^5.11.0
-    gatsby-plugin-netlify: ^5.1.0
     gatsby-plugin-provide-react: ^1.0.2
     gatsby-plugin-react-svg: ^3.3.0
     gatsby-plugin-sitemap: ^6.11.0
@@ -14001,7 +14001,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-assets-manifest@npm:^5.0.6":
+"webpack-assets-manifest@npm:^5.1.0":
   version: 5.1.0
   resolution: "webpack-assets-manifest@npm:5.1.0"
   dependencies:

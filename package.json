@@ -24,6 +24,7 @@
     "dayjs": "^1.11.8",
     "gatsby": "^5.11.0",
     "gatsby-plugin-canonical-urls": "^5.11.0",
+    "gatsby-plugin-cloudflare-pages": "^1.0.0-alpha.1",
     "gatsby-plugin-emotion": "^8.11.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-less": "^7.11.0",
@@ -53,7 +54,6 @@
     "@types/react-dom": "^18.2.6",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "cross-env": "^7.0.3",
-    "gatsby-plugin-netlify": "^5.1.0",
     "prettier": "^2.8.8",
     "typescript": "^5.1.3"
   },
