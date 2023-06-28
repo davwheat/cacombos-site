@@ -2,7 +2,6 @@ import Link from '@components/Links/Link';
 
 import Breakpoints from '@data/breakpoints';
 
-import dayjs from 'dayjs';
 import { graphql, useStaticQuery } from 'gatsby';
 
 export default function Footer() {
