@@ -21,18 +21,16 @@ export default function Footer() {
        */
       hash: string;
     };
-  } = useStaticQuery(
-    graphql`
-      {
-        siteBuildMetadata {
-          buildTime(formatString: "YYYY-MM-DD HH:mm z")
-        }
-        gitCommit(latest: { eq: true }) {
-          hash
-        }
+  } = useStaticQuery(graphql`
+    {
+      siteBuildMetadata {
+        buildTime(formatString: "YYYY-MM-DD HH:mm z")
       }
-    `
-  );
+      gitCommit(latest: { eq: true }) {
+        hash
+      }
+    }
+  `);
 
   return (
     <footer
