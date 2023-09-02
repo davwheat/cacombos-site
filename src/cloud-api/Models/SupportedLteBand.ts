@@ -3,13 +3,11 @@ import Model from '../Model';
 import type Mimo from './Mimo';
 import type Modulation from './Modulation';
 
-export default class LteComponent extends Model {
-  readonly type = 'lte-components';
+export default class SupportedLteBand extends Model {
+  readonly type = 'supported-lte-bands';
 
   band = Model.attribute<number>('band');
-  dlClass = Model.attribute<string | null>('dlClass');
-  ulClass = Model.attribute<string | null>('ulClass');
-  componentIndex = Model.attribute<number>('componentIndex');
+  powerClass = Model.attribute<string | null>('powerClass');
 
   dlMimos = Model.hasMany<Mimo>('dlMimos');
   ulMimos = Model.hasMany<Mimo>('ulMimos');
