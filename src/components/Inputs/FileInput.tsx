@@ -73,6 +73,7 @@ export default function FileInput<Multiselect extends boolean = false>({
             onInput(null);
           }}
           aria-label="Clear selected file"
+          disabled={disabled}
         >
           <CloseIcon />
         </Button>
