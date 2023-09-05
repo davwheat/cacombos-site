@@ -48,7 +48,19 @@ export default function CapabilitySetVisualiser() {
       .find<CapabilitySet[]>(
         'capability-sets',
         {
-          include: ['combos', 'combos.lteComponents', 'combos.nrComponents'],
+          include: [
+            'combos',
+            'combos.lteComponents',
+            'combos.nrComponents',
+            'combos.lteComponents.dlMimos',
+            'combos.lteComponents.ulMimos',
+            'combos.lteComponents.dlModulations',
+            'combos.lteComponents.ulModulations',
+            'combos.nrComponents.dlMimos',
+            'combos.nrComponents.ulMimos',
+            'combos.nrComponents.dlModulations',
+            'combos.nrComponents.ulModulations',
+          ],
           filter: {
             uuid: selectedCapabilitySetUuid,
           },

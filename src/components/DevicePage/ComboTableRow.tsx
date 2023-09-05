@@ -54,7 +54,7 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
   return (
     <>
       <tr
-        data-combo-uuid={combo.uuid()}
+        data-combo-uuid={combo.id()}
         css={{
           '.ComboTable-cell': {
             ...TableCellCss,
