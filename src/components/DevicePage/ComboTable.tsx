@@ -114,7 +114,7 @@ export default function ComboTable({ capabilitySetUuid }: ComboTableProps) {
           <ComboTableFilter />
 
           {allCombos.map((combo) => (
-            <ComboTableRow key={combo.uuid()} combo={combo} />
+            <ComboTableRow key={combo.id()} combo={combo} />
           ))}
         </tbody>
       </table>

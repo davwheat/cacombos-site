@@ -22,27 +22,21 @@ export interface ImportOnlyUploadProps {
 }
 
 interface ImportOnlyFormOptions {
-  eutraIsFile: boolean;
-  eutraNrIsFile: boolean;
-  nrIsFile: boolean;
+  jsonDataIsFile: boolean;
 }
 
 interface ImportOnlyFormState {
-  eutra: string | File | null;
-  eutraNr: string | File | null;
-  nr: string | File | null;
+  jsonData: string | File | null;
 }
 
 export function ImportOnlyUpload({ capabilitySet, device }: ImportOnlyUploadProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [submitError, setSubmitError] = useState<null | { status: number; responseText: string }>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [formState, setFormState] = useState<ImportOnlyFormState>({ eutra: '', eutraNr: '', nr: '' });
+  const [formState, setFormState] = useState<ImportOnlyFormState>({ jsonData: '' });
   const adminAuth = useRecoilValue(AdminAuthDetailsAtom);
-  const [formOptions, setFormOptions] = useStateWithLocalStorage<ImportOnlyFormOptions>('admin/combos-upload/import-csv-form-options', {
-    eutraIsFile: false,
-    eutraNrIsFile: false,
-    nrIsFile: false,
+  const [formOptions, setFormOptions] = useStateWithLocalStorage<ImportOnlyFormOptions>('admin/combos-upload/import-json-form-options', {
+    jsonDataIsFile: false,
   });
 
   const handleSubmit = useCallback(
@@ -56,56 +50,33 @@ export function ImportOnlyUpload({ capabilitySet, device }: ImportOnlyUploadProp
 
       const formData = new FormData();
 
-      // EUTRA
-      if (formOptions.eutraIsFile) {
-        if (formState.eutra instanceof File) {
-          formData.append('eutraCsv', formState.eutra);
+      // JSON data
+      if (formOptions.jsonDataIsFile) {
+        if (formState.jsonData instanceof File) {
+          formData.append('jsonData', formState.jsonData);
         }
       } else {
-        if (typeof formState.eutra !== 'string') {
-          alert("Error: EUTRA data should be string but isn't!");
+        if (typeof formState.jsonData !== 'string') {
+          alert("Error: data should be string but isn't!");
           return;
         }
 
-        const data = formState.eutra.trim();
-        if (data) formData.append('eutraCsv', data);
+        try {
+          JSON.parse(formState.jsonData);
+        } catch (e) {
+          alert('Error: data is not valid JSON!');
+          return;
+        }
+
+        const data = formState.jsonData.trim();
+        if (data) formData.append('jsonData', data);
       }
 
       // Device/CapSet info
       formData.append('deviceId', device.id()!);
       formData.append('capabilitySetId', capabilitySet.id()!);
 
-      // EUTRA-NR
-      if (formOptions.eutraNrIsFile) {
-        if (formState.eutraNr instanceof File) {
-          formData.append('eutranrCsv', formState.eutraNr);
-        }
-      } else {
-        if (typeof formState.eutraNr !== 'string') {
-          alert("Error: ENDC data should be string but isn't!");
-          return;
-        }
-
-        const data = formState.eutraNr.trim();
-        if (data) formData.append('eutranrCsv', data);
-      }
-
-      // NR
-      if (formOptions.nrIsFile) {
-        if (formState.nr instanceof File) {
-          formData.append('nrCsv', formState.nr);
-        }
-      } else {
-        if (typeof formState.nr !== 'string') {
-          alert("Error: NR data should be string but isn't!");
-          return;
-        }
-
-        const data = formState.nr.trim();
-        if (data) formData.append('nrCsv', data);
-      }
-
-      const promise = fetch(`${process.env.GATSBY_API_ACTIONS_BASE_URL}/import-csv`, {
+      const promise = fetch(`${process.env.GATSBY_API_ACTIONS_BASE_URL}/import-json`, {
         method: 'POST',
         headers: {
           // Content-Type is set automatically by the browser
@@ -144,17 +115,17 @@ export function ImportOnlyUpload({ capabilitySet, device }: ImportOnlyUploadProp
         <TextBox disabled label="Capability set" value={`${capabilitySet.id()} - ${capabilitySet.description()}`} onInput={() => {}} />
       </FormField>
 
-      {/* File/Text EUTRA */}
+      {/* File/Text JSON data */}
       <FormSection>
         <RadioButtonGroup
           disabled={isSubmitting}
-          value={formOptions.eutraIsFile ? 'file' : ''}
+          value={formOptions.jsonDataIsFile ? 'file' : ''}
           onChange={(value) => {
             const isFile = value === 'file';
-            setFormOptions({ ...formOptions, eutraIsFile: isFile });
-            setFormState({ ...formState, eutra: isFile ? null : '' });
+            setFormOptions({ ...formOptions, jsonDataIsFile: isFile });
+            setFormState({ ...formState, jsonData: isFile ? null : '' });
           }}
-          groupLabel="EUTRA input"
+          groupLabel="JSON data input"
           options={[
             { label: 'Text', value: '' },
             { label: 'File', value: 'file' },
@@ -162,109 +133,25 @@ export function ImportOnlyUpload({ capabilitySet, device }: ImportOnlyUploadProp
         />
 
         <FormField>
-          {formOptions.eutraIsFile ? (
+          {formOptions.jsonDataIsFile ? (
             <>
               <FileInput
                 disabled={isSubmitting}
                 css={{ margin: 'auto' }}
-                label="Select parsed EUTRA CSV file"
+                label="Select parsed JSON data file"
                 icon={<UploadIcon />}
                 onInput={(file) => {
-                  if (file) setFormState({ ...formState, eutra: file });
+                  if (file) setFormState({ ...formState, jsonData: file });
                 }}
               />
             </>
           ) : (
             <TextArea
               disabled={isSubmitting}
-              value={typeof formState.eutra === 'string' ? formState.eutra : ''}
-              onInput={(value) => setFormState({ ...formState, eutra: value })}
-              label="Parsed EUTRA CSV"
-              helpText="CSV for EUTRA data, parsed with Andrea's parser."
-            />
-          )}
-        </FormField>
-      </FormSection>
-
-      {/* File/Text EUTRA-NR */}
-      <FormSection>
-        <RadioButtonGroup
-          disabled={isSubmitting}
-          value={formOptions.eutraNrIsFile ? 'file' : ''}
-          onChange={(value) => {
-            const isFile = value === 'file';
-            setFormOptions({ ...formOptions, eutraNrIsFile: isFile });
-            setFormState({ ...formState, eutraNr: isFile ? null : '' });
-          }}
-          groupLabel="ENDC input"
-          options={[
-            { label: 'Text', value: '' },
-            { label: 'File', value: 'file' },
-          ]}
-        />
-
-        <FormField>
-          {formOptions.eutraNrIsFile ? (
-            <>
-              <FileInput
-                disabled={isSubmitting}
-                css={{ margin: 'auto' }}
-                label="Select parsed ENDC CSV file"
-                icon={<UploadIcon />}
-                onInput={(file) => {
-                  if (file) setFormState({ ...formState, eutraNr: file });
-                }}
-              />
-            </>
-          ) : (
-            <TextArea
-              disabled={isSubmitting}
-              value={typeof formState.eutraNr === 'string' ? formState.eutraNr : ''}
-              onInput={(value) => setFormState({ ...formState, eutraNr: value })}
-              label="Parsed ENDC CSV"
-              helpText="CSV for ENDC data, parsed with Andrea's parser."
-            />
-          )}
-        </FormField>
-      </FormSection>
-
-      {/* File/Text NR */}
-      <FormSection>
-        <RadioButtonGroup
-          disabled={isSubmitting}
-          value={formOptions.nrIsFile ? 'file' : ''}
-          onChange={(value) => {
-            const isFile = value === 'file';
-            setFormOptions({ ...formOptions, nrIsFile: isFile });
-            setFormState({ ...formState, nr: isFile ? null : '' });
-          }}
-          groupLabel="NR input"
-          options={[
-            { label: 'Text', value: '' },
-            { label: 'File', value: 'file' },
-          ]}
-        />
-
-        <FormField>
-          {formOptions.nrIsFile ? (
-            <>
-              <FileInput
-                disabled={isSubmitting}
-                css={{ margin: 'auto' }}
-                label="Select parsed NR CSV file"
-                icon={<UploadIcon />}
-                onInput={(file) => {
-                  if (file) setFormState({ ...formState, nr: file });
-                }}
-              />
-            </>
-          ) : (
-            <TextArea
-              disabled={isSubmitting}
-              value={typeof formState.nr === 'string' ? formState.nr : ''}
-              onInput={(value) => setFormState({ ...formState, nr: value })}
-              label="Parsed NR CSV"
-              helpText="CSV for NR data, parsed with Andrea's parser."
+              value={typeof formState.jsonData === 'string' ? formState.jsonData : ''}
+              onInput={(value) => setFormState({ ...formState, jsonData: value })}
+              label="Parsed JSON data"
+              helpText="JSON data from Andrea's parser."
             />
           )}
         </FormField>

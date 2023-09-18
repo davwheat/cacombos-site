@@ -1,19 +1,22 @@
 import Model from '../Model';
 
+import type CapabilitySet from './CapabilitySet';
 import type LteComponent from './LteComponent';
 import type NrComponent from './NrComponent';
 
 export default class Combo extends Model {
   readonly type = 'combos';
 
-  uuid = Model.attribute<string>('uuid');
-
   comboString = Model.attribute<string>('comboString');
-  bandwidthCombinationSet = Model.attribute<string[]>('bandwidthCombinationSet');
+  bandwidthCombinationSetEutra = Model.attribute<string[]>('bandwidthCombinationSetEutra');
+  bandwidthCombinationSetNr = Model.attribute<string[]>('bandwidthCombinationSetNr');
+  bandwidthCombinationSetIntraEndc = Model.attribute<string[]>('bandwidthCombinationSetIntraEndc');
 
-  createdAt = Model.attribute<Date, string>('createdAt', Model.transformDate);
-  updatedAt = Model.attribute<Date, string>('updatedAt', Model.transformDate);
+  capabilitySet = Model.hasOne<CapabilitySet>('capabilitySet');
 
   lteComponents = Model.hasMany<LteComponent>('lteComponents');
   nrComponents = Model.hasMany<NrComponent>('nrComponents');
+
+  createdAt = Model.attribute<Date, string>('createdAt', Model.transformDate);
+  updatedAt = Model.attribute<Date, string>('updatedAt', Model.transformDate);
 }

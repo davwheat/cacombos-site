@@ -71,7 +71,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
             <tbody>
               {(() => {
                 const lteCcRows = dlLteComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-lte-${cc.id()}-${cc.componentIndex()}`}>
+                  <tr key={`${combo.id()}-lte-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">{cc.band()}</code>
@@ -80,21 +80,21 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                       {cc.dlClass()} {showLteBwNextToClass && cc.dlClass() && <span className="text-whisper">({LteClassToBwCc[cc.dlClass()!]})</span>}
                     </td>
                     <td>{getDlStreamCountForComponent(cc).join('+')}</td>
-                    <td>{friendlyQamConverter(cc.dlModulation() ?? '64qam')}</td>
+                    <td>{friendlyQamConverter(cc.dlModulation())}</td>
                     <td />
                     <td />
                   </tr>
                 ));
 
                 const nrCcRows = dlNrComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-nr-${cc.id()}-${cc.componentIndex()}`}>
+                  <tr key={`${combo.id()}-nr-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">n{cc.band()}</code>
                     </td>
                     <td>{cc.dlClass()}</td>
                     <td>{getDlStreamCountForComponent(cc).join('+')}</td>
-                    <td>{friendlyQamConverter(cc.dlModulation() ?? '256qam')}</td>
+                    <td>{friendlyQamConverter(cc.dlModulation())}</td>
                     <td>{cc.bandwidth()} MHz</td>
                     <td>{cc.subcarrierSpacing()} kHz</td>
                   </tr>
@@ -141,7 +141,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
             <tbody>
               {(() => {
                 const lteCcRows = ulLteComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-lte-${cc.id()}-${cc.componentIndex()}`}>
+                  <tr key={`${combo.id()}-lte-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">{cc.band()}</code>
@@ -155,7 +155,7 @@ export default function ComboDetailsTables({ combo }: ComboDetailsTablesProps) {
                 ));
 
                 const nrCcRows = ulNrComponents.map((cc, i) => (
-                  <tr key={`${combo.uuid()}-nr-${cc.id()}-${cc.componentIndex()}`}>
+                  <tr key={`${combo.id()}-nr-${cc.id()}-${cc.componentIndex()}`}>
                     {SHOW_COMPONENT_MODEL_ID && <td>{cc.id()}</td>}
                     <td>
                       <code className="code">n{cc.band()}</code>

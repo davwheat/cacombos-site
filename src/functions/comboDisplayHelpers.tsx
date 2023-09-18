@@ -43,8 +43,8 @@ export function getDlComboString(combo: Combo, format: 'complex' | 'simple'): st
 
   const comboFormatter: Record<'complex' | 'simple', { lte: (c: LteComponent) => string; nr: (c: NrComponent) => string }> = {
     complex: {
-      lte: (c: LteComponent) => `${c.band()}${getDlCcClass(c) || '?'}${c.mimo() ?? ''}`,
-      nr: (c: NrComponent) => `n${c.band()}${getDlCcClass(c) || '?'}${c.dlMimo() ?? ''}`,
+      lte: (c: LteComponent) => `${c.band()}${getDlCcClass(c) || '?'}${c.dlMimoString(false) ?? ''}`,
+      nr: (c: NrComponent) => `n${c.band()}${getDlCcClass(c) || '?'}${c.dlMimoString(false) ?? ''}`,
     },
     simple: {
       lte: (c: LteComponent) => `${c.band()}${getDlCcClass(c, true)}`,
@@ -108,7 +108,7 @@ export function getUlComboString(combo: Combo, format: 'complex' | 'simple'): st
   const comboFormatter: Record<'complex' | 'simple', { lte: (c: LteComponent) => string; nr: (c: NrComponent) => string }> = {
     complex: {
       lte: (c: LteComponent) => `${c.band()}${getUlCcClass(c)}`,
-      nr: (c: NrComponent) => `n${c.band()}${getUlCcClass(c)}${c.ulMimo() === 1 ? '' : c.ulMimo() ?? ''}`,
+      nr: (c: NrComponent) => `n${c.band()}${getUlCcClass(c)}${c.ulMimoString(false) === '1' ? '' : c.ulMimoString(false)}`,
     },
     simple: {
       lte: (c: LteComponent) => `${c.band()}${getUlCcClass(c, true)}`,
@@ -229,7 +229,7 @@ export function getDlStreamCountForComponent(component: LteComponent | NrCompone
   if (component instanceof LteComponent) {
     const ccClass = component.dlClass() ?? 'A';
 
-    return new Array(lteClassToMultiplier[ccClass]).fill(component.mimo() ?? 0);
+    return new Array(lteClassToMultiplier[ccClass]).fill(component.maxDlMimo());
   }
 
   if (component instanceof NrComponent) {
@@ -238,7 +238,7 @@ export function getDlStreamCountForComponent(component: LteComponent | NrCompone
     const fr2 = component.band() > 256;
     const classMapping = fr2 ? nrFr2ClassToMultiplier : nrFr1ClassToMultiplier;
 
-    return new Array(classMapping[ccClass]).fill(component.dlMimo() ?? 0);
+    return new Array(classMapping[ccClass]).fill(component.maxDlMimo());
   }
 
   return [0];
@@ -257,7 +257,7 @@ export function getUlStreamCountForComponent(component: LteComponent | NrCompone
     const fr2 = component.band() > 256;
     const classMapping = fr2 ? nrFr2ClassToMultiplier : nrFr1ClassToMultiplier;
 
-    return new Array(classMapping[ccClass]).fill(component.ulMimo() ?? 0);
+    return new Array(classMapping[ccClass]).fill(component.maxUlMimo() ?? 0);
   }
 
   return [0];

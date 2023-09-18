@@ -73,9 +73,7 @@ export default function AdminModemsList() {
           gap: 16,
         }}
       >
-        {allModems?.map((modem) => (
-          <ModemsListItem key={modem.uuid()} modem={modem} />
-        ))}
+        {allModems?.map((modem) => <ModemsListItem key={modem.uuid()} modem={modem} />)}
       </ul>
 
       {allModems && ((allModems as any)?.payload as JsonApiPayload)?.links?.next && (

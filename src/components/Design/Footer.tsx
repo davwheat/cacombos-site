@@ -2,7 +2,6 @@ import Link from '@components/Links/Link';
 
 import Breakpoints from '@data/breakpoints';
 
-import dayjs from 'dayjs';
 import { graphql, useStaticQuery } from 'gatsby';
 
 export default function Footer() {
@@ -22,18 +21,16 @@ export default function Footer() {
        */
       hash: string;
     };
-  } = useStaticQuery(
-    graphql`
-      {
-        siteBuildMetadata {
-          buildTime(formatString: "YYYY-MM-DD HH:mm z")
-        }
-        gitCommit(latest: { eq: true }) {
-          hash
-        }
+  } = useStaticQuery(graphql`
+    {
+      siteBuildMetadata {
+        buildTime(formatString: "YYYY-MM-DD HH:mm z")
       }
-    `
-  );
+      gitCommit(latest: { eq: true }) {
+        hash
+      }
+    }
+  `);
 
   return (
     <footer

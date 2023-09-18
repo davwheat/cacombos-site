@@ -9,8 +9,8 @@ export default class DeviceFirmware extends Model {
 
   name = Model.attribute<string>('name');
 
+  capabilitySets = Model.hasMany<CapabilitySet>('capabilitySets');
+
   createdAt = Model.attribute<Date, string>('createdAt', Model.transformDate);
   updatedAt = Model.attribute<Date, string>('updatedAt', Model.transformDate);
-
-  capabilitySets = Model.hasMany<CapabilitySet>('capabilitySets');
 }
