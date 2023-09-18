@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { NsgUpload } from './UploadForm/NsgUpload';
 import { QualcommHexdumpUpload } from './UploadForm/QualcommHexdumpUpload';
+import { ImportOnlyUpload } from './UploadForm/ImportOnly';
 
 import SelectFormType from './UploadForm/SelectFormType';
 import AdminAuthDetailsEntry from '../AdminAuthDetailsEntry';
@@ -20,12 +21,11 @@ import { navigate } from 'gatsby';
 import { useSnackbar } from 'notistack';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
-import { ImportOnlyUpload } from './UploadForm/ImportOnly';
 
 export const ADMIN_UPLOAD_FORM_TYPE_OPTIONS = {
   NSG: NsgUpload,
   'Qualcomm 0xB0CD/0xB826 hexdump': QualcommHexdumpUpload,
-  'Import pre-parsed CSV': ImportOnlyUpload,
+  'Import pre-parsed JSON': ImportOnlyUpload,
 } as const;
 
 export type AdminUploadFormType = keyof typeof ADMIN_UPLOAD_FORM_TYPE_OPTIONS;

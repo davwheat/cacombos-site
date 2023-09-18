@@ -54,7 +54,7 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
   return (
     <>
       <tr
-        data-combo-uuid={combo.uuid()}
+        data-combo-uuid={combo.id()}
         css={{
           '.ComboTable-cell': {
             ...TableCellCss,
@@ -122,12 +122,15 @@ export default function ComboTableRow({ combo }: ComboTableRowProps) {
               },
               {
                 background: Object.values(
-                  getDlComponents(combo)[1].reduce((acc, curr) => {
-                    acc[curr.componentIndex()] &&= acc[curr.componentIndex()] + 1;
-                    acc[curr.componentIndex()] ??= 1;
+                  getDlComponents(combo)[1].reduce(
+                    (acc, curr) => {
+                      acc[curr.componentIndex()] &&= acc[curr.componentIndex()] + 1;
+                      acc[curr.componentIndex()] ??= 1;
 
-                    return acc;
-                  }, {} as Record<number, number>)
+                      return acc;
+                    },
+                    {} as Record<number, number>
+                  )
                 ).some((x) => x !== 1)
                   ? '#f00'
                   : '#f5f5f5',

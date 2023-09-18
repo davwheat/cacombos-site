@@ -1,3 +1,4 @@
+export default function modulationTransformer(mod: string): string;
 export default function modulationTransformer(mod: string | null): string | null {
   if (mod === null) {
     return null;

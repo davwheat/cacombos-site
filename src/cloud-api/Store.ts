@@ -4,8 +4,12 @@ import Combo from './Models/Combo';
 import Device from './Models/Device';
 import DeviceFirmware from './Models/DeviceFirmware';
 import LteComponent from './Models/LteComponent';
+import Mimo from './Models/Mimo';
 import Modem from './Models/Modem';
+import Modulation from './Models/Modulation';
 import NrComponent from './Models/NrComponent';
+import SupportedLteBand from './Models/SupportedLteBand';
+import SupportedNrBand from './Models/SupportedNrBand';
 
 type ConstructorFunction<T extends Model> = new (...args: any[]) => T;
 
@@ -63,8 +67,12 @@ export default class Store {
     devices: Device,
     'device-firmwares': DeviceFirmware,
     'lte-components': LteComponent,
+    mimos: Mimo,
     modems: Modem,
+    modulations: Modulation,
     'nr-components': NrComponent,
+    'supported-lte-bands': SupportedLteBand,
+    'supported-nr-bands': SupportedNrBand,
   };
 
   readonly baseUrl: string = process.env.GATSBY_API_BASE_URL!;
