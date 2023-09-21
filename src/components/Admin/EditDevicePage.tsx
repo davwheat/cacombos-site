@@ -25,6 +25,7 @@ import { useSnackbar } from 'notistack';
 import { navigate } from 'gatsby';
 
 import type { RouteComponentProps } from '@gatsbyjs/reach-router';
+import dayjs from 'dayjs';
 
 export const DevicePageContext = React.createContext<Device | null>(null);
 
@@ -100,7 +101,7 @@ function assembleAtomicRequest(currentDevice: Device, newAttributes: FormAttribu
         manufacturer,
         deviceName,
         modelName,
-        releaseDate: releaseDate.toISOString(),
+        releaseDate: dayjs(releaseDate).format('YYYY-MM-DD'),
       },
       relationships: {
         modem: {
